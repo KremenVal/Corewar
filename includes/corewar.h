@@ -14,6 +14,10 @@
 # define COREWAR_H
 
 # include "../libft/libft.h"
+# include "op.h"
+# include <stdio.h>
+# include <stdint.h>
+
 
 typedef struct			s_bot
 {
