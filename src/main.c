@@ -12,11 +12,16 @@
 
 #include "../includes/corewar.h"
 
+void		pars(int argc, char **argv, t_bot **bot)
+{
+
+}
+
 int			main(int argc, char **argv)
 {
-	(void)argv;
+	t_bot	*bot;
 	if (argc >= 2)
-		ft_printf("Zaebis9\n");
+		pars(argc, argv, &bot);
 	else
 		ft_printf("Ne zaebis9\n");
 }

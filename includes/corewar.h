@@ -15,4 +15,11 @@
 
 # include "../libft/libft.h"
 
+typedef struct			s_bot
+{
+	char				*name;
+	char				*comment;
+	struct s_player		*next;
+}						t_bot;
+
 # endif
