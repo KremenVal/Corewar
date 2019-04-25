@@ -14,7 +14,10 @@ COREWAR = corewar
 
 FLAGS = -Wall -Werror -Wextra
 
-SRC = 	./src/main.c
+SRC = 	./src/main.c\
+		./src/init_vm.c\
+		./src/add_bot.c\
+		./src/something_useful.c
 
 OB = $(SRC:%.c=%.o) 
 
