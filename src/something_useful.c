@@ -15,5 +15,21 @@
 void		error_management(char *error)
 {
 	ft_printf("%s", error);
-	exit (0);
+	exit(0);
+}
+
+void		reverse_bits(void *b, int len)
+{
+	int		step;
+	char	*tmptmp;
+	char	tmp;
+
+	step = -1;
+	tmptmp = (char *)b;
+	while (++step < len / 2)
+	{
+		tmp = tmptmp[step];
+		tmptmp[step] = tmptmp[len - step - 1];
+		tmptmp[len - step - 1] = tmp;
+	}
 }

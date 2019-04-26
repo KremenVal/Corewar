@@ -12,54 +12,27 @@
 
 #include "../includes/corewar.h"
 
-// static int32_t	bytecode_to_int32(const uint8_t *bytecode, size_t size)
-// {
-// 	int32_t	result;
-// 	// t_bool	sign;
-// 	int		i;
-
-// 	result = 0;
-// 	// sign = (t_bool)(bytecode[0] & 0x80);
-// 	i = 0;
-// 	while (size)
-// 	{
-// 		// if (sign)
-// 			result += ((bytecode[size - 1] ^ 0xFF) << (i++ * 8));
-// 		// else
-// 		// result += bytecode[size - 1] << (i++ * 8);
-// 		size--;
-// 	}
-// 	// if (sign)
-// 	// 	result = ~(result);
-// 	return (result);
-// }
-
 void		pars(int argc, char **argv, t_vmka **vmka)
 {
-	// int 	fd;
-	// int 	r;
-	// uint8_t	magic[5];
-	// (void) argc;
-	// (void) bot;
-
-	// fd = open(argv[1], O_RDWR);
-
-	// int i = 0;
-	// // while (i < 10)
-	// // {
-	// 	r = read(fd, &magic, 4);
-	// 	i++;
-	// 	// magic[r] = '\0';
-	// 	ft_printf("|%u|\n", bytecode_to_int32(magic, 4));
-	// 	// ft_bzero(magic, 5);
-	// // }
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	(void)vmka;
 	while (++i < argc)
 	{
-		add_bot_to_battle(argv[i], vmka);
+		if (ft_strstr(argv[i], ".cor"))
+		{
+			j++;
+			if ((*vmka)->bot[j]->id_bot == 0)
+				(*vmka)->bot[j]->id_bot = j;
+			add_bot_to_battle(argv[i], &(*vmka)->bot[j]);
+			ft_printf("Id: %d, Header: %x, Name: %s, Code-size: %d ",
+				(*vmka)->bot[j]->id_bot, (*vmka)->bot[j]->header,
+				(*vmka)->bot[j]->name, (*vmka)->bot[j]->code_size);
+			ft_printf(", Comment: %s\n", (*vmka)->bot[j]->comment);
+		}
 	}
 }
 

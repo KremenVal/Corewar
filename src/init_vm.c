@@ -14,18 +14,22 @@
 
 void		init_vm(t_vmka **vmka)
 {
-	int 	i;
+	int		i;
 
 	i = -1;
 	(*vmka) = (t_vmka *)ft_memalloc(sizeof(t_vmka));
-	(*vmka)->bot = (t_bot *)ft_memalloc(sizeof(t_bot) * MAX_PLAYERS);
+	(*vmka)->bot = (t_bot **)ft_memalloc(sizeof(t_bot *) * MAX_PLAYERS);
 	while (++i < MAX_PLAYERS)
 	{
-		(*vmka)->bot[i].name = (char *)ft_memalloc(sizeof(char)
-			* PROG_NAME_LENGTH);
-		(*vmka)->bot[i].comment = (char *)ft_memalloc(sizeof(char)
-			* COMMENT_LENGTH);
-		(*vmka)->bot[i].code = (char *)ft_memalloc(sizeof(char)
-			* CHAMP_MAX_SIZE);
+		(*vmka)->bot[i] = (t_bot *)ft_memalloc(sizeof(t_bot) * MAX_PLAYERS);
+		(*vmka)->bot[i]->name = (char *)ft_memalloc(sizeof(char)
+			* PROG_NAME_LENGTH + 1);
+		ft_bzero((*vmka)->bot[i]->name, PROG_NAME_LENGTH + 1);
+		(*vmka)->bot[i]->comment = (char *)ft_memalloc(sizeof(char)
+			* COMMENT_LENGTH + 1);
+		ft_bzero((*vmka)->bot[i]->comment, COMMENT_LENGTH + 1);
+		(*vmka)->bot[i]->code = (unsigned char *)ft_memalloc(
+			sizeof(unsigned char) * CHAMP_MAX_SIZE + 1);
+		ft_bzero((*vmka)->bot[i]->comment, CHAMP_MAX_SIZE + 1);
 	}
 }

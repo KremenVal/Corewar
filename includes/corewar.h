@@ -12,6 +12,8 @@
 
 #ifndef COREWAR_H
 # define COREWAR_H
+# define MIN_BOT_SIZE (4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4)
+# define MAX_BOT_SIZE (MIN_BOT_SIZE + CHAMP_MAX_SIZE)
 
 # include "../libft/libft.h"
 # include "op.h"
@@ -21,23 +23,17 @@
 typedef struct			s_bot
 {
 	int					id_bot;
+	int					header;
+	int					code_size;
 	char				*name;
 	char				*comment;
-	char				*code;
+	unsigned char		*code;
 }						t_bot;
 
 typedef struct			s_vmka
 {
-	t_bot				*bot;
+	t_bot				**bot;
 }						t_vmka;
-
-typedef struct			s_header
-{
-	unsigned int		magic;
-	char				prog_name[PROG_NAME_LENGTH + 1];
-	unsigned int		prog_size;
-	char				comment[COMMENT_LENGTH + 1];
-}						t_header;
 
 /*
 ** main.c
@@ -52,15 +48,33 @@ void					pars(int argc, char **argv, t_vmka **vmka);
 void					init_vm(t_vmka **vmka);
 
 /*
-** init_vm.c
+** add_bot.c
 */
 
-void					add_bot_to_battle(char *bot, t_vmka  **vmka);
+void					add_bot_to_battle(char *bot_file, t_bot **bot);
+void					check_file_name(char *bot_file);
+void					check_bot_size(char *bot_file, t_bot **bot);
 
 /*
-** init_vm.c
+** something_useful.c
 */
 
 void					error_management(char *error);
+void					reverse_bits(void *b, int len);
 
-# endif
+/*
+** bot_validation.c
+*/
+
+void					check_magic_header(unsigned char *bot_code,
+								t_bot **bot);
+void					check_bot_name(unsigned char *bot_code, t_bot **bot,
+								int step);
+void					check_bot_size_code(unsigned char *bot_code,
+								t_bot **bot);
+void					check_bot_comment(unsigned char *bot_code,
+								t_bot **bot, int step);
+void					check_bot_code(unsigned char *bot_code,
+								t_bot **bot, int num, unsigned char *bot_start);
+
+#endif
