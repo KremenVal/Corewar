@@ -33,19 +33,26 @@ typedef struct			s_bot
 typedef struct			s_vmka
 {
 	t_bot				**bot;
+	unsigned long int	nbr_cycles;
 }						t_vmka;
+
+int						*g_id_players;
+int						g_id;
+int						g_count_bot;
 
 /*
 ** main.c
 */
 
-void					pars(int argc, char **argv, t_vmka **vmka);
+void					pars(int argc, char **argv, t_vmka **vmka, int i);
+void					pars_flag_n(int argc, char **argv, t_vmka **vmka,
+								int *i);
 
 /*
 ** init_vm.c
 */
 
-void					init_vm(t_vmka **vmka);
+void					init_vm(t_vmka **vmka, int i);
 
 /*
 ** add_bot.c
@@ -61,6 +68,8 @@ void					check_bot_size(char *bot_file, t_bot **bot);
 
 void					error_management(char *error);
 void					reverse_bits(void *b, int len);
+int						return_bot_id(char *param);
+void					get_id_bot(t_vmka **vmka, int step);
 
 /*
 ** bot_validation.c

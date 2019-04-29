@@ -12,16 +12,13 @@
 
 #include "../includes/corewar.h"
 
-void		init_vm(t_vmka **vmka)
+void		init_vm(t_vmka **vmka, int i)
 {
-	int		i;
-
-	i = -1;
 	(*vmka) = (t_vmka *)ft_memalloc(sizeof(t_vmka));
 	(*vmka)->bot = (t_bot **)ft_memalloc(sizeof(t_bot *) * MAX_PLAYERS);
 	while (++i < MAX_PLAYERS)
 	{
-		(*vmka)->bot[i] = (t_bot *)ft_memalloc(sizeof(t_bot) * MAX_PLAYERS);
+		(*vmka)->bot[i] = (t_bot *)ft_memalloc(sizeof(t_bot));
 		(*vmka)->bot[i]->name = (char *)ft_memalloc(sizeof(char)
 			* PROG_NAME_LENGTH + 1);
 		ft_bzero((*vmka)->bot[i]->name, PROG_NAME_LENGTH + 1);
