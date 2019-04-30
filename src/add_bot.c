@@ -12,6 +12,10 @@
 
 #include "../includes/corewar.h"
 
+/*
+**	Проверка названия файла
+*/
+
 void				check_file_name(char *bot_file)
 {
 	if (bot_file[0] == '\0' || !ft_strcmp(bot_file, ".cor"))
@@ -19,6 +23,10 @@ void				check_file_name(char *bot_file)
 	if (ft_strcmp(ft_strrchr(bot_file, '.'), ".cor"))
 		error_management("ERROR: invalid file extension!\n");
 }
+
+/*
+**	Проверка на открытие и считывание файла игрока и получение его данных
+*/
 
 void				check_bot_size(char *bot_file, t_bot **bot)
 {
@@ -40,6 +48,10 @@ void				check_bot_size(char *bot_file, t_bot **bot)
 	check_bot_comment(&bot_code[4 + PROG_NAME_LENGTH + 4 + 4], bot, -1);
 	check_bot_code(&bot_code[MIN_BOT_SIZE], bot, num, bot_code);
 }
+
+/*
+**	Добавление игрока в массив структур игроков
+*/
 
 void				add_bot_to_battle(char *bot_file, t_bot **bot)
 {

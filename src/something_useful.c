@@ -12,11 +12,19 @@
 
 #include "../includes/corewar.h"
 
+/*
+**	Вывода ошибок и прекращения работы программы
+*/
+
 void			error_management(char *error)
 {
 	ft_printf("%s", error);
 	exit(0);
 }
+
+/*
+**	Перевод битов в обратном порядке
+*/
 
 void			reverse_bits(void *b, int len)
 {
@@ -34,6 +42,10 @@ void			reverse_bits(void *b, int len)
 	}
 }
 
+/*
+**	Возвращения порядкового номера игрока, если номер был явно указан
+*/
+
 int				return_bot_id(char *param)
 {
 	int			res;
@@ -42,18 +54,21 @@ int				return_bot_id(char *param)
 	step = -1;
 	while (param[++step])
 		if (!ft_isdigit(param[step]))
-			error_management("ERROR: invalid params!\n");
+			error_management("ERROR: invalid params for id player!\n");
 	if (step > 2147483647)
-		error_management("ERROR: invalid params!\n");
+		error_management("ERROR: invalid params  for id player!\n");
 	res = ft_atoi(param);
 	if (res < 1 || res > MAX_PLAYERS || (res == g_id_players[0] ||
 		res == g_id_players[1] || res == g_id_players[2] ||
 		res == g_id_players[3]))
-		error_management("ERROR: invalid params!\n");
+		error_management("ERROR: invalid params  for id player!\n");
 	g_id_players[res - 1] = res;
-	g_id++;
 	return (res);
 }
+
+/*
+**	Присвоение игрокам порядковых номеров
+*/
 
 void			get_id_bot(t_vmka **vmka, int step)
 {
@@ -79,5 +94,29 @@ void			get_id_bot(t_vmka **vmka, int step)
 			(*vmka)->bot[step]->id_bot = 4;
 			g_id_players[3] = 4;
 		}
+	}
+}
+
+/*
+**	Создание новых кареток
+*/
+
+void			create_carriage(t_vmka **vmka, int nbr_carr, int poss)
+{
+	t_carr		*new;
+	t_carr		*tmp;
+
+	new = (t_carr *)ft_memalloc(sizeof(t_carr));
+	new->id_carr = nbr_carr;
+	new->poss_carr = poss;
+	new->reg_carr = nbr_carr * -1;
+	if (!(*vmka)->carr)
+		(*vmka)->carr = new;
+	else
+	{
+		tmp = (*vmka)->carr;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
 }

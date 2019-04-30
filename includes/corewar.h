@@ -19,6 +19,17 @@
 # include "op.h"
 # include <stdio.h>
 # include <stdint.h>
+# include <stdbool.h>
+
+/*
+**	Структура игроков (скорее всего ещё дополнять нужно будет)
+**	id_bot - порядковый номер игрока
+**	header - хевер игрока
+**	code_size - размер кода игрока в байтах
+**	name - имя игрока
+**	comment - комментарий игрока
+**	code - выполняемый код игрока
+*/
 
 typedef struct			s_bot
 {
@@ -30,29 +41,83 @@ typedef struct			s_bot
 	unsigned char		*code;
 }						t_bot;
 
+/*
+**	Структура поля
+**	place - размещение выполняемого кода игрока на поле
+**	id_bot - порядковый номер игрока
+*/
+
+typedef struct			s_battlefield
+{
+	unsigned long int	place;
+	int					id_bot;
+}						t_batfield;
+
+/*
+**	Структура кареток (скорее всего ещё дополнять нужно будет)
+**	id_carr - порядковый номер каретки
+**	carry - переменная, которая влияет на работу функции zjmp
+**	poss_carr - текущая позиция каретки
+**	last_live - цикл, в котором в последний раз была выполнена операция live
+**	reg_carr - регист игрока с отрицательным знаком, на коде игрока на
+**	котором стоит каретка
+*/
+
+typedef struct			s_carriages
+{
+	int					id_carr;
+	bool				carry;
+	int					poss_carr;
+	int					last_live;
+	int					reg_carr;
+	struct s_carriages	*next;
+}						t_carr;
+
+/*
+**	Структура виртуалки
+**	t_bot - массив структур игроков
+**	t_field - указатель на структуру арены
+**	t_carr - указатель на структуру кареток
+**	nbr_cycles - количество цыклов, посе которых прекратить
+**	игру (если была задана)
+**	nbr_carr - количество кареток
+**	nbr_players - количество игроков
+*/
+
 typedef struct			s_vmka
 {
 	t_bot				**bot;
+	t_batfield			*field;
+	t_carr				*carr;
 	unsigned long int	nbr_cycles;
+	int					nbr_carr;
+	int					nbr_players;
 }						t_vmka;
 
+/*
+** g_id_players - Переменная для определения порядковых номеров игроков
+** g_count_bot - Переменная подсчёта игроков
+*/
+
 int						*g_id_players;
-int						g_id;
 int						g_count_bot;
 
 /*
-** main.c
+** parsing_bot.c
 */
 
 void					pars(int argc, char **argv, t_vmka **vmka, int i);
 void					pars_flag_n(int argc, char **argv, t_vmka **vmka,
 								int *i);
+void					sort_bot(t_vmka **vmka, int step);
 
 /*
-** init_vm.c
+** init.c
 */
 
 void					init_vm(t_vmka **vmka, int i);
+void					init_field(t_vmka **vmka, int i, int j);
+void					init_carriages(t_vmka **vmka, int step);
 
 /*
 ** add_bot.c
@@ -70,6 +135,7 @@ void					error_management(char *error);
 void					reverse_bits(void *b, int len);
 int						return_bot_id(char *param);
 void					get_id_bot(t_vmka **vmka, int step);
+void					create_carriage(t_vmka **vmka, int nbr_carr, int poss);
 
 /*
 ** bot_validation.c

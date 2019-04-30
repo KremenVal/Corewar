@@ -12,6 +12,10 @@
 
 #include "../includes/corewar.h"
 
+/*
+**	Проверка на соответствие магического хедера игрока с COREWAR_EXEC_MAGIC
+*/
+
 void				check_magic_header(unsigned char *bot_code, t_bot **bot)
 {
 	int				bot_header;
@@ -24,12 +28,20 @@ void				check_magic_header(unsigned char *bot_code, t_bot **bot)
 		(*bot)->header = bot_header;
 }
 
+/*
+**	Запись имени игрока
+*/
+
 void				check_bot_name(unsigned char *bot_code, t_bot **bot,
 									int step)
 {
 	while (++step < PROG_NAME_LENGTH && bot_code[step])
 		(*bot)->name[step] = bot_code[step];
 }
+
+/*
+**	Проверка на размер кода игрока с CHAMP_MAX_SIZE
+*/
 
 void				check_bot_size_code(unsigned char *bot_code, t_bot **bot)
 {
@@ -39,12 +51,20 @@ void				check_bot_size_code(unsigned char *bot_code, t_bot **bot)
 		error_management("ERROR: invalid champion code size!\n");
 }
 
+/*
+**	Запись комментария игрока
+*/
+
 void				check_bot_comment(unsigned char *bot_code, t_bot **bot,
 									int step)
 {
 	while (++step < COMMENT_LENGTH && bot_code[step])
 		(*bot)->comment[step] = bot_code[step];
 }
+
+/*
+**	Запись исполняемого кода игрока
+*/
 
 void				check_bot_code(unsigned char *bot_code, t_bot **bot,
 									int num, unsigned char *bot_start)
