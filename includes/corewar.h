@@ -49,7 +49,7 @@ typedef struct			s_bot
 
 typedef struct			s_battlefield
 {
-	unsigned long int	place;
+	unsigned int		place;
 	int					id_bot;
 }						t_batfield;
 
@@ -70,6 +70,8 @@ typedef struct			s_carriages
 	int					poss_carr;
 	int					last_live;
 	int					reg_carr;
+	int					iter_to_wait;
+	unsigned long int	oper;
 	struct s_carriages	*next;
 }						t_carr;
 
@@ -95,12 +97,34 @@ typedef struct			s_vmka
 }						t_vmka;
 
 /*
+**	Структура операций
+**	name - имя операции
+**	code - порядковый номер аргумента
+**	args_num - максимальное количество принимаемых аргументов
+**	types - включает ли байткод код типа аргумента
+**	args_types - типы аргументов
+**	dir_size - размер T_DIR аргумента
+*/
+
+typedef struct			s_oper
+{
+	char				*name;
+	unsigned int		code;
+	unsigned int		args_num;
+	bool				types;
+	unsigned int		args_types[3];
+	unsigned int		dir_size;
+	int					wait;
+}						t_oper;
+
+/*
 ** g_id_players - Переменная для определения порядковых номеров игроков
 ** g_count_bot - Переменная подсчёта игроков
 */
 
 int						*g_id_players;
 int						g_count_bot;
+t_oper					g_oper[16];
 
 /*
 ** parsing_bot.c
@@ -151,5 +175,18 @@ void					check_bot_comment(unsigned char *bot_code,
 								t_bot **bot, int step);
 void					check_bot_code(unsigned char *bot_code,
 								t_bot **bot, int num, unsigned char *bot_start);
+
+/*
+** start_fight.c
+*/
+
+void					start_fight(t_vmka **vmka);
+
+/*
+** helpfull_functions.c
+*/
+
+void					introducing(t_vmka **vmka, int id);
+void					get_oper_code(t_carr *tmp, unsigned int place);
 
 #endif

@@ -24,27 +24,28 @@ int				main(int argc, char **argv)
 		pars(argc, argv, &vmka, 0);
 		init_field(&vmka, -1, -1);
 		init_carriages(&vmka, -1);
+		start_fight(&vmka);
 	}
 	else
 	{
 		ft_printf("Usage\n");
 		exit(0);
 	}
-	for (int i = 0; i < g_count_bot + 1; i++)
-	{
-		ft_printf("Id: %d, Header: %x, Name: %s, Code-size: %d ",
-			vmka->bot[i]->id_bot, vmka->bot[i]->header,
-			vmka->bot[i]->name, vmka->bot[i]->code_size);
-		ft_printf(", Comment: %s, Dump: %u, Nbr carriages: %d\n",
-			vmka->bot[i]->comment, vmka->nbr_cycles, vmka->nbr_carr);
-	}
-	for (int j = 0; j < MEM_SIZE; j++)
-	{
-		ft_printf("%02x", vmka->field[j].place);
-		if ((j + 1) % 64 != 0 || j == 0)
-			ft_printf(" ");
-		if ((j + 1) % 64 == 0 && j != 0)
-			ft_printf("\n");
-	}
+	// for (int i = 0; i < g_count_bot + 1; i++)
+	// {
+	// 	ft_printf("Id: %d, Header: %x, Name: %s, Code-size: %d ",
+	// 		vmka->bot[i]->id_bot, vmka->bot[i]->header,
+	// 		vmka->bot[i]->name, vmka->bot[i]->code_size);
+	// 	ft_printf(", Comment: %s, Dump: %u, Nbr carriages: %d\n",
+	// 		vmka->bot[i]->comment, vmka->nbr_cycles, vmka->nbr_carr);
+	// }
+	// for (int j = 0; j < MEM_SIZE; j++)
+	// {
+	// 	ft_printf("%02x", vmka->field[j].place);
+	// 	if ((j + 1) % 64 != 0 || j == 0)
+	// 		ft_printf(" ");
+	// 	if ((j + 1) % 64 == 0 && j != 0)
+	// 		ft_printf("\n");
+	// }
 	system("leaks -q corewar");
 }

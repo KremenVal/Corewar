@@ -104,7 +104,6 @@ void			get_id_bot(t_vmka **vmka, int step)
 void			create_carriage(t_vmka **vmka, int nbr_carr, int poss)
 {
 	t_carr		*new;
-	t_carr		*tmp;
 
 	new = (t_carr *)ft_memalloc(sizeof(t_carr));
 	new->id_carr = nbr_carr;
@@ -114,9 +113,7 @@ void			create_carriage(t_vmka **vmka, int nbr_carr, int poss)
 		(*vmka)->carr = new;
 	else
 	{
-		tmp = (*vmka)->carr;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
+		new->next = (*vmka)->carr;
+		(*vmka)->carr = new;
 	}
 }
