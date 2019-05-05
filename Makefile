@@ -21,7 +21,8 @@ SRC = 	./src/main.c\
 		./src/bot_validation.c\
 		./src/parsing_bot.c\
 		./src/start_fight.c\
-		./src/helpful_functions.c
+		./src/helpful_functions.c\
+		./src/print.c
 
 OB = $(SRC:%.c=%.o) 
 

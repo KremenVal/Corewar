@@ -55,7 +55,7 @@ int				return_bot_id(char *param)
 	while (param[++step])
 		if (!ft_isdigit(param[step]))
 			error_management("ERROR: invalid params for id player!\n");
-	if (step > 2147483647)
+	if (ft_atoi(param) > INT_MAX)
 		error_management("ERROR: invalid params  for id player!\n");
 	res = ft_atoi(param);
 	if (res < 1 || res > MAX_PLAYERS || (res == g_id_players[0] ||
@@ -64,37 +64,6 @@ int				return_bot_id(char *param)
 		error_management("ERROR: invalid params  for id player!\n");
 	g_id_players[res - 1] = res;
 	return (res);
-}
-
-/*
-**	Присвоение игрокам порядковых номеров
-*/
-
-void			get_id_bot(t_vmka **vmka, int step)
-{
-	while (++step < MAX_PLAYERS)
-	{
-		if (!(*vmka)->bot[step]->id_bot && !g_id_players[0])
-		{
-			(*vmka)->bot[step]->id_bot = 1;
-			g_id_players[0] = 1;
-		}
-		else if (!(*vmka)->bot[step]->id_bot && !g_id_players[1])
-		{
-			(*vmka)->bot[step]->id_bot = 2;
-			g_id_players[1] = 2;
-		}
-		else if (!(*vmka)->bot[step]->id_bot && !g_id_players[2])
-		{
-			(*vmka)->bot[step]->id_bot = 3;
-			g_id_players[2] = 3;
-		}
-		else if (!(*vmka)->bot[step]->id_bot && !g_id_players[3])
-		{
-			(*vmka)->bot[step]->id_bot = 4;
-			g_id_players[3] = 4;
-		}
-	}
 }
 
 /*
@@ -108,7 +77,7 @@ void			create_carriage(t_vmka **vmka, int nbr_carr, int poss)
 	new = (t_carr *)ft_memalloc(sizeof(t_carr));
 	new->id_carr = nbr_carr;
 	new->poss_carr = poss;
-	new->reg_carr = nbr_carr * -1;
+	new->reg_carr[0] = nbr_carr * -1;
 	if (!(*vmka)->carr)
 		(*vmka)->carr = new;
 	else

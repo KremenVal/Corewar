@@ -20,11 +20,11 @@
 # include <stdio.h>
 # include <stdint.h>
 # include <stdbool.h>
+# include <limits.h>
 
 /*
 **	Структура игроков (скорее всего ещё дополнять нужно будет)
 **	id_bot - порядковый номер игрока
-**	header - хевер игрока
 **	code_size - размер кода игрока в байтах
 **	name - имя игрока
 **	comment - комментарий игрока
@@ -34,7 +34,6 @@
 typedef struct			s_bot
 {
 	int					id_bot;
-	int					header;
 	int					code_size;
 	char				*name;
 	char				*comment;
@@ -69,7 +68,7 @@ typedef struct			s_carriages
 	bool				carry;
 	int					poss_carr;
 	int					last_live;
-	int					reg_carr;
+	int					reg_carr[REG_NUMBER];
 	int					iter_to_wait;
 	unsigned long int	oper;
 	struct s_carriages	*next;
@@ -91,7 +90,7 @@ typedef struct			s_vmka
 	t_bot				**bot;
 	t_batfield			*field;
 	t_carr				*carr;
-	unsigned long int	nbr_cycles;
+	int					dump_cycles;
 	int					nbr_carr;
 	int					nbr_players;
 }						t_vmka;
@@ -118,8 +117,9 @@ typedef struct			s_oper
 }						t_oper;
 
 /*
-** g_id_players - Переменная для определения порядковых номеров игроков
-** g_count_bot - Переменная подсчёта игроков
+**	g_id_players - Переменная для определения порядковых номеров игроков
+**	g_count_bot - Переменная подсчёта игроков
+**	g_oper - Переменная операций
 */
 
 int						*g_id_players;
@@ -130,10 +130,8 @@ t_oper					g_oper[16];
 ** parsing_bot.c
 */
 
-void					pars(int argc, char **argv, t_vmka **vmka, int i);
-void					pars_flag_n(int argc, char **argv, t_vmka **vmka,
-								int *i);
-void					sort_bot(t_vmka **vmka, int step);
+void					parsing_argv_params(int argc, char **argv,
+								t_vmka **vmka, int i);
 
 /*
 ** init.c
@@ -148,8 +146,6 @@ void					init_carriages(t_vmka **vmka, int step);
 */
 
 void					add_bot_to_battle(char *bot_file, t_bot **bot);
-void					check_file_name(char *bot_file);
-void					check_bot_size(char *bot_file, t_bot **bot);
 
 /*
 ** something_useful.c
@@ -158,21 +154,14 @@ void					check_bot_size(char *bot_file, t_bot **bot);
 void					error_management(char *error);
 void					reverse_bits(void *b, int len);
 int						return_bot_id(char *param);
-void					get_id_bot(t_vmka **vmka, int step);
 void					create_carriage(t_vmka **vmka, int nbr_carr, int poss);
 
 /*
 ** bot_validation.c
 */
 
-void					check_magic_header(unsigned char *bot_code,
-								t_bot **bot);
-void					check_bot_name(unsigned char *bot_code, t_bot **bot,
-								int step);
 void					check_bot_size_code(unsigned char *bot_code,
 								t_bot **bot);
-void					check_bot_comment(unsigned char *bot_code,
-								t_bot **bot, int step);
 void					check_bot_code(unsigned char *bot_code,
 								t_bot **bot, int num, unsigned char *bot_start);
 
@@ -186,7 +175,14 @@ void					start_fight(t_vmka **vmka);
 ** helpfull_functions.c
 */
 
+void					get_oper(t_carr *tmp, unsigned int place);
+
+/*
+** print.c
+*/
+
+void					print_field(t_vmka *vmka, int i);
 void					introducing(t_vmka **vmka, int id);
-void					get_oper_code(t_carr *tmp, unsigned int place);
+void					print_carriages(t_vmka *vmka);
 
 #endif

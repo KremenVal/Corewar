@@ -21,9 +21,17 @@ void		start_fight(t_vmka **vmka)
 	while (tmp)
 	{
 		if (!tmp->iter_to_wait)
-			get_oper_code(tmp, (*vmka)->field[tmp->poss_carr].place);
-		ft_printf("%d|%d\n", tmp->iter_to_wait, tmp->id_carr);
-		tmp->iter_to_wait -= tmp->iter_to_wait > 0 ? 1 : 0;
+			get_oper(tmp, (*vmka)->field[tmp->poss_carr].place);
+		if (tmp->iter_to_wait > 0)
+			tmp->iter_to_wait--;
+		if (!tmp->iter_to_wait)
+		{
+			if (tmp->oper >= 0x01 && tmp->oper <= 0x10)
+				;
+			else
+				tmp->poss_carr = (tmp->poss_carr + 1) % MEM_SIZE;
+		}
 		tmp = tmp->next;
 	}
+	(*vmka)->dump_cycles++;
 }
