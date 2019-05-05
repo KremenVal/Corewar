@@ -6,7 +6,7 @@
 /*   By: vkremen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 12:39:09 by vkremen           #+#    #+#             */
-/*   Updated: 2019/04/23 12:39:12 by vkremen          ###   ########.fr       */
+/*   Updated: 2019/05/05 06:40:12 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include <limits.h>
+# include <ncurses.h>
 
 /*
 **	Структура игроков (скорее всего ещё дополнять нужно будет)
@@ -177,5 +178,11 @@ void					get_oper(t_carr *tmp, unsigned int place);
 
 void					print_field(t_vmka *vmka, int i);
 void					introducing(t_vmka **vmka, int id);
+
+/*
+** visual.c
+*/
+
+void					visual(t_vmka **all);
 
 #endif
