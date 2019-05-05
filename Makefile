@@ -18,7 +18,6 @@ SRC = 	./src/main.c\
 		./src/init.c\
 		./src/add_bot.c\
 		./src/something_useful.c\
-		./src/bot_validation.c\
 		./src/parsing_bot.c\
 		./src/start_fight.c\
 		./src/helpful_functions.c\
