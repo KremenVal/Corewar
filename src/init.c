@@ -64,7 +64,7 @@ void		init_field(t_vmka **vmka, int i, int j)
 void		init_carriages(t_vmka **vmka, int step)
 {
 	while (++step < (*vmka)->nbr_players)
-		create_carriage(vmka, step + 1,
+		create_carriage(vmka, (*vmka)->bot[step]->id_bot,
 			step * (MEM_SIZE / (*vmka)->nbr_players));
 }
 

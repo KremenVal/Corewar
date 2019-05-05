@@ -100,7 +100,7 @@ static void		pars_flag_dump(int argc, char **argv, t_vmka **vmka, int *i)
 			error_management("ERROR: invalid number of cycles!\n");
 	}
 	if (ft_atoi(argv[(*i)]) > INT_MAX || argv[(*i)] < 0)
-		error_management("ERROR: invalid number of cycles!\n");	
+		error_management("ERROR: invalid number of cycles!\n");
 	(*vmka)->dump_cycles = ft_atoi(argv[(*i) + 1]);
 	(*i) += 1;
 }
@@ -129,4 +129,8 @@ void			parsing_argv_params(int argc, char **argv, t_vmka **vmka, int i)
 	}
 	get_id_bot(vmka, -1);
 	sort_bot(vmka, -1);
+	if ((*vmka)->dump_cycles > 0)
+		(*vmka)->cycles_to_die = (*vmka)->dump_cycles;
+	else
+		(*vmka)->cycles_to_die = CYCLE_TO_DIE;
 }

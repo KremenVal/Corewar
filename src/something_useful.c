@@ -73,6 +73,7 @@ int				return_bot_id(char *param)
 void			create_carriage(t_vmka **vmka, int nbr_carr, int poss)
 {
 	t_carr		*new;
+	t_carr		*tmp;
 
 	new = (t_carr *)ft_memalloc(sizeof(t_carr));
 	new->id_carr = nbr_carr;
@@ -82,7 +83,9 @@ void			create_carriage(t_vmka **vmka, int nbr_carr, int poss)
 		(*vmka)->carr = new;
 	else
 	{
-		new->next = (*vmka)->carr;
+		tmp = (*vmka)->carr;
 		(*vmka)->carr = new;
+		(*vmka)->carr->next = tmp;
+		tmp->prev = (*vmka)->carr;
 	}
 }

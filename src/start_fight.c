@@ -12,26 +12,39 @@
 
 #include "../includes/corewar.h"
 
-void		start_fight(t_vmka **vmka)
+static void		check_oper(t_vmka **vmka, t_carr *carr, int i, int j)
 {
-	t_carr	*tmp;
+	int			code;
 
-	tmp = (*vmka)->carr;
+	(void)i;
+	(void)j;
+	code = (*vmka)->field[(carr->poss_carr + 1) % MEM_SIZE].place;
+	carr->args_types[0] = (code >> j) % 4;
+}
+
+void			start_fight(t_vmka **vmka)
+{
+	t_carr		*tmp;
+	int			kek;
+
 	introducing(vmka, -1);
-	while (tmp)
+	kek = 7;
+	while (--kek >= 0)
 	{
-		if (!tmp->iter_to_wait)
-			get_oper(tmp, (*vmka)->field[tmp->poss_carr].place);
-		if (tmp->iter_to_wait > 0)
-			tmp->iter_to_wait--;
-		if (!tmp->iter_to_wait)
+		tmp = (*vmka)->carr;
+		while (tmp)
 		{
-			if (tmp->oper >= 0x01 && tmp->oper <= 0x10)
-				;
-			else
+			if (!tmp->iter_to_wait)
+				get_oper(tmp, (*vmka)->field[tmp->poss_carr].place);
+			if (tmp->iter_to_wait > 0)
+				tmp->iter_to_wait--;
+			if (!tmp->iter_to_wait)
+			{
+				if (tmp->oper >= 0x01 && tmp->oper <= 0x10)
+					check_oper(vmka, tmp, -1, 6);
 				tmp->poss_carr = (tmp->poss_carr + 1) % MEM_SIZE;
+			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
-	(*vmka)->dump_cycles++;
 }

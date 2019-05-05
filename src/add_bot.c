@@ -34,7 +34,7 @@ void				get_and_check_bot_code(char *bot_code, t_bot **bot,
 **	Запись имени и комментарий игрока
 */
 
-static void				get_bot_name_and_comment(char *bot_code, t_bot **bot,
+static void			get_bot_name_and_comment(char *bot_code, t_bot **bot,
 									int step)
 {
 	while (++step < PROG_NAME_LENGTH && bot_code[step + 4])

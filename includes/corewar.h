@@ -70,8 +70,10 @@ typedef struct			s_carriages
 	int					last_live;
 	int					reg_carr[REG_NUMBER];
 	int					iter_to_wait;
+	unsigned int		args_types[3];
 	unsigned long int	oper;
 	struct s_carriages	*next;
+	struct s_carriages	*prev;
 }						t_carr;
 
 /*
@@ -91,6 +93,7 @@ typedef struct			s_vmka
 	t_batfield			*field;
 	t_carr				*carr;
 	int					dump_cycles;
+	int					cycles_to_die;
 	int					nbr_carr;
 	int					nbr_players;
 }						t_vmka;
@@ -157,15 +160,6 @@ int						return_bot_id(char *param);
 void					create_carriage(t_vmka **vmka, int nbr_carr, int poss);
 
 /*
-** bot_validation.c
-*/
-
-void					check_bot_size_code(unsigned char *bot_code,
-								t_bot **bot);
-void					check_bot_code(unsigned char *bot_code,
-								t_bot **bot, int num, unsigned char *bot_start);
-
-/*
 ** start_fight.c
 */
 
@@ -183,6 +177,5 @@ void					get_oper(t_carr *tmp, unsigned int place);
 
 void					print_field(t_vmka *vmka, int i);
 void					introducing(t_vmka **vmka, int id);
-void					print_carriages(t_vmka *vmka);
 
 #endif
