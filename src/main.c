@@ -27,7 +27,8 @@ int				main(int argc, char **argv)
 	parsing_argv_params(argc, argv, &vmka, 0);
 	init_field(&vmka, -1, -1);
 	init_carriages(&vmka, -1);
+	introducing(&vmka, -1);
 	start_fight(&vmka);
-	print_field(vmka, -1);
+	// print_field(vmka, -1);
 	system("leaks -q corewar");
 }
