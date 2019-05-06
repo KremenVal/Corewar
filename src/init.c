@@ -64,9 +64,25 @@ void		init_field(t_vmka **vmka, int i, int j)
 
 void		init_carriages(t_vmka **vmka, int step)
 {
+	t_carr		*new;
+	t_carr		*tmp;
+
 	while (++step < (*vmka)->nbr_players)
-		create_carriage(vmka, (*vmka)->bot[step]->id_bot,
-			step * (MEM_SIZE / (*vmka)->nbr_players));
+	{
+		new = (t_carr *)ft_memalloc(sizeof(t_carr));
+		new->id_carr = (*vmka)->bot[step]->id_bot;
+		new->poss_carr = step * (MEM_SIZE / (*vmka)->nbr_players);
+		new->reg_carr[0] = (*vmka)->bot[step]->id_bot * -1;
+		if (!(*vmka)->carr)
+			(*vmka)->carr = new;
+		else
+		{
+			tmp = (*vmka)->carr;
+			(*vmka)->carr = new;
+			(*vmka)->carr->next = tmp;
+			tmp->prev = (*vmka)->carr;
+		}
+	}
 }
 
 t_oper		g_oper[16] = {
@@ -216,6 +232,6 @@ t_oper		g_oper[16] = {
 	}
 };
 
-static void		(*g_op[16])() = {&live_op, &ld_op, &st_op, &add_sub_op,
-	&add_sub_op, &and_or_xor_op, &and_or_xor_op, &and_or_xor_op, &zjmp_op,
-	&ldi_op, &sti_op, &fork_op, &ld_op, &ldi_op, &fork_op, &aff_op};
+// static void		(*g_op[16])() = {&live_op, &ld_op, &st_op, &add_sub_op,
+// 	&add_sub_op, &and_or_xor_op, &and_or_xor_op, &and_or_xor_op, &zjmp_op,
+// 	&ldi_op, &sti_op, &fork_op, &ld_op, &ldi_op, &fork_op, &aff_op};

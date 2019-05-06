@@ -12,6 +12,18 @@
 
 #include "../includes/corewar.h"
 
+static void		introducing(t_vmka **vmka, int id)
+{
+	ft_printf("Introducing contestants...\n");
+	while (++id < (*vmka)->nbr_players)
+	{
+		ft_printf("\033[0;3%dm* Player %d, weighing %d bytes, \"%s\" ",
+			id + 1, id + 1, (*vmka)->bot[id]->code_size,
+			(*vmka)->bot[id]->name);
+		ft_printf("(\"%s\") !\n", (*vmka)->bot[id]->comment);
+	}
+}
+
 int				main(int argc, char **argv)
 {
 	t_vmka		*vmka;
@@ -27,7 +39,8 @@ int				main(int argc, char **argv)
 	parsing_argv_params(argc, argv, &vmka, 0);
 	init_field(&vmka, -1, -1);
 	init_carriages(&vmka, -1);
-	start_fight(&vmka);
+	introducing(&vmka, -1);
+	// start_fight(&vmka);
 	visual(&vmka);
 	system("leaks -q corewar");
 }

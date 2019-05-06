@@ -58,10 +58,12 @@ static void		make_oper_or_skip(t_vmka **vmka, t_carr *carr, int step)
 	if (g_oper[carr->oper - 1].types)
 	{
 		if (check_oper(vmka, carr, -1, 6))
-			(*g_op[carr->oper])((*vmka)->field, carr);
+			// (*g_op[carr->oper])((*vmka)->field, carr);
+			;
 	}
 	else
-		(*g_op[carr->oper])((*vmka)->field, carr);
+		// (*g_op[carr->oper])((*vmka)->field, carr);
+		;
 	if (g_oper[carr->oper - 1].types == 1)
 		carr->poss_carr += 2;
 	else
@@ -70,6 +72,13 @@ static void		make_oper_or_skip(t_vmka **vmka, t_carr *carr, int step)
 		g_oper[carr->oper - 1].types)
 		carr->poss_carr += carr->args_size[step];
 	carr->poss_carr %= MEM_SIZE;
+}
+
+static void		get_oper(t_carr *tmp, unsigned int place)
+{
+	tmp->oper = place;
+	if (tmp->oper >= 0x01 && tmp->oper <= 0x10)
+		tmp->iter_to_wait = g_oper[tmp->oper - 1].wait;
 }
 
 void			start_fight(t_vmka **vmka)
