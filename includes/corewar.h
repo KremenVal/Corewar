@@ -6,7 +6,7 @@
 /*   By: vkremen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 12:39:09 by vkremen           #+#    #+#             */
-/*   Updated: 2019/05/05 06:40:12 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/06 03:58:10 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct			s_vmka
 	int					cycles_to_die;
 	int					nbr_carr;
 	int					nbr_players;
+	int					speed;
 }						t_vmka;
 
 /*
