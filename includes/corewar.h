@@ -88,6 +88,8 @@ typedef struct			s_carriages
 **	nbr_carr - количество кареток
 **	nbr_players - количество игроков
 **	visual - флаг для визуализации
+**	cycles - количество выполнених циклов
+**	lives - количество выполненых операций live
 */
 
 typedef struct			s_vmka
@@ -101,6 +103,8 @@ typedef struct			s_vmka
 	int					nbr_carr;
 	int					nbr_players;
 	int					speed;
+	int					cycles;
+	int					lives;
 }						t_vmka;
 
 /*
