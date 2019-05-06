@@ -20,6 +20,7 @@ SRC = 	./src/main.c\
 		./src/something_useful.c\
 		./src/parsing_bot.c\
 		./src/start_fight.c\
+		./src/start_fight_2.c\
 		./src/helpful_functions.c\
 		./src/print.c\
 		./src/visual.c
