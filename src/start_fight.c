@@ -6,7 +6,7 @@
 /*   By: pmartyny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 13:24:46 by pmartyny          #+#    #+#             */
-/*   Updated: 2019/05/05 08:49:15 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/03 13:24:47 by pmartyny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void			start_fight(t_vmka **vmka)
 			{
 				if (tmp->oper >= 0x01 && tmp->oper <= 0x10)
 				{
-					ft_bzero(tmp->args_size, 3);
+					// ft_bzero(tmp->args_size, 3);
 					// make_oper_or_skip(vmka, tmp, -1);
 					;
 				}

@@ -15,4 +15,10 @@
 void			start_fight_2(t_vmka **vmka)
 {
 	visual(vmka);
+
+}
+
+void			kek(void)
+{
+	
 }
