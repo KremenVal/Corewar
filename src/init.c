@@ -216,6 +216,6 @@ t_oper		g_oper[16] = {
 	}
 };
 
-static void		(*g_op[16])() = {&live_op, &ld_op, &st_op, &add_sub_op,
-	&add_sub_op, &and_or_xor_op, &and_or_xor_op, &and_or_xor_op, &zjmp_op,
-	&ldi_op, &sti_op, &fork_op, &ld_op, &ldi_op, &fork_op, &aff_op};
+// static void		(*g_op[16])() = {&live_op, &ld_op, &st_op, &add_sub_op,
+// 	&add_sub_op, &and_or_xor_op, &and_or_xor_op, &and_or_xor_op, &zjmp_op,
+// 	&ldi_op, &sti_op, &fork_op, &ld_op, &ldi_op, &fork_op, &aff_op};

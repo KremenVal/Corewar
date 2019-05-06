@@ -87,6 +87,7 @@ typedef struct			s_carriages
 **	игру (если была задана)
 **	nbr_carr - количество кареток
 **	nbr_players - количество игроков
+**	visual - флаг для визуализации
 */
 
 typedef struct			s_vmka
@@ -94,6 +95,7 @@ typedef struct			s_vmka
 	t_bot				**bot;
 	t_batfield			*field;
 	t_carr				*carr;
+	int					visual;
 	int					dump_cycles;
 	int					cycles_to_die;
 	int					nbr_carr;
@@ -114,11 +116,11 @@ typedef struct			s_vmka
 typedef struct			s_oper
 {
 	char				*name;
-	unsigned int		code;
-	unsigned int		args_num;
+	int					code;
+	int					args_num;
 	bool				types;
-	unsigned int		args_types[3];
-	unsigned int		dir_size;
+	int					args_types[3];
+	int					dir_size;
 	int					wait;
 }						t_oper;
 
@@ -167,6 +169,12 @@ void					create_carriage(t_vmka **vmka, int nbr_carr, int poss);
 */
 
 void					start_fight(t_vmka **vmka);
+
+/*
+** start_fight_2.c
+*/
+
+void					start_fight_2(t_vmka **vmka);
 
 /*
 ** helpfull_functions.c
