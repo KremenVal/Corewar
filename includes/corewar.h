@@ -6,7 +6,7 @@
 /*   By: vkremen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 12:39:09 by vkremen           #+#    #+#             */
-/*   Updated: 2019/05/06 03:58:10 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/06 07:11:46 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,9 +190,10 @@ void					print_field(t_vmka *vmka, int i);
 void					introducing(t_vmka **vmka, int id);
 
 /*
-** visual.c
+** visual.c visual2.c
 */
 
 void					visual(t_vmka **all);
+void					fill_info(t_vmka *all, WINDOW **info, int i);
 
 #endif
