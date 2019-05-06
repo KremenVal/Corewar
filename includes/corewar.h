@@ -6,7 +6,7 @@
 /*   By: vkremen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 12:39:09 by vkremen           #+#    #+#             */
-/*   Updated: 2019/05/05 06:40:12 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/06 07:11:46 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct			s_carriages
 **	игру (если была задана)
 **	nbr_carr - количество кареток
 **	nbr_players - количество игроков
+**	visual - флаг для визуализации
 */
 
 typedef struct			s_vmka
@@ -94,10 +95,12 @@ typedef struct			s_vmka
 	t_bot				**bot;
 	t_batfield			*field;
 	t_carr				*carr;
+	int					visual;
 	int					dump_cycles;
 	int					cycles_to_die;
 	int					nbr_carr;
 	int					nbr_players;
+	int					speed;
 }						t_vmka;
 
 /*
@@ -113,11 +116,11 @@ typedef struct			s_vmka
 typedef struct			s_oper
 {
 	char				*name;
-	unsigned int		code;
-	unsigned int		args_num;
+	int					code;
+	int					args_num;
 	bool				types;
-	unsigned int		args_types[3];
-	unsigned int		dir_size;
+	int					args_types[3];
+	int					dir_size;
 	int					wait;
 }						t_oper;
 
@@ -168,6 +171,12 @@ void					create_carriage(t_vmka **vmka, int nbr_carr, int poss);
 void					start_fight(t_vmka **vmka);
 
 /*
+** start_fight_2.c
+*/
+
+void					start_fight_2(t_vmka **vmka);
+
+/*
 ** helpfull_functions.c
 */
 
@@ -181,9 +190,10 @@ void					print_field(t_vmka *vmka, int i);
 void					introducing(t_vmka **vmka, int id);
 
 /*
-** visual.c
+** visual.c visual2.c
 */
 
 void					visual(t_vmka **all);
+void					fill_info(t_vmka *all, WINDOW **info, int i);
 
 #endif
