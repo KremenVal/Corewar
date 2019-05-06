@@ -71,7 +71,8 @@ typedef struct			s_carriages
 	int					last_live;
 	int					reg_carr[REG_NUMBER];
 	int					iter_to_wait;
-	unsigned int		args_types[3];
+	unsigned int		args_type[3];
+	unsigned int		args_size[3];
 	unsigned long int	oper;
 	struct s_carriages	*next;
 	struct s_carriages	*prev;
