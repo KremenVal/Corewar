@@ -65,3 +65,26 @@ int				return_bot_id(char *param)
 	g_id_players[res - 1] = res;
 	return (res);
 }
+
+/*
+**	Возвращает абсолютное значение
+*/
+
+int				abs(int number)
+{
+	if (number < 0)
+		return (number * -1);
+	return (number);
+}
+
+void			modify_field(t_vmka **vmka, int place, int *value, int *mass)
+{
+	int			step;
+
+	step = -1;
+	while (++step < mass[0])
+	{
+		(*vmka)->field[(place + step) % MEM_SIZE].place = value[step];
+		(*vmka)->field[(place + step) % MEM_SIZE].id_bot = mass[1];
+	}
+}

@@ -58,12 +58,10 @@ static void		make_oper_or_skip(t_vmka **vmka, t_carr *carr, int step)
 	if (g_oper[carr->oper - 1].types)
 	{
 		if (check_oper(vmka, carr, -1, 6))
-			// (*g_op[carr->oper])((*vmka)->field, carr);
-			;
+			(*g_op[carr->oper])((*vmka)->field, carr);
 	}
 	else
-		// (*g_op[carr->oper])((*vmka)->field, carr);
-		;
+		(*g_op[carr->oper])((*vmka)->field, carr);
 	if (g_oper[carr->oper - 1].types == 1)
 		carr->poss_carr += 2;
 	else
@@ -84,10 +82,8 @@ static void		get_oper(t_carr *tmp, unsigned int place)
 void			start_fight(t_vmka **vmka)
 {
 	t_carr		*tmp;
-	int			kek;
-
-	kek = 6;
-	while (--kek >= 0)
+	
+	while (1)
 	{
 		tmp = (*vmka)->carr;
 		while (tmp)

@@ -14,6 +14,7 @@
 # define COREWAR_H
 # define MIN_BOT_SIZE (4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4)
 # define MAX_BOT_SIZE (MIN_BOT_SIZE + CHAMP_MAX_SIZE)
+# define MAX_BIT 2147483648
 
 # include "../libft/libft.h"
 # include "op.h"
@@ -105,6 +106,7 @@ typedef struct			s_vmka
 	int					speed;
 	int					cycles;
 	int					lives;
+	int					last_alive;
 }						t_vmka;
 
 /*
@@ -166,6 +168,8 @@ void					add_bot_to_battle(char *bot_file, t_bot **bot);
 void					error_management(char *error);
 void					reverse_bits(void *b, int len);
 int						return_bot_id(char *param);
+int						abs(int number);
+void					modify_field(t_vmka **vmka, int place, int *value, int *mass);
 
 /*
 ** start_fight.c
@@ -185,5 +189,43 @@ void					start_fight_2(t_vmka **vmka);
 
 void					visual(t_vmka **all);
 void					fill_info(t_vmka *all, WINDOW **info, int i);
+
+/*
+** operations_1.c
+*/
+
+void					live(t_vmka **vmka, t_carr *carr);
+void					st(t_vmka **vmka, t_carr *carr);
+void					sti(t_vmka **vmka, t_carr *carr, int step, int var);
+void					zjmp(t_vmka **vmka, t_carr *carr);
+void					add_sub(t_vmka **vmka, t_carr *carr);
+
+/*
+** operations_2.c
+*/
+
+void					aff(t_vmka **vmka, t_carr *carr);
+void					forkk(t_vmka **vmka, t_carr *carr);
+void					ld(t_vmka **vmka, t_carr *carr);
+void					ldi(t_vmka **vmka, t_carr *carr);
+
+/*
+** operations_3.c
+*/
+
+void					and_or_xor(t_vmka **vmka, t_carr *carr);
+
+static void		(*g_op[16])() = {&live, &ld, &st, &add_sub,
+	&add_sub, &and_or_xor, &and_or_xor, &and_or_xor, &zjmp,
+	&ldi, &sti, &forkk, &ld, &ldi, &forkk, &aff};
+
+/*
+** utils_for_oper.c
+*/
+
+void					value(t_vmka **vmka, int start_pos, int dir_size, int *arg);
+int						ind(t_vmka **vmka, t_carr *carr, int step, int size);
+void					reg_num(t_vmka **vmka, t_carr *carr, int arg, int *res);
+int						return_arg(t_carr *carr, int size);
 
 #endif
