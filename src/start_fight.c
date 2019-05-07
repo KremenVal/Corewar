@@ -6,7 +6,7 @@
 /*   By: pmartyny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 13:24:46 by pmartyny          #+#    #+#             */
-/*   Updated: 2019/05/03 13:24:47 by pmartyny         ###   ########.fr       */
+/*   Updated: 2019/05/06 08:07:14 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void			start_fight(t_vmka **vmka)
 	t_carr		*tmp;
 	int			kek;
 
-	kek = 6;
+	kek = 436;
 	while (--kek >= 0)
 	{
 		tmp = (*vmka)->carr;
