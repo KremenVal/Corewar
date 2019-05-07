@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 03:56:18 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/06 08:43:45 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/07 05:50:41 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void	set_colors(void)
 
 void	config(t_vmka **all, int key)
 {
+	WINDOW	*pause;
+
+	pause = newwin(1, 5, 1, 204);
 	key = getch();
 	if (key == 27)
 	{
@@ -71,12 +74,17 @@ void	config(t_vmka **all, int key)
 		exit(1);
 	}
 	else if (key == 32 || key == 'p')
+	{
+		wprintw(pause, "PAUSE");
+		refresh();
+		wrefresh(pause);
 		while (1)
 		{
 			key = getch();
 			if (key == 32 || key == 'p')
 				break ;
 		}
+	}
 	else if (key == 'q' && (*all)->speed > 1)
 		(*all)->speed /= 2;
 	else if (key == 'a' && (*all)->speed < 400)
@@ -90,8 +98,9 @@ void	visual(t_vmka **all)
 
 	initscr();
 	(void)all;
+	curs_set(0);
 	field = newwin(64, 192, 1, 1);
-	info = newwin(30, 30, 1, 193);
+	info = newwin(30, 30, 1, 196);
 	start_color();
 	noecho();
 	set_colors();
@@ -103,5 +112,4 @@ void	visual(t_vmka **all)
 	wrefresh(info);
 	timeout((*all)->speed);
 	config(all, 0);
-//	endwin();
 }

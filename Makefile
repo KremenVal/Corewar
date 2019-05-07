@@ -6,7 +6,7 @@
 #    By: vkremen <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/24 18:15:35 by vkremen           #+#    #+#              #
-#    Updated: 2019/05/06 07:19:16 by oandrosh         ###   ########.fr        #
+#    Updated: 2019/05/07 04:56:54 by oandrosh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,8 @@ SRC = 	./src/main.c\
 		./src/parsing_bot.c\
 		./src/start_fight.c\
 		./src/start_fight_2.c\
-<<<<<<< HEAD
-		./src/helpful_functions.c\
-		./src/print.c\
 		./src/visual.c\
 		./src/visual2.c\
-=======
-		./src/visual.c
->>>>>>> 8976b21e1b1564b70724d72bd81dcdcac9cb811e
 
 OB = $(SRC:%.c=%.o) 
 

@@ -6,7 +6,7 @@
 /*   By: vkremen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 11:58:42 by vkremen           #+#    #+#             */
-/*   Updated: 2019/05/06 07:53:19 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/07 05:48:29 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int				main(int argc, char **argv)
 	init_field(&vmka, -1, -1);
 	init_carriages(&vmka, -1);
 	introducing(&vmka, -1);
-	// start_fight(&vmka);
+	start_fight(&vmka);
 	visual(&vmka);
+	endwin();
 //	system("leaks -q corewar");
 }
