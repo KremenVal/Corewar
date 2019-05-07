@@ -89,6 +89,8 @@ typedef struct			s_carriages
 **	nbr_carr - количество кареток
 **	nbr_players - количество игроков
 **	visual - флаг для визуализации
+**	cycles - количество выполнених циклов
+**	lives - количество выполненых операций live
 */
 
 typedef struct			s_vmka
@@ -102,6 +104,8 @@ typedef struct			s_vmka
 	int					nbr_carr;
 	int					nbr_players;
 	int					speed;
+	int					cycles;
+	int					lives;
 }						t_vmka;
 
 /*
@@ -163,7 +167,6 @@ void					add_bot_to_battle(char *bot_file, t_bot **bot);
 void					error_management(char *error);
 void					reverse_bits(void *b, int len);
 int						return_bot_id(char *param);
-void					create_carriage(t_vmka **vmka, int nbr_carr, int poss);
 
 /*
 ** start_fight.c
@@ -176,19 +179,6 @@ void					start_fight(t_vmka **vmka);
 */
 
 void					start_fight_2(t_vmka **vmka);
-
-/*
-** helpfull_functions.c
-*/
-
-void					get_oper(t_carr *tmp, unsigned int place);
-
-/*
-** print.c
-*/
-
-void					print_field(t_vmka *vmka, int i);
-void					introducing(t_vmka **vmka, int id);
 
 /*
 ** visual.c visual2.c

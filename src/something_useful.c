@@ -65,27 +65,3 @@ int				return_bot_id(char *param)
 	g_id_players[res - 1] = res;
 	return (res);
 }
-
-/*
-**	Создание новых кареток
-*/
-
-void			create_carriage(t_vmka **vmka, int nbr_carr, int poss)
-{
-	t_carr		*new;
-	t_carr		*tmp;
-
-	new = (t_carr *)ft_memalloc(sizeof(t_carr));
-	new->id_carr = nbr_carr;
-	new->poss_carr = poss;
-	new->reg_carr[0] = nbr_carr * -1;
-	if (!(*vmka)->carr)
-		(*vmka)->carr = new;
-	else
-	{
-		tmp = (*vmka)->carr;
-		(*vmka)->carr = new;
-		(*vmka)->carr->next = tmp;
-		tmp->prev = (*vmka)->carr;
-	}
-}

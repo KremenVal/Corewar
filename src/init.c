@@ -64,9 +64,25 @@ void		init_field(t_vmka **vmka, int i, int j)
 
 void		init_carriages(t_vmka **vmka, int step)
 {
+	t_carr		*new;
+	t_carr		*tmp;
+
 	while (++step < (*vmka)->nbr_players)
-		create_carriage(vmka, (*vmka)->bot[step]->id_bot,
-			step * (MEM_SIZE / (*vmka)->nbr_players));
+	{
+		new = (t_carr *)ft_memalloc(sizeof(t_carr));
+		new->id_carr = (*vmka)->bot[step]->id_bot;
+		new->poss_carr = step * (MEM_SIZE / (*vmka)->nbr_players);
+		new->reg_carr[0] = (*vmka)->bot[step]->id_bot * -1;
+		if (!(*vmka)->carr)
+			(*vmka)->carr = new;
+		else
+		{
+			tmp = (*vmka)->carr;
+			(*vmka)->carr = new;
+			(*vmka)->carr->next = tmp;
+			tmp->prev = (*vmka)->carr;
+		}
+	}
 }
 
 t_oper		g_oper[16] = {

@@ -21,10 +21,14 @@ SRC = 	./src/main.c\
 		./src/parsing_bot.c\
 		./src/start_fight.c\
 		./src/start_fight_2.c\
+<<<<<<< HEAD
 		./src/helpful_functions.c\
 		./src/print.c\
 		./src/visual.c\
 		./src/visual2.c\
+=======
+		./src/visual.c
+>>>>>>> 8976b21e1b1564b70724d72bd81dcdcac9cb811e
 
 OB = $(SRC:%.c=%.o) 
 

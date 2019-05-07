@@ -36,7 +36,7 @@ void	fill_field(t_vmka *all, WINDOW **field, int i)
 		if (id != 0 && is_carr(all, i) == 1)
 		{
 			wattron((*field), COLOR_PAIR(id + 4));
-			wprintw((*field), "%02x", all->field[i].place);		
+			wprintw((*field), "%02x", all->field[i].place);
 			wattroff((*field), COLOR_PAIR(id + 4));
 			wprintw((*field), " ");
 		}
