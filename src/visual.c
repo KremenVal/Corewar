@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 03:56:18 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/06 05:52:55 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/07 05:50:41 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,6 @@ void	fill_field(t_vmka *all, WINDOW **field, int i)
 	}
 }
 
-void	fill_info(t_vmka *all, WINDOW **info, int i)
-{
-	while (++i < 4 && all->bot[i]->name[0])
-	{
-		wprintw((*info), "PLAYER %d: ", i);
-		wattron((*info), COLOR_PAIR(i + 1));
-		wprintw((*info), "%s\n", all->bot[i]->name);
-		wattroff((*info), COLOR_PAIR(i + 1));
-	}
-}
-
 void	set_colors(void)
 {
 	init_pair(0, COLOR_WHITE, COLOR_BLACK);
@@ -73,6 +62,35 @@ void	set_colors(void)
 	init_pair(8, COLOR_BLACK, COLOR_YELLOW);
 }
 
+void	config(t_vmka **all, int key)
+{
+	WINDOW	*pause;
+
+	pause = newwin(1, 5, 1, 204);
+	key = getch();
+	if (key == 27)
+	{
+		endwin();
+		exit(1);
+	}
+	else if (key == 32 || key == 'p')
+	{
+		wprintw(pause, "PAUSE");
+		refresh();
+		wrefresh(pause);
+		while (1)
+		{
+			key = getch();
+			if (key == 32 || key == 'p')
+				break ;
+		}
+	}
+	else if (key == 'q' && (*all)->speed > 1)
+		(*all)->speed /= 2;
+	else if (key == 'a' && (*all)->speed < 400)
+		(*all)->speed *= 2;
+}
+
 void	visual(t_vmka **all)
 {
 	WINDOW	*field;
@@ -80,17 +98,18 @@ void	visual(t_vmka **all)
 
 	initscr();
 	(void)all;
-	field = newwin(64, 192, 0, 1);
-	info = newwin(30, 30, 0, 193);
+	curs_set(0);
+	field = newwin(64, 192, 1, 1);
+	info = newwin(30, 30, 1, 196);
 	start_color();
 	noecho();
 	set_colors();
 	fill_field(*all, &field, -1);
 	fill_info(*all, &info, -1);
 	refresh();
+	nodelay(stdscr, TRUE);
 	wrefresh(field);
 	wrefresh(info);
 	timeout((*all)->speed);
-	getch();
-	endwin();
+	config(all, 0);
 }
