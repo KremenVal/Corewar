@@ -12,6 +12,8 @@
 
 COREWAR = corewar
 
+GCC = clang
+
 FLAGS = -Wall -Werror -Wextra
 
 SRC = 	./src/main.c\
@@ -33,11 +35,11 @@ OB = $(SRC:%.c=%.o)
 all: $(COREWAR)
 
 %.o:%.c
-	@gcc -c $(FLAGS) $< -o $@
+	@$(GCC) -c $(FLAGS) $< -o $@
 
 $(COREWAR): $(OB)
 	@make -C libft
-	@gcc $(OB) libft/libft.a -lncurses -o $(COREWAR)
+	@(GCC) $(OB) libft/libft.a -lncurses -o $(COREWAR)
 
 clean: 
 	@make clean -C libft

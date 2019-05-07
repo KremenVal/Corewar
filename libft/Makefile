@@ -14,7 +14,7 @@ NAME = libft.a
 
 LIB = libft.h
 
-GCC = gcc
+GCC = clang
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -102,7 +102,7 @@ OB = $(SRC:%.c=%.o)
 all: $(NAME)
 
 $(OB):%.o:%.c
-	@gcc -c $(FLAGS) $< -o $@
+	@$(GCC) -c $(FLAGS) $< -o $@
 
 $(NAME): $(OB)
 	@ar rc $(NAME) $(OB)
