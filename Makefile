@@ -39,7 +39,7 @@ all: $(COREWAR)
 
 $(COREWAR): $(OB)
 	@make -C libft
-	@(GCC) $(OB) libft/libft.a -lncurses -o $(COREWAR)
+	@$(GCC) $(OB) libft/libft.a -lncurses -o $(COREWAR)
 
 clean: 
 	@make clean -C libft
