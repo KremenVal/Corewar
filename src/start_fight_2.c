@@ -63,21 +63,24 @@ void			start_fight_2(t_vmka **vmka)
 	checks++;
 	if (!cycles_to_dies)
 		cycles_to_dies = (*vmka)->cycles_to_die;
-	check_to_del_carr(vmka, (*vmka)->carr, NULL);
-	if ((*vmka)->lives >= NBR_LIVE)
+	if (cycles % (*vmka)->cycles_to_die == 0 || (*vmka)->cycles_to_die <= 0)
 	{
-		(*vmka)->cycles_to_die -= CYCLE_DELTA;
-		cycles_to_dies = (*vmka)->cycles_to_die;
-		checks = 0;
-	}
-	if (checks && !(checks %= MAX_CHECKS))
-		if (cycles_to_dies == (*vmka)->cycles_to_die &&
-			(*vmka)->cycles_to_die > 0)
+		check_to_del_carr(vmka, (*vmka)->carr, NULL);
+		if ((*vmka)->lives >= NBR_LIVE)
 		{
 			(*vmka)->cycles_to_die -= CYCLE_DELTA;
 			cycles_to_dies = (*vmka)->cycles_to_die;
+			checks = 0;
 		}
-	check_for_winner(vmka);
-	// if ((*vmka)->visual)
-		// visual(vmka);
+		if (checks && !(checks %= MAX_CHECKS))
+			if (cycles_to_dies == (*vmka)->cycles_to_die &&
+				(*vmka)->cycles_to_die > 0)
+			{
+				(*vmka)->cycles_to_die -= CYCLE_DELTA;
+				cycles_to_dies = (*vmka)->cycles_to_die;
+			}
+		check_for_winner(vmka);
+		// if ((*vmka)->visual)
+			visual(vmka);
+	}
 }

@@ -25,7 +25,6 @@ void			forkk(t_vmka **vmka, t_carr *carr)
 	t_carr		*new_carr;
 	int			place;
 
-	KEK2;
 	value(vmka, (carr->poss_carr + 1) % MEM_SIZE,
 		g_oper[carr->oper - 1].dir_size, &place);
 	if (carr->oper == 0x0C)

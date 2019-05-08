@@ -92,6 +92,7 @@ void			start_fight(t_vmka **vmka)
 				get_oper(tmp, (*vmka)->field[tmp->poss_carr].place);
 			if (tmp->iter_to_wait > 0)
 				tmp->iter_to_wait--;
+			// ft_printf("%d\n", tmp->iter_to_wait);
 			if (!tmp->iter_to_wait)
 			{
 				if (tmp->oper >= 0x01 && tmp->oper <= 0x10)

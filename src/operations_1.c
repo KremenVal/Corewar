@@ -97,7 +97,6 @@ void		zjmp(t_vmka **vmka, t_carr *carr)
 	int		arg;
 	int		tmp;
 
-	ft_printf("OK\n");
 	value(vmka, (carr->poss_carr + 1) % MEM_SIZE,
 		g_oper[carr->oper - 1].dir_size, &arg);
 	if (carr->carry)
