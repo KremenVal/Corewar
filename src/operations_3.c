@@ -16,6 +16,7 @@ static void		xor(int x, int y, int *res)
 {
 	unsigned int	tmp;
 
+	(*res) = 0;
 	tmp = MAX_BIT;
 	while (tmp)
 	{
@@ -29,6 +30,7 @@ static void		or(int x, int y, int *res)
 {
 	unsigned int	tmp;
 
+	(*res) = 0;
 	tmp = MAX_BIT;
 	while (tmp)
 	{
@@ -42,6 +44,7 @@ static void		and(int x, int y, int *res)
 {
 	unsigned int	tmp;
 
+	(*res) = 0;
 	tmp = MAX_BIT;
 	while (tmp)
 	{

@@ -24,6 +24,10 @@ void		live(t_vmka **vmka, t_carr *carr)
 	(*vmka)->lives++;
 }
 
+/*
+**	It works!!!
+*/
+
 void		st(t_vmka **vmka, t_carr *carr)
 {
 	int		number;
@@ -46,20 +50,17 @@ void		st(t_vmka **vmka, t_carr *carr)
 		reverse_bits(&val, 4);
 		mass[0] = REG_SIZE;
 		mass[1] = carr->id_carr;
-		modify_field(vmka, place, (int *)(&val), mass);
+		modify_field(vmka, place, (unsigned char *)(&val), mass);
 	}
 }
 
-void		sti(t_vmka **vmka, t_carr *carr, int step, int var)
+static void	sti_2(t_vmka **vmka, t_carr *carr, int *address)
 {
-	int		number;
-	int		val;
+	int		step;
+	int		var;
 	int		mass[2];
-	int		address;
-	int		res[2];
-	
-	reg_num(vmka, carr, 1, &number);
-	val = carr->reg_carr[number - 1];
+
+	step = -1;
 	while (++step < 2)
 		if (carr->args_type[step + 1] == DIR_CODE)
 			value(vmka, return_arg(carr, step + 2),
@@ -71,11 +72,24 @@ void		sti(t_vmka **vmka, t_carr *carr, int step, int var)
 			reg_num(vmka, carr, step + 2, &var);
 			mass[step] = carr->reg_carr[var - 1];
 		}
-	address = carr->poss_carr + (mass[0] + mass[1]) % IDX_MOD;
+	(*address) = carr->poss_carr + (mass[0] + mass[1]) % IDX_MOD;
+}
+
+void		sti(t_vmka **vmka, t_carr *carr)
+{
+	int		number;
+	int		val;
+	int		address;
+	int		res[2];
+	
+	reg_num(vmka, carr, 1, &number);
+	val = carr->reg_carr[number - 1];
+	sti_2(vmka, carr, &address);
 	reverse_bits(&val, 4);
 	res[0] = REG_SIZE;
 	res[1] = carr->id_carr;
-	modify_field(vmka, (MEM_SIZE + address) % MEM_SIZE, (int *)(&val), res);
+	modify_field(vmka, (MEM_SIZE + address) % MEM_SIZE,
+		(unsigned char *)(&val), res);
 }
 
 void		zjmp(t_vmka **vmka, t_carr *carr)
@@ -83,6 +97,7 @@ void		zjmp(t_vmka **vmka, t_carr *carr)
 	int		arg;
 	int		tmp;
 
+	ft_printf("OK\n");
 	value(vmka, (carr->poss_carr + 1) % MEM_SIZE,
 		g_oper[carr->oper - 1].dir_size, &arg);
 	if (carr->carry)

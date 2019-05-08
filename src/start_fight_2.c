@@ -55,9 +55,9 @@ static void		check_to_del_carr(t_vmka **vmka, t_carr *tmp, t_carr *tmp_prev)
 
 void			start_fight_2(t_vmka **vmka)
 {
-	static int	cycles_to_dies = 0;
+	static int	cycles_to_dies;
 	static int	checks;
-	static int	cycles = 0;
+	static int	cycles;
 
 	cycles++;
 	checks++;
@@ -79,5 +79,5 @@ void			start_fight_2(t_vmka **vmka)
 		}
 	check_for_winner(vmka);
 	// if ((*vmka)->visual)
-		visual(vmka);
+		// visual(vmka);
 }

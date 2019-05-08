@@ -15,6 +15,8 @@
 # define MIN_BOT_SIZE (4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4)
 # define MAX_BOT_SIZE (MIN_BOT_SIZE + CHAMP_MAX_SIZE)
 # define MAX_BIT 2147483648
+// # define KEK1 ft_printf("KEK1\n");
+# define KEK2 ft_printf("KEK2\n");
 
 # include "../libft/libft.h"
 # include "op.h"
@@ -75,7 +77,7 @@ typedef struct			s_carriages
 	int					iter_to_wait;
 	unsigned int		args_type[3];
 	unsigned int		args_size[3];
-	unsigned long int	oper;
+	unsigned char		oper;
 	struct s_carriages	*next;
 	struct s_carriages	*prev;
 }						t_carr;
@@ -170,7 +172,7 @@ void					error_management(char *error);
 void					reverse_bits(void *b, int len);
 int						return_bot_id(char *param);
 int						abs(int number);
-void					modify_field(t_vmka **vmka, int place, int *value, int *mass);
+void					modify_field(t_vmka **vmka, int place, unsigned char *value, int *mass);
 
 /*
 ** start_fight.c
@@ -197,7 +199,7 @@ void					fill_info(t_vmka *all, WINDOW **info, int i);
 
 void					live(t_vmka **vmka, t_carr *carr);
 void					st(t_vmka **vmka, t_carr *carr);
-void					sti(t_vmka **vmka, t_carr *carr, int step, int var);
+void					sti(t_vmka **vmka, t_carr *carr);
 void					zjmp(t_vmka **vmka, t_carr *carr);
 void					add_sub(t_vmka **vmka, t_carr *carr);
 
