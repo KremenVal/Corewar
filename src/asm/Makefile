@@ -6,7 +6,7 @@
 #    By: kbakhari <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 13:32:19 by kbakhari          #+#    #+#              #
-#    Updated: 2019/05/06 13:32:20 by kbakhari         ###   ########.fr        #
+#    Updated: 2019/05/08 13:34:33 by kbakhari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ all: $(COREWAR)
 
 $(COREWAR): $(OB)
 	@make -C ../../libft
-	@gcc $(OB) ../../libft/libft.a -lncurses -o ../../$(COREWAR)
+	@gcc $(OB) ../../libft/libft.a -lncurses -o $(COREWAR)
 
 clean: 
 	@make clean -C ../../libft
@@ -36,6 +36,6 @@ clean:
 
 fclean: clean
 	@make fclean -C ../../libft
-	@rm -f ../../$(COREWAR)
+	@rm -f $(COREWAR)
 
 re: fclean all

@@ -12,6 +12,37 @@
 
 #include "../../includes/asm.h"
 
+int			ft_is_label(char *line)
+{
+	int		i;
+
+	i = -1;
+	while (line[++i])
+	{
+		if (line[i] == LABEL_CHAR)
+		{
+			if (line[i - 1] && line[i - 1] != '%' && line[i - 1] != ',' &&
+				line[i - 1] != ' ')
+				return (1);
+		}
+	}
+	return(0);
+}
+
+int			ft_check_empty(char *line)
+{
+	int		i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	ft_death(char *str)
 {
 	int len;

@@ -70,7 +70,7 @@ char		*ft_get_comment(char *line)
 	return (comment);
 }
 
-void		ft_get_name_comment(int fd)
+char		*ft_get_name_comment(int fd, int fd2)
 {
 	char	*line;
 	char	*name;
@@ -90,5 +90,7 @@ void		ft_get_name_comment(int fd)
 		free(line);
 		i++;
 	}
+	ft_write_name(fd2, name, 1);
+	return (comment);
 	printf("NAME: |%s|, COMMENT: |%s|\n", name, comment);
 }
