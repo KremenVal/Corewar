@@ -70,6 +70,7 @@ typedef struct			s_battlefield
 typedef struct			s_carriages
 {
 	int					id_carr;
+	int					carr_color;
 	bool				carry;
 	int					poss_carr;
 	int					last_live;

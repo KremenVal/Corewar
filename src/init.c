@@ -71,6 +71,7 @@ void		init_carriages(t_vmka **vmka, int step)
 	{
 		new = (t_carr *)ft_memalloc(sizeof(t_carr));
 		new->id_carr = (*vmka)->bot[step]->id_bot;
+		new->carr_color = new->id_carr;
 		new->poss_carr = step * (MEM_SIZE / (*vmka)->nbr_players);
 		new->reg_carr[0] = (*vmka)->bot[step]->id_bot * -1;
 		if (!(*vmka)->carr)
