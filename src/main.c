@@ -33,13 +33,16 @@ static int		music(void)
 
 static void		introducing(t_vmka **vmka, int id)
 {
-	ft_printf("Introducing contestants...\n");
-	while (++id < (*vmka)->nbr_players)
+	if (!(*vmka)->visual)
 	{
-		ft_printf("\033[0;3%dm* Player %d, weighing %d bytes, \"%s\" ",
-			id + 1, id + 1, (*vmka)->bot[id]->code_size,
-			(*vmka)->bot[id]->name);
-		ft_printf("(\"%s\") !\n\033[0m", (*vmka)->bot[id]->comment);
+		ft_printf("Introducing contestants...\n");
+		while (++id < (*vmka)->nbr_players)
+		{
+			ft_printf("* Player %d, weighing %d bytes, \"%s\" ",
+				id + 1, (*vmka)->bot[id]->code_size,
+				(*vmka)->bot[id]->name);
+			ft_printf("(\"%s\") !\n", (*vmka)->bot[id]->comment);
+		}
 	}
 }
 

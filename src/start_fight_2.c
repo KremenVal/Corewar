@@ -19,8 +19,8 @@ static void		check_for_winner(t_vmka **vmka)
 		if (!(*vmka)->visual)
 		{
 			ft_printf("Contestant %d, \"%s\", has won !\n",
-				(*vmka)->nbr_players - 1,
-				(*vmka)->bot[(*vmka)->nbr_players - 1]->name);
+				(*vmka)->last_alive,
+				(*vmka)->bot[(*vmka)->last_alive - 1]->name);
 		}
 		endwin();
 		exit(0);
