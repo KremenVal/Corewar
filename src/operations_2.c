@@ -69,7 +69,7 @@ void			ldi(t_vmka **vmka, t_carr *carr)
 	while (++step < 2)
 		if (carr->args_type[step] == DIR_CODE)
 			value(vmka, return_arg(carr, step + 1),
-				g_oper[carr->oper -1].dir_size, &mass[step]);
+				g_oper[carr->oper - 1].dir_size, &mass[step]);
 		else if (carr->args_type[step] == IND_CODE)
 			mass[step] = ind(vmka, carr, step + 1, 4);
 		else if (carr->args_type[step] == REG_CODE)

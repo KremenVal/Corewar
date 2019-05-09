@@ -77,7 +77,8 @@ int				abs(int number)
 	return (number);
 }
 
-void			modify_field(t_vmka **vmka, int place, unsigned char *value, int *mass)
+void			modify_field(t_vmka **vmka, int place, unsigned char *value,
+								int *mass)
 {
 	int			step;
 

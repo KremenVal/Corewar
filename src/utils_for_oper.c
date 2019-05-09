@@ -68,3 +68,24 @@ int			return_arg(t_carr *carr, int size)
 	jump++;
 	return ((carr->poss_carr + jump) % MEM_SIZE);
 }
+
+void		sti_2(t_vmka **vmka, t_carr *carr, int *address)
+{
+	int		step;
+	int		var;
+	int		mass[2];
+
+	step = -1;
+	while (++step < 2)
+		if (carr->args_type[step + 1] == DIR_CODE)
+			value(vmka, return_arg(carr, step + 2),
+				g_oper[carr->oper - 1].dir_size, &mass[step]);
+		else if (carr->args_type[step + 1] == IND_CODE)
+			mass[step] = ind(vmka, carr, step + 2, 4);
+		else
+		{
+			reg_num(vmka, carr, step + 2, &var);
+			mass[step] = carr->reg_carr[var - 1];
+		}
+	(*address) = carr->poss_carr + (mass[0] + mass[1]) % IDX_MOD;
+}

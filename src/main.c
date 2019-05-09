@@ -11,14 +11,25 @@
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
-#include <SDL.h>
-#include <SDL_mixer.h>
 
-#define WAV_PATH "Eminem - Rap God.mp3"
-#define MUS_PATH "HR2_Friska.ogg"
-
-Mix_Chunk *wave = NULL;
-Mix_Music *music = NULL;
+static int		music(void)
+{
+	if (SDL_Init(SDL_INIT_AUDIO) < 0)
+		return (0);
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+		return (0);
+	g_wave = Mix_LoadWAV(WAV_PATH);
+	if (g_wave == NULL)
+		return (0);
+	g_music = Mix_LoadMUS(WAV_PATH);
+	if (g_music == NULL)
+		return (0);
+	if (Mix_PlayChannel(-1, g_wave, 0) == -1)
+		return (0);
+	if (Mix_PlayMusic(g_music, -1) == -1)
+		return (0);
+	return (1);
+}
 
 static void		introducing(t_vmka **vmka, int id)
 {
@@ -36,24 +47,8 @@ int				main(int argc, char **argv)
 {
 	t_vmka		*vmka;
 
-	if (SDL_Init(SDL_INIT_AUDIO) < 0)
-		return -1;
-	if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 ) 
-		return -1; 
-	wave = Mix_LoadWAV(WAV_PATH);
-	if (wave == NULL)
-		return -1;
-	music = Mix_LoadMUS(WAV_PATH);
-	if (music == NULL)
-		return -1;
-	
-	if ( Mix_PlayChannel(-1, wave, 0) == -1 )
-		return -1;
-	
-	if ( Mix_PlayMusic( music, -1) == -1 )
-		return -1;
-	// while ( Mix_PlayingMusic() ) ;
-
+	if (!music())
+		return (0);
 	if (argc < 2)
 	{
 		ft_printf("Usage\n");
@@ -66,14 +61,10 @@ int				main(int argc, char **argv)
 	init_field(&vmka, -1, -1);
 	init_carriages(&vmka, -1);
 	introducing(&vmka, -1);
+	vmka->last_alive = vmka->nbr_players;
 	start_fight(&vmka);
 	endwin();
-
-
-	Mix_FreeChunk(wave);
-	Mix_FreeMusic(music);
+	Mix_FreeChunk(g_wave);
+	Mix_FreeMusic(g_music);
 	Mix_CloseAudio();
-
-
-//	system("leaks -q corewar");
 }

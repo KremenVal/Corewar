@@ -36,7 +36,7 @@ void	fill_info(t_vmka *all, WINDOW **info, int i)
 }
 
 void	pause_game(void)
-{	
+{
 	int		key;
 	WINDOW	*pause;
 

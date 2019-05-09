@@ -30,7 +30,7 @@ void		st(t_vmka **vmka, t_carr *carr)
 	int		val;
 	int		place;
 	int		mass[2];
-	
+
 	reg_num(vmka, carr, 1, &number);
 	val = carr->reg_carr[number - 1];
 	if (carr->args_type[1] == REG_CODE)
@@ -50,34 +50,13 @@ void		st(t_vmka **vmka, t_carr *carr)
 	}
 }
 
-static void	sti_2(t_vmka **vmka, t_carr *carr, int *address)
-{
-	int		step;
-	int		var;
-	int		mass[2];
-
-	step = -1;
-	while (++step < 2)
-		if (carr->args_type[step + 1] == DIR_CODE)
-			value(vmka, return_arg(carr, step + 2),
-				g_oper[carr->oper - 1].dir_size, &mass[step]);
-		else if (carr->args_type[step + 1] == IND_CODE)
-			mass[step] = ind(vmka, carr, step + 2, 4);
-		else
-		{
-			reg_num(vmka, carr, step + 2, &var);
-			mass[step] = carr->reg_carr[var - 1];
-		}
-	(*address) = carr->poss_carr + (mass[0] + mass[1]) % IDX_MOD;
-}
-
 void		sti(t_vmka **vmka, t_carr *carr)
 {
 	int		number;
 	int		val;
 	int		address;
 	int		res[2];
-	
+
 	reg_num(vmka, carr, 1, &number);
 	val = carr->reg_carr[number - 1];
 	sti_2(vmka, carr, &address);
@@ -98,7 +77,8 @@ void		zjmp(t_vmka **vmka, t_carr *carr)
 	if (carr->carry)
 	{
 		tmp = arg % IDX_MOD;
-		carr->poss_carr = (MEM_SIZE + (carr->poss_carr + tmp) % MEM_SIZE) % MEM_SIZE;
+		carr->poss_carr = (MEM_SIZE + (carr->poss_carr + tmp) % MEM_SIZE) %
+		MEM_SIZE;
 		carr->stay = 1;
 	}
 }

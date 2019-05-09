@@ -21,7 +21,7 @@ static void		xor(int x, int y, int *res)
 	while (tmp)
 	{
 		if ((x & tmp || y & tmp) && ((x & tmp) != (y & tmp)))
-			(*res)+= tmp;
+			(*res) += tmp;
 		tmp >>= 1;
 	}
 }
@@ -35,7 +35,7 @@ static void		or(int x, int y, int *res)
 	while (tmp)
 	{
 		if (x & tmp || y & tmp)
-			(*res)+= tmp;
+			(*res) += tmp;
 		tmp >>= 1;
 	}
 }
@@ -49,7 +49,7 @@ static void		and(int x, int y, int *res)
 	while (tmp)
 	{
 		if (x & tmp && y & tmp)
-			(*res)+= tmp;
+			(*res) += tmp;
 		tmp >>= 1;
 	}
 }

@@ -19,7 +19,7 @@ static void		check_for_winner(t_vmka **vmka)
 		if (!(*vmka)->visual)
 		{
 			ft_printf("Contestant %d, \"%s\", has won !\n",
-				(*vmka)->nbr_players,
+				(*vmka)->nbr_players - 1,
 				(*vmka)->bot[(*vmka)->nbr_players - 1]->name);
 		}
 		endwin();
@@ -54,6 +54,17 @@ static void		check_to_del_carr(t_vmka **vmka, t_carr *tmp, t_carr *tmp_prev)
 	}
 }
 
+static void		start_fight_2_1(int checks, int *cycles_to_dies, t_vmka **vmka)
+{
+	if (checks != 0 && !(checks %= MAX_CHECKS))
+		if ((*cycles_to_dies) == (*vmka)->cycles_to_die &&
+			(*vmka)->cycles_to_die > 0)
+		{
+			(*vmka)->cycles_to_die -= CYCLE_DELTA;
+			(*cycles_to_dies) = (*vmka)->cycles_to_die;
+		}
+}
+
 void			start_fight_2(t_vmka **vmka)
 {
 	static int	cycles_to_dies;
@@ -61,11 +72,11 @@ void			start_fight_2(t_vmka **vmka)
 	static int	cycles;
 
 	cycles++;
-	checks++;
 	if (!cycles_to_dies)
 		cycles_to_dies = (*vmka)->cycles_to_die;
 	if (cycles % (*vmka)->cycles_to_die == 0 || (*vmka)->cycles_to_die <= 0)
 	{
+		checks++;
 		check_to_del_carr(vmka, (*vmka)->carr, NULL);
 		if ((*vmka)->lives >= NBR_LIVE)
 		{
@@ -73,14 +84,9 @@ void			start_fight_2(t_vmka **vmka)
 			cycles_to_dies = (*vmka)->cycles_to_die;
 			checks = 0;
 		}
-		if (checks && !(checks %= MAX_CHECKS))
-			if (cycles_to_dies == (*vmka)->cycles_to_die &&
-				(*vmka)->cycles_to_die > 0)
-			{
-				(*vmka)->cycles_to_die -= CYCLE_DELTA;
-				cycles_to_dies = (*vmka)->cycles_to_die;
-			}
+		start_fight_2_1(checks, &cycles_to_dies, vmka);
 		cycles = 0;
+		(*vmka)->lives = 0;
 		check_for_winner(vmka);
 	}
 	if ((*vmka)->visual)

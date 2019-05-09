@@ -15,8 +15,8 @@
 # define MIN_BOT_SIZE (4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4)
 # define MAX_BOT_SIZE (MIN_BOT_SIZE + CHAMP_MAX_SIZE)
 # define MAX_BIT 2147483648
-// # define KEK1 ft_printf("KEK1\n");
-# define KEK2 ft_printf("KEK2\n");
+# define WAV_PATH "Eminem - Rap God.mp3"
+# define MUS_PATH "HR2_Friska.ogg"
 
 # include "../libft/libft.h"
 # include "op.h"
@@ -26,6 +26,12 @@
 # include <limits.h>
 # include <ncurses.h>
 # include <unistd.h>
+# include <SDL.h>
+# include <SDL_mixer.h>
+
+
+Mix_Chunk *g_wave;
+Mix_Music *g_music;
 
 /*
 **	Структура игроков (скорее всего ещё дополнять нужно будет)
@@ -233,5 +239,6 @@ void					value(t_vmka **vmka, int start_pos, int dir_size, int *arg);
 int						ind(t_vmka **vmka, t_carr *carr, int step, int size);
 void					reg_num(t_vmka **vmka, t_carr *carr, int arg, int *res);
 int						return_arg(t_carr *carr, int size);
+void					sti_2(t_vmka **vmka, t_carr *carr, int *address);
 
 #endif

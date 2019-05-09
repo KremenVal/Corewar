@@ -87,8 +87,7 @@ static void		get_oper(t_carr *tmp, unsigned char place)
 void			start_fight(t_vmka **vmka)
 {
 	t_carr		*tmp;
-	
-	(*vmka)->last_alive = (*vmka)->nbr_players;
+
 	while (1)
 	{
 		tmp = (*vmka)->carr;
