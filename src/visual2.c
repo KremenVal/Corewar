@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 07:09:16 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/07 07:42:18 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 01:27:17 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	fill_info(t_vmka *all, WINDOW **info, int i)
 		wprintw((*info), "LIVE NOW: \n");
 		wprintw((*info), "LAST LIVE: \n");
 	}
+	wprintw((*info), "CYCLES: %d\n", all->cycles);
+	wprintw((*info), "CYCLES TO DIE: %d\n", all->cycles_to_die);
 	fill_usage(info);
 }
