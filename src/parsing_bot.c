@@ -90,17 +90,17 @@ static void		pars_flag_dump(int argc, char **argv, t_vmka **vmka, int *i)
 	int			index;
 
 	if ((*i) + 1 >= argc || (*vmka)->dump_cycles > 0)
-		error_management("ERROR: invalid number of cycles!\n");
+		error_management("ERROR: invalid number of cycles1!\n");
 	index = 0;
-	while (argv[(*i)][index])
+	while (argv[(*i) + 1][index])
 	{
-		if (argv[(*i)][index] >= '0' && argv[(*i)][index] <= '0')
+		if (argv[(*i) + 1][index] >= '0' && argv[(*i) + 1][index] <= '9')
 			index++;
 		else
-			error_management("ERROR: invalid number of cycles!\n");
+			error_management("ERROR: invalid number of cycles2!\n");
 	}
-	if (ft_atoi(argv[(*i)]) > INT_MAX || argv[(*i)] < 0)
-		error_management("ERROR: invalid number of cycles!\n");
+	if (ft_atoi(argv[(*i) + 1]) > INT_MAX || argv[(*i) + 1] < 0)
+		error_management("ERROR: invalid number of cycles3!\n");
 	(*vmka)->dump_cycles = ft_atoi(argv[(*i) + 1]);
 	(*i) += 1;
 }
@@ -131,8 +131,6 @@ void			parsing_argv_params(int argc, char **argv, t_vmka **vmka, int i)
 	}
 	get_id_bot(vmka, -1);
 	sort_bot(vmka, -1);
-	if ((*vmka)->dump_cycles > 0)
-		(*vmka)->cycles_to_die = (*vmka)->dump_cycles;
-	else
+	if (!(*vmka)->dump_cycles)
 		(*vmka)->cycles_to_die = CYCLE_TO_DIE;
 }

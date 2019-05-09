@@ -6,7 +6,7 @@
 /*   By: pmartyny <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:43:56 by pmartyny          #+#    #+#             */
-/*   Updated: 2019/05/06 15:44:01 by pmartyny         ###   ########.fr       */
+/*   Updated: 2019/05/09 10:49:36 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ static void		check_for_winner(t_vmka **vmka)
 			ft_printf("Contestant %d, \"%s\", has won !\n",
 				(*vmka)->last_alive,
 				(*vmka)->bot[(*vmka)->last_alive - 1]->name);
+		}
+		else
+		{
+			fill_winner(*vmka);
 		}
 		endwin();
 		exit(0);

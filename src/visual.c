@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 03:56:18 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/09 08:32:50 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:04:41 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,27 @@ void	set_colors(void)
 	init_pair(6, COLOR_BLACK, COLOR_BLUE);
 	init_pair(7, COLOR_BLACK, COLOR_GREEN);
 	init_pair(8, COLOR_BLACK, COLOR_YELLOW);
+}
+
+void	fill_winner(t_vmka *all)
+{
+	WINDOW	*win;
+
+	win = newwin(7, 100, 72, 75);
+	wattron(win, COLOR_PAIR(all->bot[all->last_alive - 1]->id_bot));
+	wattron(win, A_BOLD);
+	wprintw(win, "¶¶```¶¶`¶¶¶¶¶¶``¶¶``¶¶``¶¶``¶¶``¶¶¶¶¶```¶¶¶¶¶\n");
+	wprintw(win, "¶¶```¶¶```¶¶````¶¶¶`¶¶``¶¶¶`¶¶``¶¶``````¶¶``¶¶\n");
+	wprintw(win, "¶¶`¶`¶¶```¶¶````¶¶`¶¶¶``¶¶`¶¶¶``¶¶¶¶````¶¶¶¶¶\n");
+	wprintw(win, "¶¶¶¶¶¶¶```¶¶````¶¶``¶¶``¶¶``¶¶``¶¶``````¶¶``¶¶\n");
+	wprintw(win, "`¶¶`¶¶``¶¶¶¶¶¶``¶¶``¶¶``¶¶``¶¶``¶¶¶¶¶```¶¶``¶¶\n");
+	wprintw(win, "\n\t\t%s", all->bot[all->last_alive - 1]->name);
+	wattroff(win, A_BOLD);
+	wattroff(win, COLOR_PAIR(all->bot[all->last_alive - 1]->id_bot));
+	refresh();
+	wrefresh(win);
+	while (getch() != 27)
+		;
 }
 
 void	visual(t_vmka **all)
