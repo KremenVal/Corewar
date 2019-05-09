@@ -81,6 +81,7 @@ void			start_fight_2(t_vmka **vmka)
 			}
 		check_for_winner(vmka);
 	}
+	(*vmka)->cycles++;
 	if ((*vmka)->visual)
 		visual(vmka);
 }
