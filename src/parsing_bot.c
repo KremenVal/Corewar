@@ -124,6 +124,8 @@ void			parsing_argv_params(int argc, char **argv, t_vmka **vmka, int i)
 				error_management("ERROR: too much players!\n");
 			add_bot_to_battle(argv[i], &(*vmka)->bot[g_count_bot]);
 		}
+		else if (!ft_strcmp(argv[i], "-v") && !(*vmka)->visual)
+			(*vmka)->visual = 1;
 		else
 			error_management("ERROR: unknown type of data!\n");
 	}

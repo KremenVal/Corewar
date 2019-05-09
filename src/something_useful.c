@@ -56,12 +56,12 @@ int				return_bot_id(char *param)
 		if (!ft_isdigit(param[step]))
 			error_management("ERROR: invalid params for id player!\n");
 	if (ft_atoi(param) > INT_MAX)
-		error_management("ERROR: invalid params  for id player!\n");
+		error_management("ERROR: invalid params for id player!\n");
 	res = ft_atoi(param);
 	if (res < 1 || res > MAX_PLAYERS || (res == g_id_players[0] ||
 		res == g_id_players[1] || res == g_id_players[2] ||
 		res == g_id_players[3]))
-		error_management("ERROR: invalid params  for id player!\n");
+		error_management("ERROR: invalid params for id player!\n");
 	g_id_players[res - 1] = res;
 	return (res);
 }
