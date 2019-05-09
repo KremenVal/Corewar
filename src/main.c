@@ -41,7 +41,6 @@ int				main(int argc, char **argv)
 	init_carriages(&vmka, -1);
 	introducing(&vmka, -1);
 	start_fight(&vmka);
-	visual(&vmka);
 	endwin();
 //	system("leaks -q corewar");
 }
