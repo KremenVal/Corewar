@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 03:56:18 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/09 02:36:06 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 08:32:50 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ void	visual(t_vmka **all)
 	initscr();
 	(void)all;
 	curs_set(0);
-	field = newwin(64, 192, 1, 1);
-	info = newwin(30, 30, 1, 196);
+	field = newwin(64, 192, 7, 1);
+	info = newwin(30, 30, 7, 196);
 	start_color();
+	nodelay(stdscr, TRUE);
 	noecho();
 	set_colors();
 	fill_field(*all, &field, -1);
 	fill_info(*all, &info, -1);
 	refresh();
-	nodelay(stdscr, TRUE);
 	wrefresh(field);
 	wrefresh(info);
 	timeout((*all)->speed);

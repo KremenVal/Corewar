@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 07:09:16 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/09 02:23:11 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 09:24:34 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,25 @@
 
 void	fill_usage(WINDOW **info)
 {
-	wprintw((*info), "\n\nUsage:\n\"Q\" - Speed UP\n\"A\" - Speed DOWN\n");
-	wprintw((*info), "\"P\" / \"space\" - Pause\n\"Esc\" - Close program");
+	wprintw((*info), "\n\nUsage:\n\n\"Q\" - Speed UP\n\n\"A\" - Speed DOWN\n");
+	wprintw((*info), "\n\"P\" / \"space\" - Pause\n\n\"Esc\" - Close program");
 }
 
 void	fill_info(t_vmka *all, WINDOW **info, int i)
 {
+	WINDOW	*header;
+
+	header = newwin(5, 192, 1, 70);
+	wattron(header, COLOR_PAIR(3));
+	wprintw(header, "`¶¶¶¶`````¶¶¶¶````¶¶¶¶¶````¶¶¶¶¶```¶¶```¶¶```¶¶¶¶````");
+	wprintw(header, "¶¶¶¶¶\n¶¶``¶¶```¶¶``¶¶```¶¶``¶¶```¶¶``````¶¶```¶¶``¶¶`");
+	wprintw(header, "`¶¶```¶¶``¶¶\n¶¶```````¶¶``¶¶```¶¶¶¶¶````¶¶¶¶````¶¶`¶`");
+	wprintw(header, "¶¶``¶¶¶¶¶¶```¶¶¶¶¶\n¶¶``¶¶```¶¶``¶¶```¶¶``¶¶```¶¶``````");
+	wprintw(header, "¶¶¶¶¶¶¶``¶¶``¶¶```¶¶``¶¶\n`¶¶¶¶`````¶¶¶¶````¶¶``¶¶```¶¶");
+	wprintw(header, "¶¶¶````¶¶`¶¶```¶¶``¶¶```¶¶``¶¶");
+	wattroff(header, COLOR_PAIR(3));
+	refresh();
+	wrefresh(header);
 	wprintw((*info), "CYCLES/SEC: %.f\n", 1000 / all->speed + 0.5);
 	while (++i < 4 && all->bot[i]->name[0])
 	{
@@ -27,8 +40,8 @@ void	fill_info(t_vmka *all, WINDOW **info, int i)
 		wattron((*info), COLOR_PAIR(i + 1));
 		wprintw((*info), "%s\n", all->bot[i]->name);
 		wattroff((*info), COLOR_PAIR(i + 1));
-		wprintw((*info), "LIVE NOW: \n");
-		wprintw((*info), "LAST LIVE: \n");
+		wprintw((*info), "LIVES: %d\n", all->carr->last_live);
+		wprintw((*info), "NUMBER OF LIVE: \n");
 	}
 	wprintw((*info), "\n\nCYCLES: %d\n", all->cycles);
 	wprintw((*info), "CYCLES TO DIE: %d\n", all->cycles_to_die);
@@ -40,7 +53,7 @@ void	pause_game(void)
 	int		key;
 	WINDOW	*pause;
 
-	pause = newwin(1, 5, 1, 208);
+	pause = newwin(1, 5, 7, 208);
 	wprintw(pause, "PAUSE");
 	refresh();
 	wrefresh(pause);
