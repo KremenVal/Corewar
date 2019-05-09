@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 03:56:18 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/07 05:50:41 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 01:21:24 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		is_carr(t_vmka *all, int i)
 	while (tmp)
 	{
 		if (tmp->poss_carr == i)
-			return (1);
+			return (tmp->id_carr);
 		tmp = tmp->next;
 	}
 	return (0);
@@ -29,15 +29,16 @@ int		is_carr(t_vmka *all, int i)
 void	fill_field(t_vmka *all, WINDOW **field, int i)
 {
 	int		id;
+	int		id_carr;
 
 	while (++i < MEM_SIZE)
 	{
 		id = all->field[i].id_bot;
-		if (id != 0 && is_carr(all, i) == 1)
+		if ((id_carr = is_carr(all, i)) != 0)
 		{
-			wattron((*field), COLOR_PAIR(id + 4));
+			wattron((*field), COLOR_PAIR(id_carr + 4));
 			wprintw((*field), "%02x", all->field[i].place);
-			wattroff((*field), COLOR_PAIR(id + 4));
+			wattroff((*field), COLOR_PAIR(id_carr + 4));
 			wprintw((*field), " ");
 		}
 		else
