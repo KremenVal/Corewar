@@ -62,6 +62,11 @@ static void		make_oper_or_skip(t_vmka **vmka, t_carr *carr, int step)
 	}
 	else
 		(*g_op[carr->oper - 1])(vmka, carr);
+	if (carr->stay)
+	{
+		carr->stay = 0;
+		return ;
+	}
 	if (g_oper[carr->oper - 1].types)
 		carr->poss_carr += 2;
 	else
@@ -83,6 +88,7 @@ void			start_fight(t_vmka **vmka)
 {
 	t_carr		*tmp;
 	
+	(*vmka)->last_alive = (*vmka)->nbr_players;
 	while (1)
 	{
 		tmp = (*vmka)->carr;

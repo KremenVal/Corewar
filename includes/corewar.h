@@ -72,6 +72,7 @@ typedef struct			s_carriages
 	int					id_carr;
 	int					carr_color;
 	bool				carry;
+	int					stay;
 	int					poss_carr;
 	int					last_live;
 	int					reg_carr[REG_NUMBER];

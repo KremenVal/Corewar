@@ -32,7 +32,7 @@ void			forkk(t_vmka **vmka, t_carr *carr)
 	new_carr = (t_carr *)ft_memalloc(sizeof(t_carr));
 	ft_memcpy(new_carr, carr, sizeof(t_carr));
 	new_carr->id_carr = ++(*vmka)->nbr_carr;
-	new_carr->carr_color = carr->id_carr;
+	new_carr->carr_color = carr->carr_color;
 	new_carr->poss_carr = (MEM_SIZE + (new_carr->poss_carr + place) %
 		MEM_SIZE) % MEM_SIZE;
 	new_carr->next = (*vmka)->carr;

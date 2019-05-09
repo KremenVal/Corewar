@@ -80,9 +80,10 @@ void			start_fight_2(t_vmka **vmka)
 				(*vmka)->cycles_to_die -= CYCLE_DELTA;
 				cycles_to_dies = (*vmka)->cycles_to_die;
 			}
+		cycles = 0;
 		check_for_winner(vmka);
 	}
-	(*vmka)->cycles++;
 	if ((*vmka)->visual)
 		visual(vmka);
+	(*vmka)->cycles++;
 }

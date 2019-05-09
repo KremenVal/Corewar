@@ -23,6 +23,7 @@ void		init_vm(t_vmka **vmka, int i)
 	(*vmka)->field = (t_batfield *)ft_memalloc(sizeof(t_batfield) * MEM_SIZE);
 	(*vmka)->carr = NULL;
 	(*vmka)->speed = 512;
+	(*vmka)->cycles = 1;
 	while (++i < MAX_PLAYERS)
 	{
 		(*vmka)->bot[i] = (t_bot *)ft_memalloc(sizeof(t_bot));

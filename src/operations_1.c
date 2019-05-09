@@ -24,10 +24,6 @@ void		live(t_vmka **vmka, t_carr *carr)
 	(*vmka)->lives++;
 }
 
-/*
-**	It works!!!
-*/
-
 void		st(t_vmka **vmka, t_carr *carr)
 {
 	int		number;
@@ -49,7 +45,7 @@ void		st(t_vmka **vmka, t_carr *carr)
 			MEM_SIZE) % MEM_SIZE;
 		reverse_bits(&val, 4);
 		mass[0] = REG_SIZE;
-		mass[1] = carr->id_carr;
+		mass[1] = carr->carr_color;
 		modify_field(vmka, place, (unsigned char *)(&val), mass);
 	}
 }
@@ -87,7 +83,7 @@ void		sti(t_vmka **vmka, t_carr *carr)
 	sti_2(vmka, carr, &address);
 	reverse_bits(&val, 4);
 	res[0] = REG_SIZE;
-	res[1] = carr->id_carr;
+	res[1] = carr->carr_color;
 	modify_field(vmka, (MEM_SIZE + address) % MEM_SIZE,
 		(unsigned char *)(&val), res);
 }
@@ -102,8 +98,8 @@ void		zjmp(t_vmka **vmka, t_carr *carr)
 	if (carr->carry)
 	{
 		tmp = arg % IDX_MOD;
-		carr->poss_carr = (MEM_SIZE + (carr->poss_carr + tmp) % MEM_SIZE) %
-		MEM_SIZE;
+		carr->poss_carr = (MEM_SIZE + (carr->poss_carr + tmp) % MEM_SIZE) % MEM_SIZE;
+		carr->stay = 1;
 	}
 }
 
