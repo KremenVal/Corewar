@@ -16,6 +16,14 @@ GCC = clang
 
 FLAGS = -Wall -Werror -Wextra
 
+INC  = -I ./SDL/SDL2.framework/Headers\
+  -I ./SDL/SDL2_image.framework/Headers\
+  -I ./SDL/SDL2_ttf.framework/Headers \
+  -I ./SDL/SDL2_mixer.framework/Headers
+
+FRM  = -F ./SDL/ -framework SDL2 -framework SDL2_image -framework SDL2_ttf\
+  -framework SDL2_mixer
+
 SRC = 	./src/main.c\
 		./src/init.c\
 		./src/add_bot.c\
@@ -35,11 +43,11 @@ OB = $(SRC:%.c=%.o)
 all: $(COREWAR)
 
 %.o:%.c
-	@$(GCC) -c $(FLAGS) $< -o $@
+	@$(GCC) -c $(FLAGS) $< -o $@ $(INC)
 
 $(COREWAR): $(OB)
 	@make -C libft
-	@$(GCC) $(OB) libft/libft.a -lncurses -o $(COREWAR)
+	@$(GCC) $(OB) libft/libft.a $(FRM) -rpath @loader_path/SDL -lncurses -o $(COREWAR)
 
 clean: 
 	@make clean -C libft
