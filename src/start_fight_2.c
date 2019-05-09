@@ -14,23 +14,14 @@
 
 static void		check_for_winner(t_vmka **vmka)
 {
-	t_carr *tmp;
 	if (!(*vmka)->carr)
 	{
-		ft_printf("KEK\n");
 		if (!(*vmka)->visual)
 		{
 			ft_printf("Contestant %d, \"%s\", has won !\n",
 				(*vmka)->nbr_players,
 				(*vmka)->bot[(*vmka)->nbr_players - 1]->name);
 		}
-		tmp = (*vmka)->carr;
-		while (tmp && tmp->next)
-		{
-			ft_printf("%d\n", tmp->next->id_carr);
-			tmp = tmp->next;
-		}
-		ft_printf("%d\n", (*vmka)->cycles);
 		endwin();
 		exit(0);
 	}
@@ -40,7 +31,6 @@ static void		check_to_del_carr(t_vmka **vmka, t_carr *tmp, t_carr *tmp_prev)
 {
 	while (tmp)
 	{
-		ft_printf("%d|%d\n", (*vmka)->cycles - tmp->last_live, (*vmka)->cycles_to_die);
 		if ((*vmka)->cycles - tmp->last_live >= (*vmka)->cycles_to_die)
 		{
 			if ((*vmka)->carr == tmp)
