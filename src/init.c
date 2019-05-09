@@ -6,7 +6,7 @@
 /*   By: vkremen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 14:13:44 by vkremen           #+#    #+#             */
-/*   Updated: 2019/05/06 05:52:38 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 02:11:52 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		init_vm(t_vmka **vmka, int i)
 	(*vmka)->bot = (t_bot **)ft_memalloc(sizeof(t_bot *) * MAX_PLAYERS);
 	(*vmka)->field = (t_batfield *)ft_memalloc(sizeof(t_batfield) * MEM_SIZE);
 	(*vmka)->carr = NULL;
-	(*vmka)->speed = 400;
+	(*vmka)->speed = 512;
 	while (++i < MAX_PLAYERS)
 	{
 		(*vmka)->bot[i] = (t_bot *)ft_memalloc(sizeof(t_bot));

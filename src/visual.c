@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 03:56:18 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/09 01:21:24 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 01:47:58 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,35 +61,6 @@ void	set_colors(void)
 	init_pair(6, COLOR_BLACK, COLOR_BLUE);
 	init_pair(7, COLOR_BLACK, COLOR_GREEN);
 	init_pair(8, COLOR_BLACK, COLOR_YELLOW);
-}
-
-void	config(t_vmka **all, int key)
-{
-	WINDOW	*pause;
-
-	pause = newwin(1, 5, 1, 204);
-	key = getch();
-	if (key == 27)
-	{
-		endwin();
-		exit(1);
-	}
-	else if (key == 32 || key == 'p')
-	{
-		wprintw(pause, "PAUSE");
-		refresh();
-		wrefresh(pause);
-		while (1)
-		{
-			key = getch();
-			if (key == 32 || key == 'p')
-				break ;
-		}
-	}
-	else if (key == 'q' && (*all)->speed > 1)
-		(*all)->speed /= 2;
-	else if (key == 'a' && (*all)->speed < 400)
-		(*all)->speed *= 2;
 }
 
 void	visual(t_vmka **all)

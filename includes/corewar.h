@@ -6,7 +6,7 @@
 /*   By: vkremen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 12:39:09 by vkremen           #+#    #+#             */
-/*   Updated: 2019/05/06 08:34:48 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 01:54:05 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ void					start_fight_2(t_vmka **vmka);
 
 void					visual(t_vmka **all);
 void					fill_info(t_vmka *all, WINDOW **info, int i);
+void					config(t_vmka **all, int key);
 
 /*
 ** operations_1.c
