@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 07:09:16 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/09 02:14:27 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 02:23:11 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	fill_usage(WINDOW **info)
 
 void	fill_info(t_vmka *all, WINDOW **info, int i)
 {
-	wprintw((*info), "STATUS: PLAY\n");
 	wprintw((*info), "CYCLES/SEC: %.f\n", 1000 / all->speed + 0.5);
 	while (++i < 4 && all->bot[i]->name[0])
 	{
@@ -31,7 +30,7 @@ void	fill_info(t_vmka *all, WINDOW **info, int i)
 		wprintw((*info), "LIVE NOW: \n");
 		wprintw((*info), "LAST LIVE: \n");
 	}
-	wprintw((*info), "CYCLES: %d\n", all->cycles);
+	wprintw((*info), "\n\nCYCLES: %d\n", all->cycles);
 	wprintw((*info), "CYCLES TO DIE: %d\n", all->cycles_to_die);
 	fill_usage(info);
 }
@@ -41,7 +40,7 @@ void	pause_game(void)
 	int		key;
 	WINDOW	*pause;
 
-	pause = newwin(1, 5, 1, 204);
+	pause = newwin(1, 5, 1, 208);
 	wprintw(pause, "PAUSE");
 	refresh();
 	wrefresh(pause);

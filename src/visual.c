@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 03:56:18 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/09 01:47:58 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 02:36:06 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		is_carr(t_vmka *all, int i)
 	while (tmp)
 	{
 		if (tmp->poss_carr == i)
-			return (tmp->id_carr);
+			return (tmp->carr_color);
 		tmp = tmp->next;
 	}
 	return (0);
