@@ -131,6 +131,5 @@ void			parsing_argv_params(int argc, char **argv, t_vmka **vmka, int i)
 	}
 	get_id_bot(vmka, -1);
 	sort_bot(vmka, -1);
-	if (!(*vmka)->dump_cycles)
-		(*vmka)->cycles_to_die = CYCLE_TO_DIE;
+	(*vmka)->cycles_to_die = CYCLE_TO_DIE;
 }

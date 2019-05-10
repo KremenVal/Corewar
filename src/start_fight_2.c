@@ -11,6 +11,22 @@
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
+#include <stdio.h>
+
+static void		dump(t_vmka **vmka, int step)
+{
+	while (++step < MEM_SIZE)
+	{
+		if (!step)
+			ft_printf("0x0000 : ");
+		else if (step % 64 == 0)
+			ft_printf("0x%04x : ", step);
+		ft_printf("%02x ", (*vmka)->field[step].place);
+		if ((step + 1) % 64 == 0)
+			ft_printf("\n");
+	}
+	exit(0);
+}
 
 static void		check_for_winner(t_vmka **vmka)
 {
@@ -76,8 +92,7 @@ void			start_fight_2(t_vmka **vmka)
 	static int	cycles;
 
 	cycles++;
-	if (!cycles_to_dies)
-		cycles_to_dies = (*vmka)->cycles_to_die;
+	cycles_to_dies = !cycles_to_dies ? (*vmka)->cycles_to_die : cycles_to_dies;
 	if (cycles % (*vmka)->cycles_to_die == 0 || (*vmka)->cycles_to_die <= 0)
 	{
 		checks++;
@@ -93,6 +108,7 @@ void			start_fight_2(t_vmka **vmka)
 		(*vmka)->lives = 0;
 		check_for_winner(vmka);
 	}
+	(*vmka)->cycles == (*vmka)->dump_cycles ? dump(vmka, -1) : 0;
 	if ((*vmka)->visual)
 		visual(vmka);
 	(*vmka)->cycles++;
