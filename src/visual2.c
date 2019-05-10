@@ -6,7 +6,7 @@
 /*   By: oandrosh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 07:09:16 by oandrosh          #+#    #+#             */
-/*   Updated: 2019/05/09 09:24:34 by oandrosh         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:01:01 by oandrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	fill_usage(WINDOW **info)
 {
-	wprintw((*info), "\n\nUsage:\n\n\"Q\" - Speed UP\n\n\"A\" - Speed DOWN\n");
+	wprintw((*info), "_____________________________\n");
+	wprintw((*info), "                      HOTKEYS\n");
+	wprintw((*info), "\n\"Q\" - Speed UP\n\n\"A\" - Speed DOWN\n");
 	wprintw((*info), "\n\"P\" / \"space\" - Pause\n\n\"Esc\" - Close program");
 }
 
@@ -34,6 +36,8 @@ void	fill_info(t_vmka *all, WINDOW **info, int i)
 	refresh();
 	wrefresh(header);
 	wprintw((*info), "CYCLES/SEC: %.f\n", 1000 / all->speed + 0.5);
+	wprintw((*info), "_____________________________\n");
+	wprintw((*info), "                      PLAYERS\n");
 	while (++i < 4 && all->bot[i]->name[0])
 	{
 		wprintw((*info), "\nPLAYER %d: ", i + 1);
