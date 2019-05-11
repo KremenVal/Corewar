@@ -15,9 +15,19 @@ COREWAR = asmMY
 FLAGS = -Wall -Werror -Wextra
 
 SRC = 	./main.c\
-		./utility.c\
+		./ft_utility.c\
 		./ft_write.c\
-		./ft_functions.c
+		./ft_functions.c\
+		./ft_labels.c\
+		./ft_get_tokens.c\
+		./ft_utilities2.c\
+		./ft_get_size.c\
+		./ft_write_code.c\
+		./ft_live.c\
+		./ft_ld.c\
+		./ft_st.c\
+		./ft_add.c\
+		./ft_sub.c
 
 OB = $(SRC:%.c=%.o) 
 

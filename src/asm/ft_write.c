@@ -19,7 +19,7 @@ void		ft_write(int fd, char **str, int size)
 	ft_strdel(str);
 }
 
-void		ft_put_magic(int fd2)
+void		ft_put_magic(int fd2, int flag)
 {
 	int		magic;
 	int		i;
@@ -27,7 +27,7 @@ void		ft_put_magic(int fd2)
 
 	res = ft_strnew(4);
 	i = 4;
-	magic = COREWAR_EXEC_MAGIC;
+	magic = flag == 0 ? COREWAR_EXEC_MAGIC : g_code_size;
 	while (--i >= 0)
 	{
 		res[i] = magic % 256;
@@ -59,6 +59,8 @@ void		ft_write_name(int fd2, char *str, int flag)
 	i = -1;
 	while (str[++i])
 		res[i] = str[i];
+	if (i > (flag == 1 ? PROG_NAME_LENGTH : COMMENT_LENGTH))
+		ft_death(flag == 1 ? "Champ name too big" : "Comment too big");
 	while (++i <= (flag == 1 ? PROG_NAME_LENGTH : COMMENT_LENGTH))
 		res[i] = 0;
 	ft_write(fd2, &res, (flag == 1 ? PROG_NAME_LENGTH : COMMENT_LENGTH));

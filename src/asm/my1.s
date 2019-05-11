@@ -13,9 +13,19 @@ SpongeBug SegfaultPants!
 SpongeBug SegfaultPants!
 SpongeBuuuuuuug SegfaultPaaaaaaaants!"
 
+loop: 
+		sti r1, %:live, %1
 live:
-	st r1, r3
-	ld %10, r1
-	live %1
-	add r1, r2, r3
-	sub r1, r2, r3
+        live %0
+        ld %0, r2
+        zjmp %:loop
+
+entree:	live	%42		# entree
+	ld	%0,r5
+	ld	%0,r5
+	zjmp %:loop
+
+tir:	sti	r1,%1, %1
+	ld	%2304,r10
+	ld	%1,r5
+	ld	%0,r11

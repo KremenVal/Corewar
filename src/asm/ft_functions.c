@@ -12,85 +12,87 @@
 
 #include "../../includes/asm.h"
 
-char		*ft_get_name(char *line)
+char		*ft_get_name(int fd, char *line, int flag)
 {
-	int		i;
 	int		y;
+	int		i;
 	char	*name;
+	char	*tmp;
 
-	i = 5;
-	while (line[i])
+	i = -1;
+	while (line[++i] != '.')
+		if(line[i] != ' ' && line[i] != '\t')
+			ft_death("Error in name/comment");
+	if(flag == 1 && (line[i + 1] != 'n' || line[i + 2] != 'a' || line[i + 3] != 'm' ||
+		line[i + 4] != 'e'))
+		ft_death("Error in name");
+	if(flag == 2 && (line[i + 1] != 'c' || line[i + 2] != 'o' || line[i + 3] != 'm' ||
+		line[i + 4] != 'm' || line[i + 5] != 'e' || line[i + 6] != 'n' || line[i + 7] != 't'))
+		ft_death("Error in comment");
+	i += flag == 1 ? 5 : 8;
+	while (line[++i] != '"')
+		if(line[i] != ' ' && line[i] != '\t')
+			ft_death("Error in name/comment");
+	y = ++i;
+	name = NULL;
+	while(line[++i] != '"')
 	{
-		if (line[i] != '"' && line[i] != ' ' && line[i] != '\t')
-			ft_death("Invalid character in .name!");
-		if (line[i] == '"')
-			break ;
-		i++;
+		if (!line[i])
+		{
+			if (!name)
+			{
+				name = ft_strsub(line, y, i - y);
+				name = ft_strjoin(name, "\n");
+			}
+			else
+			{
+				tmp = ft_strsub(line, y, i - y);
+				name = ft_strjoin(name, tmp);
+				ft_strdel(&tmp);
+				name = ft_strjoin(name, "\n");
+			}
+			y = 0;
+			i = -1;
+			ft_strdel(&line);
+			get_next_line(fd, &line);
+		}
 	}
-	i++;
-	y = i;
-	while(line[i] != '"')
-		i++;
-	name = ft_strsub(line, y, i - y);
-	i++;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	if (line[i] != '\0' && line[i] != '\n' && line[i] != COMMENT_CHAR &&
-		line[i] != ALT_COMMENT_CHAR)
-		ft_death("Error in name!");
+	if (!name)
+		name = ft_strsub(line, y, i - y);
+	else
+	{
+		tmp = ft_strsub(line, y, i - y);
+		name = ft_strjoin(name, tmp);
+		ft_strdel(&tmp);
+	}
+	ft_strdel(&line);
 	return (name);
 }
 
-char		*ft_get_comment(char *line)
-{
-	int		i;
-	int		y;
-	char	*comment;
-
-	i = 8;
-	while (line[i])
-	{
-		if (line[i] != '"' && line[i] != ' ' && line[i] != '\t')
-			ft_death("Invalid character in .comment!");
-		if (line[i] == '"')
-			break ;
-		i++;
-	}
-	i++;
-	y = i;
-	while(line[i] != '"')
-		i++;
-	comment = ft_strsub(line, y, i - y);
-	i++;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	if (line[i] != '\0' && line[i] != '\n' && line[i] != COMMENT_CHAR &&
-		line[i] != ALT_COMMENT_CHAR)
-		ft_death("Error in name!");
-	return (comment);
-}
-
-char		*ft_get_name_comment(int fd, int fd2)
+char		**ft_get_name_comment(int fd)
 {
 	char	*line;
-	char	*name;
-	char	*comment;
 	int		i;
+	char	**res;
 
 	i = 0;
+	res = (char**)ft_memalloc(sizeof(char*) * 3);
 	while (i < 2)
 	{
 		get_next_line(fd, &line);
+		while (!ft_check_empty(line))
+		{
+			ft_strdel(&line);
+			get_next_line(fd, &line);
+		}
 		if (ft_strstr(line, ".name"))
-			name = ft_get_name(line);
+			res[0] = ft_get_name(fd, line, 1);
 		else if (ft_strstr(line, ".comment"))
-			comment = ft_get_comment(line);
+			res[1] = ft_get_name(fd, line, 2);
 		else
 			ft_death("Error in name/comment!");
-		free(line);
 		i++;
 	}
-	ft_write_name(fd2, name, 1);
-	return (comment);
-	printf("NAME: |%s|, COMMENT: |%s|\n", name, comment);
+	res[2] = "\0";
+	return(res);
 }

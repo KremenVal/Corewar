@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.c                                          :+:      :+:    :+:   */
+/*   ft_utility.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbakhari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,6 +11,21 @@
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
+
+char		*ft_get_filename(char *name)
+{
+	char	*result;
+	int		endlen;
+	int		namelen;
+
+	endlen = (int)ft_strlen((ft_strrchr(name, '.'), ".s"));
+	namelen = (int)ft_strlen(name) - endlen;
+	if (ft_strcmp(ft_strrchr(name, '.'), ".s"))
+		ft_death("Bad file");
+	result = ft_strsub(name, 0, namelen);
+	result = ft_strjoin(result, ".cor");
+	return (result);
+}
 
 int			ft_is_label(char *line)
 {
@@ -36,6 +51,8 @@ int			ft_check_empty(char *line)
 	i = 0;
 	while (line[i])
 	{
+		if (line[i] == COMMENT_CHAR || line[i] == ALT_COMMENT_CHAR)
+			return (0);
 		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
 			return (1);
 		i++;
