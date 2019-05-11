@@ -89,6 +89,8 @@ static void		pars_flag_dump(int argc, char **argv, t_vmka **vmka, int *i)
 {
 	int			index;
 
+	if ((*vmka)->visual)
+		error_management("ERROR: don't use -dump with -v!\n");
 	if ((*i) + 1 >= argc || (*vmka)->dump_cycles > 0)
 		error_management("ERROR: invalid number of cycles!\n");
 	index = 0;
@@ -125,7 +127,11 @@ void			parsing_argv_params(int argc, char **argv, t_vmka **vmka, int i)
 			add_bot_to_battle(argv[i], &(*vmka)->bot[g_count_bot]);
 		}
 		else if (!ft_strcmp(argv[i], "-v") && !(*vmka)->visual)
+		{
+			if ((*vmka)->dump_cycles > 0)
+				error_management("ERROR: don't use -v with -dump!\n");
 			(*vmka)->visual = 1;
+		}
 		else
 			error_management("ERROR: unknown type of data!\n");
 	}
