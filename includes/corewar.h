@@ -195,13 +195,15 @@ void					start_fight(t_vmka **vmka);
 void					start_fight_2(t_vmka **vmka);
 
 /*
-** visual.c visual2.c
+** visual.c visual2.c visual3.c
 */
 
 void					visual(t_vmka **all);
 void					fill_info(t_vmka *all, WINDOW **info, int i);
 void					config(t_vmka **all, int key);
 void					fill_winner(t_vmka *all);
+int						last_live(t_carr *all, int id);
+int						count_live(t_carr *all, int id);
 
 /*
 ** operations_1.c

@@ -12,15 +12,7 @@
 
 #include "../includes/corewar.h"
 
-void	fill_usage(WINDOW **info)
-{
-	wprintw((*info), "_____________________________\n");
-	wprintw((*info), "                      HOTKEYS\n");
-	wprintw((*info), "\n\"Q\" - Speed UP\n\n\"A\" - Speed DOWN\n");
-	wprintw((*info), "\n\"P\" / \"space\" - Pause\n\n\"Esc\" - Close program");
-}
-
-void	fill_info(t_vmka *all, WINDOW **info, int i)
+void	fill_header(void)
 {
 	WINDOW	*header;
 
@@ -35,7 +27,16 @@ void	fill_info(t_vmka *all, WINDOW **info, int i)
 	wattroff(header, COLOR_PAIR(3));
 	refresh();
 	wrefresh(header);
-	wprintw((*info), "CYCLES/SEC: %.f\n", 1000 / all->speed + 0.5);
+}
+
+void	fill_info(t_vmka *all, WINDOW **info, int i)
+{
+	fill_header();
+	wprintw((*info), "_____________________________\n");
+	wprintw((*info), "                  INFORMATION\n");
+	wprintw((*info), "CYCLES/SEC: %.f\n\n\n", 1000 / all->speed + 0.5);
+	wprintw((*info), "CYCLES: %d\n", all->cycles);
+	wprintw((*info), "CYCLES TO DIE: %d\n", all->cycles_to_die);
 	wprintw((*info), "_____________________________\n");
 	wprintw((*info), "                      PLAYERS\n");
 	while (++i < 4 && all->bot[i]->name[0])
@@ -44,12 +45,13 @@ void	fill_info(t_vmka *all, WINDOW **info, int i)
 		wattron((*info), COLOR_PAIR(i + 1));
 		wprintw((*info), "%s\n", all->bot[i]->name);
 		wattroff((*info), COLOR_PAIR(i + 1));
-		wprintw((*info), "LIVES: %d\n", all->carr->last_live);
-		wprintw((*info), "NUMBER OF LIVE: \n");
+		wprintw((*info), "LIVES: %d\n", last_live(all->carr, i + 1));
+		wprintw((*info), "NUMBER OF LIVE: %d\n", count_live(all->carr, i + 1)); 
 	}
-	wprintw((*info), "\n\nCYCLES: %d\n", all->cycles);
-	wprintw((*info), "CYCLES TO DIE: %d\n", all->cycles_to_die);
-	fill_usage(info);
+	wprintw((*info), "\n\n_____________________________\n");
+	wprintw((*info), "                      HOTKEYS\n");
+	wprintw((*info), "\"Q\" - Speed UP\n\n\"A\" - Speed DOWN\n");
+	wprintw((*info), "\n\"P\" / \"space\" - Pause\n\n\"Esc\" - Close program");
 }
 
 void	pause_game(void)
@@ -57,7 +59,7 @@ void	pause_game(void)
 	int		key;
 	WINDOW	*pause;
 
-	pause = newwin(1, 5, 7, 208);
+	pause = newwin(1, 5, 8, 208);
 	wprintw(pause, "PAUSE");
 	refresh();
 	wrefresh(pause);

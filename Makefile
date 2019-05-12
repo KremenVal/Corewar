@@ -36,7 +36,8 @@ SRC = 	./src/main.c\
 		./src/operations_3.c\
 		./src/utils_for_oper.c\
 		./src/visual.c\
-		./src/visual2.c
+		./src/visual2.c\
+		./src/visual3.c
 
 OB = $(SRC:%.c=%.o) 
 
