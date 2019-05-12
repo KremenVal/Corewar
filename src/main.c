@@ -12,6 +12,12 @@
 
 #include "../includes/corewar.h"
 
+static void		usage(void)
+{
+	ft_printf("Usage\n");
+	exit(0);
+}
+
 static int		music(void)
 {
 	if (SDL_Init(SDL_INIT_AUDIO) < 0)
@@ -53,10 +59,7 @@ int				main(int argc, char **argv)
 	if (!music())
 		return (0);
 	if (argc < 2)
-	{
-		ft_printf("Usage\n");
-		exit(0);
-	}
+		usage();
 	g_id_players = (int *)ft_memalloc(sizeof(int) * 4);
 	g_count_bot = -1;
 	init_vm(&vmka, -1);

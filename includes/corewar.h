@@ -59,7 +59,7 @@ typedef struct			s_bot
 
 typedef struct			s_battlefield
 {
-	unsigned int		place;
+	unsigned char		place;
 	int					id_bot;
 }						t_batfield;
 
@@ -83,8 +83,8 @@ typedef struct			s_carriages
 	int					last_live;
 	int					reg_carr[REG_NUMBER];
 	int					iter_to_wait;
-	unsigned int		args_type[3];
-	unsigned int		args_size[3];
+	unsigned char		args_type[3];
+	unsigned char		args_size[3];
 	unsigned char		oper;
 	struct s_carriages	*next;
 	struct s_carriages	*prev;
@@ -133,11 +133,11 @@ typedef struct			s_vmka
 typedef struct			s_oper
 {
 	char				*name;
-	int					code;
-	int					args_num;
-	bool				types;
-	int					args_types[3];
-	int					dir_size;
+	unsigned char		code;
+	unsigned char		args_num;
+	unsigned char		types;
+	unsigned char		args_types[3];
+	unsigned char		dir_size;
 	int					wait;
 }						t_oper;
 

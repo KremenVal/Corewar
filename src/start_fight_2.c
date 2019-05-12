@@ -39,9 +39,7 @@ static void		check_for_winner(t_vmka **vmka)
 				(*vmka)->bot[(*vmka)->last_alive - 1]->name);
 		}
 		else
-		{
 			fill_winner(*vmka);
-		}
 		endwin();
 		exit(0);
 	}
