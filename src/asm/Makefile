@@ -6,7 +6,7 @@
 #    By: kbakhari <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/06 13:32:19 by kbakhari          #+#    #+#              #
-#    Updated: 2019/05/08 13:34:33 by kbakhari         ###   ########.fr        #
+#    Updated: 2019/05/12 18:01:14 by kbakhari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,18 @@ SRC = 	./main.c\
 		./ft_ld.c\
 		./ft_st.c\
 		./ft_add.c\
-		./ft_sub.c
+		./ft_sub.c\
+		./ft_and.c\
+		./ft_or.c\
+		./ft_xor.c\
+		./ft_zjmp.c\
+		./ft_ldi.c\
+		./ft_sti.c\
+		./ft_fork.c\
+		./ft_lld.c\
+		./ft_lldi.c\
+		./ft_lfork.c\
+		./ft_aff.c
 
 OB = $(SRC:%.c=%.o) 
 
@@ -38,7 +49,7 @@ all: $(COREWAR)
 
 $(COREWAR): $(OB)
 	@make -C ../../libft
-	@gcc $(OB) ../../libft/libft.a -lncurses -o $(COREWAR)
+	@gcc $(OB) ../../libft/libft.a -o $(COREWAR)
 
 clean: 
 	@make clean -C ../../libft

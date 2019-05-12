@@ -42,7 +42,7 @@ int			ft_get_label_val(char *str, t_label** labels)
 		label = label->next;
 	}
 	ft_death("No label found");
-	return (0);
+	return (-1);
 }
 
 char		*ft_hex_conv(int32_t nbr, int size)

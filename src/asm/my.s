@@ -1,3 +1,5 @@
+
+
 .name		"SpongeBug"
 .comment    "Who lives in the compiler down in the code? 
 SpongeBug SegfaultPants! 
@@ -14,8 +16,4 @@ SpongeBug SegfaultPants!
 SpongeBuuuuuuug SegfaultPaaaaaaaants!"
 
 live:
-	st r1, r3
-	ld %10, r1
-	live %1
-	add r1, r2, r3
-	sub r1, r2, r3
+	or %1, %2%2, r1

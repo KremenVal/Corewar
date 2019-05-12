@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_live.c                                          :+:      :+:    :+:   */
+/*   ft_zjmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbakhari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/11 08:52:39 by kbakhari          #+#    #+#             */
-/*   Updated: 2019/05/11 08:52:41 by kbakhari         ###   ########.fr       */
+/*   Created: 2019/05/12 19:21:50 by kbakhari          #+#    #+#             */
+/*   Updated: 2019/05/12 19:21:50 by kbakhari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/asm.h"
 
-void			ft_live(t_token **token, t_label **labels, int fd2)
+void			ft_zjmp(t_token **token, t_label **labels, int fd2)
 {
 	char	*res;
 	char	*tmp;
@@ -22,7 +22,7 @@ void			ft_live(t_token **token, t_label **labels, int fd2)
 		(*token) = (*token)->next;
 	g_byte_pos++;
 	if ((*token)->type != 2 && (*token)->type != 5)
-		ft_death("Bad argument for live!!!");
+		ft_death("Bad argument for zjmp!!!");
 	if ((*token)->type == 2)
 	{
 		tmp = (*token)->value;
@@ -36,9 +36,9 @@ void			ft_live(t_token **token, t_label **labels, int fd2)
 		n = ft_get_label_val((*token)->value + 1, labels);
 		n = n - g_byte_pos + 1;
 	}
-	g_byte_pos += 4;
-	res = ft_hex_conv(1, 1);
+	g_byte_pos += 2;
+	res = ft_hex_conv(9, 1);
 	ft_write(fd2, &res, 1);
-	res = ft_hex_conv(n, 4);
-	ft_write(fd2, &res, 4);
+	res = ft_hex_conv(n, 2);
+	ft_write(fd2, &res, 2);
 }

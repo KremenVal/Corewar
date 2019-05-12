@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.sub.c                                           :+:      :+:    :+:   */
+/*   ft_sub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbakhari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -30,7 +30,7 @@ void			ft_sub(t_token **token, int fd2)
 		if ((*token)->next)
 			(*token) = (*token)->next;
 		if ((*token)->type != 1)
-			ft_death("Bad argument for ld!!!");
+			ft_death("Bad argument for sub!!!");
 		n = ft_atoi((*token)->value + 1);
 		if (n > 99 || n < 0)
 			ft_death("Bad register!!!");

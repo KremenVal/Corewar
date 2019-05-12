@@ -29,7 +29,7 @@ void			ft_st(t_token **token, t_label **labels, int fd2)
 	ft_write(fd2, &res, 1);
 	g_byte_pos++;
 	if ((*token)->type != 1)
-		ft_death("Bad argument for ld!!!");
+		ft_death("Bad argument for st!!!");
 	n = ft_atoi((*token)->value + 1);
 	if (n > 99 || n < 0)
 		ft_death("Bad register!!!");
@@ -40,7 +40,7 @@ void			ft_st(t_token **token, t_label **labels, int fd2)
 		(*token) = (*token)->next;
 	if ((*token)->type != 1 && (*token)->type != 3 &&
 		(*token)->type != 6)
-		ft_death("Bad argument for ld!!!");
+		ft_death("Bad argument for st!!!");
 	if ((*token)->type == 1)
 	{
 		n = ft_atoi((*token)->value + 1);
