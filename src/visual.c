@@ -12,29 +12,37 @@
 
 #include "../includes/corewar.h"
 
-int		is_carr(t_vmka *all, int i)
+char	*is_carr(t_vmka *all, char *carr_field)
 {
 	t_carr	*tmp;
+	int		i;
 
+	i = 0;
 	tmp = all->carr;
+	while (i < MEM_SIZE)
+	{
+		carr_field[i] = 0;
+		i++;
+	}
 	while (tmp)
 	{
-		if (tmp->poss_carr == i)
-			return (tmp->carr_color);
+		carr_field[tmp->poss_carr] = tmp->carr_color;
 		tmp = tmp->next;
 	}
-	return (0);
+	return (carr_field);
 }
 
 void	fill_field(t_vmka *all, WINDOW **field, int i)
 {
 	int		id;
 	int		id_carr;
+	char	carr_field[MEM_SIZE];
 
+	is_carr(all, carr_field);
 	while (++i < MEM_SIZE)
 	{
 		id = all->field[i].id_bot;
-		if ((id_carr = is_carr(all, i)) != 0)
+		if ((id_carr = carr_field[i]) != 0)
 		{
 			wattron((*field), COLOR_PAIR(id_carr + 4));
 			wprintw((*field), "%02x", all->field[i].place);

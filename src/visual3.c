@@ -12,27 +12,27 @@
 
 #include "../includes/corewar.h"
 
-int     last_live(t_carr *all, int id)
+int		last_live(t_carr *all, int id)
 {
-    while (all)
-    {
-        if (all->id_carr == id)
-            return (all->last_live);
-        all = all->next;        
-    }
-    return (0);
+	while (all)
+	{
+		if (all->carr_color == id)
+			return (all->last_live);
+		all = all->next;
+	}
+	return (0);
 }
 
-int     count_live(t_carr *all, int id)
+int		count_live(t_carr *all, int id)
 {
-    int     count;
+	int	count;
 
-    count = 0;
-    while (all)
-    {
-        if (all->carr_color == id)
-            count++;
-        all = all->next;  
-    }
-    return (count);
+	count = 0;
+	while (all)
+	{
+		if (all->carr_color == id)
+			count++;
+		all = all->next;
+	}
+	return (count);
 }
