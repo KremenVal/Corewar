@@ -12,11 +12,11 @@
 
 #include "../../includes/asm.h"
 
-void		ft_check_ind(char *str, t_label **labels)
+void			ft_check_ind(char *str, t_label **labels)
 {
-	int		i;
-	int		flag;
-	t_label	*cur;
+	int			i;
+	int			flag;
+	t_label		*cur;
 
 	i = 0;
 	flag = 0;
@@ -40,11 +40,38 @@ void		ft_check_ind(char *str, t_label **labels)
 	}
 }
 
-void		ft_get_rest(char *str, t_token **tokens, int i, t_label **labels)
+static void		ft_get_rest_2(t_token **cur, t_label **labels, char ***mass,
+								int i)
 {
-	char	*tmp;
-	t_token *cur;
-	char	**mass;
+	if ((*mass)[i][0] == 'r')
+	{
+		g_code_size++;
+		(*cur)->type = REG;
+	}
+	else if ((*mass)[i][0] == '%')
+	{
+		if (ft_strchr((*mass)[i], LABEL_CHAR))
+			(*cur)->type = DIR_L;
+		else
+			(*cur)->type = DIR;
+	}
+	else
+	{
+		ft_check_ind((*mass)[i], labels);
+		if (ft_strchr((*mass)[i], LABEL_CHAR))
+			(*cur)->type = IND_L;
+		else
+			(*cur)->type = IND;
+		g_code_size += 2;
+	}
+}
+
+void			ft_get_rest(char *str, t_token **tokens, int i,
+								t_label **labels)
+{
+	char		*tmp;
+	t_token		*cur;
+	char		**mass;
 
 	cur = *tokens;
 	str = ft_destroy_comments(str);
@@ -63,37 +90,17 @@ void		ft_get_rest(char *str, t_token **tokens, int i, t_label **labels)
 		if (!cur->next)
 			cur->next = (t_token*)ft_memalloc(sizeof(t_token));
 		cur->value = mass[i];
-		if (mass[i][0] == 'r')
-		{
-			g_code_size++;
-			cur->type = REG;
-		}
-		else if (mass[i][0] == '%')
-		{
-			if (ft_strchr(mass[i], LABEL_CHAR))
-				cur->type = DIR_L;
-			else
-				cur->type = DIR;
-		}
-		else
-		{
-			ft_check_ind(mass[i], labels);
-			if (ft_strchr(mass[i], LABEL_CHAR))
-				cur->type = IND_L;
-			else
-				cur->type = IND;
-			g_code_size += 2;
-		}
+		ft_get_rest_2(&cur, labels, &mass, i);
 	}
 }
 
-void		ft_define_tokens(char *str, t_token **tokens, t_label **labels)
+void			ft_define_tokens(char *str, t_token **tokens, t_label **labels)
 {
-	int		i;
-	int		y;
-	t_token	*cur;
-	char	*rest;
-	char	*tmp;
+	int			i;
+	int			y;
+	t_token		*cur;
+	char		*rest;
+	char		*tmp;
 
 	i = -1;
 	cur = *tokens;
@@ -115,9 +122,9 @@ void		ft_define_tokens(char *str, t_token **tokens, t_label **labels)
 	ft_get_rest(rest, tokens, -1, labels);
 }
 
-void		ft_get_tokens(int fd, t_token **tokens, t_label **labels)
+void			ft_get_tokens(int fd, t_token **tokens, t_label **labels)
 {
-	char	*line;
+	char		*line;
 
 	while (get_next_line(fd, &line) > 0)
 	{

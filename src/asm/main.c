@@ -12,7 +12,8 @@
 
 #include "../../includes/asm.h"
 
-void		ft_writer(int fd2, char **namecom, t_label **labels, t_token **tokens)
+void			ft_writer(int fd2, char **namecom, t_label **labels,
+							t_token **tokens)
 {
 	ft_put_magic(fd2, 0);
 	ft_write_name(fd2, namecom[0], 1);
@@ -24,7 +25,7 @@ void		ft_writer(int fd2, char **namecom, t_label **labels, t_token **tokens)
 	ft_write_code(fd2, labels, tokens);
 }
 
-void		ft_starter(t_label **labels, t_token **tokens, char *str)
+void			ft_starter(t_label **labels, t_token **tokens, char *str)
 {
 	char		*filename;
 	int			fd;
@@ -40,9 +41,8 @@ void		ft_starter(t_label **labels, t_token **tokens, char *str)
 	ft_writer(fd2, namecom, labels, tokens);
 }
 
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
-	
 	t_token		*tokens;
 	t_label		*labels;
 
@@ -51,7 +51,6 @@ int			main(int ac, char **av)
 	tokens = (t_token*)ft_memalloc(sizeof(t_token));
 	labels = (t_label*)ft_memalloc(sizeof(t_label));
 	ft_starter(&labels, &tokens, av[ac - 1]);
-
 	printf("\nLABELS\n");
 	while (labels->next)
 	{
@@ -64,7 +63,6 @@ int			main(int ac, char **av)
 		printf("VALUE: %s TYPE: %d\n", tokens->value, tokens->type);
 		tokens = tokens->next;
 	}
-	// system("leaks asmMY");
-	// ft_write_code();
+	system("leaks -q asmMY");
 	return (0);
 }

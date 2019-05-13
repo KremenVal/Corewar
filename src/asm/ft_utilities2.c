@@ -12,10 +12,10 @@
 
 #include "../../includes/asm.h"
 
-char		*ft_destroy_comments(char *str)
+char				*ft_destroy_comments(char *str)
 {
-	int		i;
-	char	*tmp;
+	int				i;
+	char			*tmp;
 
 	if (ft_strchr(str, COMMENT_CHAR) ||
 		ft_strchr(str, ALT_COMMENT_CHAR))
@@ -27,10 +27,10 @@ char		*ft_destroy_comments(char *str)
 		str = ft_strsub(tmp, 0, i);
 		ft_strdel(&tmp);
 	}
-	return(str);
+	return (str);
 }
 
-int			ft_get_label_val(char *str, t_label** labels)
+int					ft_get_label_val(char *str, t_label **labels)
 {
 	t_label	*label;
 
@@ -38,14 +38,14 @@ int			ft_get_label_val(char *str, t_label** labels)
 	while (label->next)
 	{
 		if (ft_strequ(str + 1, label->name))
-			return(label->position);
+			return (label->position);
 		label = label->next;
 	}
 	ft_death("No label found");
 	return (-1);
 }
 
-char		*ft_hex_conv(int32_t nbr, int size)
+char				*ft_hex_conv(int32_t nbr, int size)
 {
 	unsigned int	tmp;
 	int				i;
@@ -72,12 +72,12 @@ char		*ft_hex_conv(int32_t nbr, int size)
 	return (res);
 }
 
-void		ft_find_lable(t_label **labels, char *str)
+void				ft_find_lable(t_label **labels, char *str)
 {
-	t_label	*label;
+	t_label			*label;
 
 	label = *labels;
-	while(label->next)
+	while (label->next)
 	{
 		if (ft_strequ(str, label->name))
 			label->position = g_byte_pos;
