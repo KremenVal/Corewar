@@ -32,8 +32,8 @@ char	*ft_strtrim(char const *s)
 				s[step + 1] != '\t' || s[step + 1] != '\n'))
 			finish = step;
 	step = 0;
-	copy_s = (char*)malloc(sizeof(char) * (finish - start) + 2);
-	if (copy_s == 0)
+	copy_s = (char *)malloc(sizeof(char) * (finish - start) + 2);
+	if (!copy_s)
 		return (0);
 	while (start <= finish)
 		copy_s[step++] = s[start++];

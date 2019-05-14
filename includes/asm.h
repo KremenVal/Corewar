@@ -104,6 +104,7 @@ char						*ft_destroy_comments(char *str);
 void						ft_find_lable(t_label **labels, char *str);
 char						*ft_hex_conv(int32_t nbr, int size);
 int							ft_get_label_val(char *str, t_label** labels);
+void						ft_free_mass(char **mass, int step);
 
 /*
 **	ft_get_size.c
