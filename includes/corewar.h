@@ -29,7 +29,6 @@
 # include <SDL.h>
 # include <SDL_mixer.h>
 
-
 Mix_Chunk *g_wave;
 Mix_Music *g_music;
 
@@ -180,7 +179,8 @@ void					error_management(char *error);
 void					reverse_bits(void *b, int len);
 int						return_bot_id(char *param);
 int						abs(int number);
-void					modify_field(t_vmka **vmka, int place, unsigned char *value, int *mass);
+void					modify_field(t_vmka **vmka, int place,
+								unsigned char *value, int *mass);
 
 /*
 ** start_fight.c
@@ -238,7 +238,8 @@ static void		(*g_op[16])() = {&live, &ld, &st, &add_sub,
 ** utils_for_oper.c
 */
 
-void					value(t_vmka **vmka, int start_pos, int dir_size, int *arg);
+void					value(t_vmka **vmka, int start_pos, int dir_size,
+								int *arg);
 int						ind(t_vmka **vmka, t_carr *carr, int step, int size);
 void					reg_num(t_vmka **vmka, t_carr *carr, int arg, int *res);
 int						return_arg(t_carr *carr, int size);

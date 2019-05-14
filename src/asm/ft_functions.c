@@ -12,68 +12,85 @@
 
 #include "../../includes/asm.h"
 
-char		*ft_get_name(int fd, char *line, int flag)
+static void		ft_get_name_3(char *line, int *i, char **name, int **mass)
 {
-	int		y;
-	int		i;
-	char	*name;
-	char	*tmp;
+	char		*tmp;
 
-	i = -1;
-	while (line[++i] != '.')
-		if(line[i] != ' ' && line[i] != '\t')
-			ft_death("Error in name/comment");
-	if(flag == 1 && (line[i + 1] != 'n' || line[i + 2] != 'a' || line[i + 3] != 'm' ||
-		line[i + 4] != 'e'))
-		ft_death("Error in name");
-	if(flag == 2 && (line[i + 1] != 'c' || line[i + 2] != 'o' || line[i + 3] != 'm' ||
-		line[i + 4] != 'm' || line[i + 5] != 'e' || line[i + 6] != 'n' || line[i + 7] != 't'))
-		ft_death("Error in comment");
-	i += flag == 1 ? 5 : 8;
-	while (line[++i] != '"')
-		if(line[i] != ' ' && line[i] != '\t')
-			ft_death("Error in name/comment");
-	y = ++i;
-	name = NULL;
-	while(line[++i] != '"')
+	while (line[++(*i)] != '"')
 	{
-		if (!line[i])
+		if (!line[(*i)])
 		{
-			if (!name)
+			if (!(*name))
 			{
-				name = ft_strsub(line, y, i - y);
-				name = ft_strjoin(name, "\n");
+				(*name) = ft_strsub(line, y, (*i) - y);
+				(*name) = ft_strjoin((*name), "\n");
 			}
 			else
 			{
-				tmp = ft_strsub(line, y, i - y);
-				name = ft_strjoin(name, tmp);
+				tmp = ft_strsub(line, (*mass)[1], (*i) - (*mass)[1]);
+				(*name) = ft_strjoin((*name), tmp);
 				ft_strdel(&tmp);
-				name = ft_strjoin(name, "\n");
+				(*name) = ft_strjoin((*name), "\n");
 			}
-			y = 0;
-			i = -1;
+			(*mass)[1] = 0;
+			(*i) = -1;
 			ft_strdel(&line);
-			get_next_line(fd, &line);
+			get_next_line((*mass)[0], &line);
 		}
 	}
+}
+
+static void		ft_get_name_2(char *line, int *i, int flag)
+{
+	while (line[++(*i)] != '.')
+		if (line[(*i)] != ' ' && line[(*i)] != '\t')
+			ft_death("Error in name/comment");
+	if (flag == 1 && (line[(*i) + 1] != 'n' || line[(*i) + 2] != 'a' ||
+		line[(*i) + 3] != 'm' || line[(*i) + 4] != 'e'))
+		ft_death("Error in name");
+	if (flag == 2 && (line[(*i) + 1] != 'c' || line[(*i) + 2] != 'o' ||
+		line[(*i) + 3] != 'm' || line[(*i) + 4] != 'm' || line[(*i) + 5] != 'e'
+		|| line[(*i) + 6] != 'n' || line[(*i) + 7] != 't'))
+		ft_death("Error in comment");
+	(*i) += flag == 1 ? 5 : 8;
+	while (line[++(*i)] != '"')
+		if (line[(*i)] != ' ' && line[(*i)] != '\t')
+			ft_death("Error in name/comment");
+}
+
+char			*ft_get_name(int fd, char *line, int flag)
+{
+	int			y;
+	int			i;
+	int			*mass;
+	char		*name;
+	char		*tmp;
+
+	i = -1;
+	ft_get_name_2(line, &i, flag);
+	mass = (int *)ft_memalloc(sizeof(int) * 2);
+	mass[0] = fd;
+	mass[1] = ++i;
+	name = NULL;
+	ft_get_name_3(line, &i, &name, &mass);
 	if (!name)
-		name = ft_strsub(line, y, i - y);
+		name = ft_strsub(line, mass[1], i - mass[1]);
 	else
 	{
-		tmp = ft_strsub(line, y, i - y);
+		tmp = ft_strsub(line, mass[1], i - mass[1]);
 		name = ft_strjoin(name, tmp);
 		ft_strdel(&tmp);
 	}
 	ft_strdel(&line);
+	free(mass);
 	return (name);
 }
 
-char		**ft_get_name_comment(int fd)
+char			**ft_get_name_comment(int fd)
 {
-	char	*line;
-	int		i;
-	char	**res;
+	char		*line;
+	int			i;
+	char		**res;
 
 	i = 0;
 	res = (char**)ft_memalloc(sizeof(char*) * 3);
@@ -94,5 +111,5 @@ char		**ft_get_name_comment(int fd)
 		i++;
 	}
 	res[2] = "\0";
-	return(res);
+	return (res);
 }

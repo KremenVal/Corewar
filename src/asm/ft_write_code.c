@@ -14,7 +14,9 @@
 
 void			ft_write_code2(int fd2, t_label **labels, t_token *token)
 {
-	if (ft_strequ(token->value, "add"))
+	if (ft_strequ(token->value, "aff"))
+		ft_aff(&token, fd2);
+	else if (ft_strequ(token->value, "add"))
 		ft_add(&token, fd2);
 	else if (ft_strequ(token->value, "sub"))
 		ft_sub(&token, fd2);
@@ -38,12 +40,12 @@ void			ft_write_code2(int fd2, t_label **labels, t_token *token)
 
 void			ft_write_code(int fd2, t_label **labels, t_token **tokens)
 {
-	t_token	*token;
+	t_token		*token;
 
 	token = *tokens;
 	while (token->next)
 	{
-		if (token->type == 0)
+		if (!token->type)
 		{
 			if (ft_strequ(token->value, "live"))
 				ft_live(&token, labels, fd2);
@@ -57,9 +59,7 @@ void			ft_write_code(int fd2, t_label **labels, t_token **tokens)
 				ft_lldi(&token, labels, fd2);
 			else if (ft_strequ(token->value, "lfork"))
 				ft_lfork(&token, labels, fd2);
-			else if (ft_strequ(token->value, "aff"))
-				ft_aff(&token, fd2);
-			else 
+			else
 				ft_write_code2(fd2, labels, token);
 		}
 		token = token->next;

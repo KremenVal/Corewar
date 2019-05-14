@@ -18,7 +18,7 @@ char		*ft_get_filename(char *name)
 	int		endlen;
 	int		namelen;
 
-	endlen = (int)ft_strlen((ft_strrchr(name, '.'), ".s"));
+	endlen = (int)ft_strlen(ft_strrchr(name, '.'));
 	namelen = (int)ft_strlen(name) - endlen;
 	if (ft_strcmp(ft_strrchr(name, '.'), ".s"))
 		ft_death("Bad file");
@@ -41,7 +41,7 @@ int			ft_is_label(char *line)
 				return (1);
 		}
 	}
-	return(0);
+	return (0);
 }
 
 int			ft_check_empty(char *line)
@@ -60,10 +60,10 @@ int			ft_check_empty(char *line)
 	return (0);
 }
 
-void	ft_death(char *str)
+void		ft_death(char *str)
 {
-	int len;
-	int i;
+	int		len;
+	int		i;
 
 	i = -1;
 	len = (int)ft_strlen(str);
@@ -74,7 +74,7 @@ void	ft_death(char *str)
 	ft_printf("| %s%s\n", str, "    |");
 	i = -1;
 	ft_printf("\\");
-	while(++i < len + 5)
+	while (++i < len + 5)
 		ft_printf("-");
 	ft_printf("/\n\033[0m");
 	exit(0);

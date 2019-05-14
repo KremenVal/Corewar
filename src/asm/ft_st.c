@@ -12,11 +12,8 @@
 
 #include "../../includes/asm.h"
 
-void			ft_st(t_token **token, t_label **labels, int fd2)
+static void		ft_st_2(t_token **token, char *res, int fd2, int n)
 {
-	char	*res;
-	int		n;
-
 	g_byte_pos++;
 	res = ft_hex_conv(3, 1);
 	ft_write(fd2, &res, 1);
@@ -41,11 +38,19 @@ void			ft_st(t_token **token, t_label **labels, int fd2)
 	if ((*token)->type != 1 && (*token)->type != 3 &&
 		(*token)->type != 6)
 		ft_death("Bad argument for st!!!");
+}
+
+void			ft_st(t_token **token, t_label **labels, int fd2)
+{
+	char		*res;
+	int			n;
+
+	ft_st_2(token, NULL, fd2, 0);
 	if ((*token)->type == 1)
 	{
 		n = ft_atoi((*token)->value + 1);
 		if (n > 99 || n < 0)
-		ft_death("Bad register!!!");
+			ft_death("Bad register!!!");
 	}
 	else if ((*token)->type == 3)
 		n = ft_atoi((*token)->value);
