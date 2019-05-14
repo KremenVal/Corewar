@@ -31,7 +31,6 @@ void			ft_check_ind(char *str, t_label **labels)
 		}
 		if (flag != 1)
 			;
-			// ft_death("Bad argument!");
 	}
 	else
 		ft_check_digit(str);
@@ -73,11 +72,9 @@ void			ft_get_rest(char *str, t_token **tokens, int i,
 	t_token		*cur;
 	char		**mass;
 
-	if (!str)
-		ft_death("Bad line!");
+	!str ? ft_death("Bad line!") : 0;
 	cur = *tokens;
 	str = ft_destroy_comments(str);
-	ft_check_separators(str);
 	mass = ft_strsplit(str, SEPARATOR_CHAR);
 	while (mass[++i])
 	{
@@ -90,8 +87,7 @@ void			ft_get_rest(char *str, t_token **tokens, int i,
 	{
 		while (cur->next)
 			cur = cur->next;
-		if (!cur->next)
-			cur->next = (t_token *)ft_memalloc(sizeof(t_token));
+		cur->next = !cur->next ? (t_token *)ft_memalloc(sizeof(t_token)) : 0;
 		cur->value = mass[i];
 		ft_get_rest_2(&cur, labels, &mass, i);
 	}
@@ -130,7 +126,9 @@ void			ft_define_tokens(char *str, t_token **tokens, t_label **labels)
 void			ft_get_tokens(int fd, t_token **tokens, t_label **labels)
 {
 	char		*line;
+	char		*tmp;
 
+	tmp = ft_strdup("Hello!");
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (ft_check_empty(line))
@@ -140,6 +138,11 @@ void			ft_get_tokens(int fd, t_token **tokens, t_label **labels)
 			else
 				ft_define_tokens(line, tokens, labels);
 		}
+		ft_strdel(&tmp);
+		tmp = ft_strdup(line);
 		ft_strdel(&line);
 	}
+	if (!ft_check_empty(tmp))
+		g_gnl = 1;
+	ft_strdel(&tmp);
 }

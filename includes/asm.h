@@ -23,13 +23,13 @@
 
 enum						e_token_type
 {
-	OP,		// 0
-	REG,	// 1
-	DIR,	// 2
-	IND,	// 3
-	LABEL,	// 4
-	DIR_L,	// 5
-	IND_L	// 6
+	OP,
+	REG,
+	DIR,
+	IND,
+	LABEL,
+	DIR_L,
+	IND_L
 };
 
 typedef struct				s_token
@@ -85,15 +85,19 @@ char						*ft_get_comment(char *line);
 */
 
 void						ft_check_label(char *str);
-void						ft_add_label(char *str, t_label **labels, t_token **tokens, int i);
+void						ft_add_label(char *str, t_label **labels,
+	t_token **tokens, int i);
 
 /*
 **	ft_get_tokens.c
 */
 
-void						ft_get_rest(char *str, t_token **tokens, int i, t_label **labels);
-void						ft_define_tokens(char *str, t_token **tokens, t_label **labels);
-void						ft_get_tokens(int fd, t_token **tokens, t_label **labels);
+void						ft_get_rest(char *str, t_token **tokens, int i,
+	t_label **labels);
+void						ft_define_tokens(char *str, t_token **tokens,
+	t_label **labels);
+void						ft_get_tokens(int fd, t_token **tokens,
+	t_label **labels);
 void						ft_check_ind(char *str, t_label **labels);
 
 /*
@@ -103,7 +107,7 @@ void						ft_check_ind(char *str, t_label **labels);
 char						*ft_destroy_comments(char *str);
 void						ft_find_lable(t_label **labels, char *str);
 char						*ft_hex_conv(int32_t nbr, int size);
-int							ft_get_label_val(char *str, t_label** labels);
+int							ft_get_label_val(char *str, t_label **labels);
 void						ft_free_mass(char **mass, int step);
 
 /*
@@ -117,7 +121,8 @@ void						ft_get_size(t_token **tokens, t_label **labels);
 **	ft_write_code.c
 */
 
-void						ft_write_code(int fd2, t_label **labels, t_token **tokens);
+void						ft_write_code(int fd2, t_label **labels,
+	t_token **tokens);
 
 /*
 **	ft_utilities3.c
@@ -144,7 +149,8 @@ void						ft_sti(t_token **token, t_label **labels, int fd2);
 void						ft_fork(t_token **token, t_label **labels, int fd2);
 void						ft_lld(t_token **token, t_label **labels, int fd2);
 void						ft_lldi(t_token **token, t_label **labels, int fd2);
-void						ft_lfork(t_token **token, t_label **labels, int fd2);
+void						ft_lfork(t_token **token, t_label **labels,
+	int fd2);
 void						ft_aff(t_token **token, int fd2);
 
 #endif

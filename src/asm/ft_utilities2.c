@@ -27,12 +27,13 @@ char				*ft_destroy_comments(char *str)
 		str = ft_strsub(tmp, 0, i);
 		ft_strdel(&tmp);
 	}
+	ft_check_separators(str);
 	return (str);
 }
 
 int					ft_get_label_val(char *str, t_label **labels)
 {
-	t_label	*label;
+	t_label			*label;
 
 	label = *labels;
 	while (label->next)
@@ -85,7 +86,7 @@ void				ft_find_lable(t_label **labels, char *str)
 	}
 }
 
-void			ft_free_mass(char **mass, int step)
+void				ft_free_mass(char **mass, int step)
 {
 	while (mass[++step] && mass[step][0] != '\0')
 	{

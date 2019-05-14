@@ -58,6 +58,17 @@ static int		other_func(char **new, char ***line)
 	return (1);
 }
 
+static void		ft_check_nl(char *new)
+{
+	static char		c;
+
+	if (c == '\n')
+		g_gnl = 1;
+	else if (c != '\t' && c != ' ')
+		g_gnl = 0;
+	c = new[ft_strlen(new) - 1];
+}
+
 int				get_next_line(const int fd, char **line)
 {
 	char		buff[BUFF_SIZE + 1];
@@ -71,14 +82,11 @@ int				get_next_line(const int fd, char **line)
 	while (!(ft_strchr(new, '\n')))
 	{
 		ret = read(fd, buff, BUFF_SIZE);
-		if (!ft_strchr(buff, '\n'))
-			g_gnl = 0;
-		else
-			g_gnl = 1;
 		if (ret == -1)
 			return (-1);
 		buff[ret] = '\0';
 		new = ft_strjoin(new, buff);
+		ft_check_nl(new);
 		if (ret == 0 && *new == '\0')
 			return (0);
 		if (ret == 0)

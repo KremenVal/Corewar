@@ -102,13 +102,9 @@ void			ft_or(t_token **token, t_label **labels, int fd2)
 	ft_write(fd2, &res, 1);
 	g_byte_pos++;
 	tmp = 0;
-	//size
 	ft_size(fd2, tmp, token, res);
-	//arg 1
 	ft_arg_1(fd2, tmp, token, labels);
-	//arg 2
 	ft_arg_2(fd2, tmp, token, labels);
-	//dir
 	if ((*token)->next)
 		(*token) = (*token)->next;
 	if ((*token)->type != 1)

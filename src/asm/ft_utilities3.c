@@ -39,7 +39,7 @@ void		ft_check_digit(char *str)
 		if (str[i] == '-')
 			;
 		else if (str[i] == ' ' || str[i] == '\t')
-				;
+			;
 		else if (!ft_isdigit(str[i]))
 			ft_death("Bad argument!");
 	}

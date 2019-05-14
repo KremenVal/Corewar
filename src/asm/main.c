@@ -15,6 +15,8 @@
 void			ft_writer(int fd2, char **namecom, t_label **labels,
 							t_token **tokens)
 {
+	if (g_gnl == 0)
+		ft_death("No newline!!!");
 	ft_put_magic(fd2, 0);
 	ft_write_name(fd2, namecom[0], 1);
 	ft_put_null(fd2);
