@@ -68,10 +68,13 @@ int				get_next_line(const int fd, char **line)
 		new = ft_strnew(1);
 	if (BUFF_SIZE < 0 || !line || fd < 0)
 		return (-1);
-	ret = 2;
 	while (!(ft_strchr(new, '\n')))
 	{
 		ret = read(fd, buff, BUFF_SIZE);
+		if (!ft_strchr(buff, '\n'))
+			g_gnl = 0;
+		else
+			g_gnl = 1;
 		if (ret == -1)
 			return (-1);
 		buff[ret] = '\0';

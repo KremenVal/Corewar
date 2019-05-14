@@ -42,6 +42,7 @@ typedef	struct		s_list
 char				g_buff[10000];
 int					g_step;
 int					g_null;
+int					g_gnl;
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
