@@ -21,6 +21,7 @@ SRC = 	./main.c\
 		./ft_labels.c\
 		./ft_get_tokens.c\
 		./ft_utilities2.c\
+		./ft_utilities3.c\
 		./ft_get_size.c\
 		./ft_write_code.c\
 		./ft_live.c\

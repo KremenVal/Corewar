@@ -30,14 +30,11 @@ void			ft_check_ind(char *str, t_label **labels)
 			cur = cur->next;
 		}
 		if (flag != 1)
-			ft_death("Bad argument!");
+			;
+			// ft_death("Bad argument!");
 	}
 	else
-	{
-		while (str[++i])
-			if (!ft_isdigit(str[i]))
-				ft_death("Bad argument!");
-	}
+		ft_check_digit(str);
 }
 
 static void		ft_get_rest_2(t_token **cur, t_label **labels, char ***mass,
@@ -48,12 +45,15 @@ static void		ft_get_rest_2(t_token **cur, t_label **labels, char ***mass,
 		g_code_size++;
 		(*cur)->type = REG;
 	}
-	else if ((*mass)[i][0] == '%')
+	else if ((*mass)[i][0] == DIRECT_CHAR)
 	{
 		if (ft_strchr((*mass)[i], LABEL_CHAR))
 			(*cur)->type = DIR_L;
 		else
+		{
+			ft_check_digit((*cur)->value + 1);
 			(*cur)->type = DIR;
+		}
 	}
 	else
 	{
@@ -73,9 +73,12 @@ void			ft_get_rest(char *str, t_token **tokens, int i,
 	t_token		*cur;
 	char		**mass;
 
+	if (!str)
+		ft_death("Bad line!");
 	cur = *tokens;
 	str = ft_destroy_comments(str);
-	mass = ft_strsplit(str, ',');
+	ft_check_separators(str);
+	mass = ft_strsplit(str, SEPARATOR_CHAR);
 	while (mass[++i])
 	{
 		tmp = mass[i];

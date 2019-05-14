@@ -120,6 +120,13 @@ void						ft_get_size(t_token **tokens, t_label **labels);
 void						ft_write_code(int fd2, t_label **labels, t_token **tokens);
 
 /*
+**	ft_utilities3.c
+*/
+
+void						ft_check_separators(char *str);
+void						ft_check_digit(char *str);
+
+/*
 **	ft_operations.c
 */
 
