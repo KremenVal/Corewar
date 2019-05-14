@@ -60,7 +60,6 @@ static void		ft_get_name_2(char *line, int *i, int flag)
 
 char			*ft_get_name(int fd, char *line, int flag)
 {
-	// int			y;
 	int			i;
 	int			*mass;
 	char		*name;
@@ -81,7 +80,6 @@ char			*ft_get_name(int fd, char *line, int flag)
 		name = ft_strjoin(name, tmp);
 		ft_strdel(&tmp);
 	}
-	ft_strdel(&line);
 	free(mass);
 	return (name);
 }
@@ -102,12 +100,12 @@ char			**ft_get_name_comment(int fd)
 			ft_strdel(&line);
 			get_next_line(fd, &line);
 		}
-		if (ft_strstr(line, ".name"))
+		if (ft_strstr(line, ".name") && !res[0])
 			res[0] = ft_get_name(fd, line, 1);
-		else if (ft_strstr(line, ".comment"))
+		else if (ft_strstr(line, ".comment") && !res[1])
 			res[1] = ft_get_name(fd, line, 2);
 		else
-			ft_death("Error in name/comment!");
+			ft_death("No, or dublicate name/comment!");
 		i++;
 	}
 	res[2] = "\0";

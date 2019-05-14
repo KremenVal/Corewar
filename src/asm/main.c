@@ -25,6 +25,31 @@ void			ft_writer(int fd2, char **namecom, t_label **labels,
 	ft_write_code(fd2, labels, tokens);
 }
 
+void			ft_check_tokens(t_token **tokens)
+{
+	t_token		*cur;
+
+	cur = (*tokens);
+	while (cur->next)
+	{
+		if (ft_strchr(cur->value, ' ') || ft_strchr(cur->value, '\t'))
+			ft_death("Error in token!");
+		if (cur->type == 2 || cur->type == 5)
+		{
+			printf("%s\n", cur->value);
+			if (ft_strchr(cur->value + 1, DIRECT_CHAR))
+				ft_death("Error in token!");
+			if (ft_strchr(cur->value + 2, LABEL_CHAR))
+				ft_death("Error in token!");
+		}
+		if (cur->type == 1)
+			if (ft_strchr(cur->value + 1, 'r'))
+				ft_death("Error in token!");
+		printf("%s\n", cur->value);
+		cur = cur->next;
+	}
+}
+
 void			ft_starter(t_label **labels, t_token **tokens, char *str)
 {
 	char		*filename;
@@ -37,6 +62,7 @@ void			ft_starter(t_label **labels, t_token **tokens, char *str)
 	fd2 = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	namecom = ft_get_name_comment(fd);
 	ft_get_tokens(fd, tokens, labels);
+	ft_check_tokens(tokens);
 	ft_get_size(tokens, labels);
 	ft_writer(fd2, namecom, labels, tokens);
 }
@@ -46,23 +72,23 @@ int				main(int ac, char **av)
 	t_token		*tokens;
 	t_label		*labels;
 
-	if (ac == 1)
+	if (ac != 2)
 		ft_death("MY USAGE:");
 	tokens = (t_token*)ft_memalloc(sizeof(t_token));
 	labels = (t_label*)ft_memalloc(sizeof(t_label));
 	ft_starter(&labels, &tokens, av[ac - 1]);
-	printf("\nLABELS\n");
-	while (labels->next)
-	{
-		printf("NAME: %s POS: %d\n", labels->name, labels->position);
-		labels = labels->next;
-	}
-	printf("\nTOKENS\n");
-	while (tokens->next)
-	{
-		printf("VALUE: %s TYPE: %d\n", tokens->value, tokens->type);
-		tokens = tokens->next;
-	}
 	system("leaks -q asmMY");
+	// printf("\nLABELS\n");
+	// while (labels->next)
+	// {
+	// 	printf("NAME: %s POS: %d\n", labels->name, labels->position);
+	// 	labels = labels->next;
+	// }
+	// printf("\nTOKENS\n");
+	// while (tokens->next)
+	// {
+	// 	printf("VALUE: %s TYPE: %d\n", tokens->value, tokens->type);
+	// 	tokens = tokens->next;
+	// }
 	return (0);
 }
