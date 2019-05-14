@@ -25,7 +25,7 @@
 **	ft_utility.c
 */
 
-void	ft_death(char *str);
+void		ft_death(char *str);
 
 /*
 **	ft_write.c

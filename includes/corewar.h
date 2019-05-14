@@ -29,7 +29,6 @@
 # include <SDL.h>
 # include <SDL_mixer.h>
 
-
 Mix_Chunk *g_wave;
 Mix_Music *g_music;
 
