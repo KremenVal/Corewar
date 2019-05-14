@@ -47,9 +47,9 @@ static void		ft_sti_3(t_token **token, t_label **labels, int *n, int fd2)
 	else if ((*token)->type == 2)
 		(*n) = ft_atoi((*token)->value + 1);
 	else if ((*token)->type == 5)
-		(*n) = ft_get_label_val((*token)->value + 1, labels) - g_byte_pos + 2;
+		(*n) = ft_get_label_val((*token)->value + 1, labels) - g_byte_pos + 3;
 	else if ((*token)->type == 6)
-		(*n) = ft_get_label_val((*token)->value, labels) - g_byte_pos + 2;
+		(*n) = ft_get_label_val((*token)->value, labels) - g_byte_pos + 3;
 	else
 		ft_death("Bad second argument for sti!!!");
 }
