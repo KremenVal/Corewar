@@ -84,14 +84,3 @@ void				ft_find_lable(t_label **labels, char *str)
 		label = label->next;
 	}
 }
-
-void			ft_free_mass(char **mass, int step)
-{
-	while (mass[++step])
-	{
-		free(mass[step]);
-		mass[step] = NULL;
-	}
-	free(mass);
-	mass = NULL;
-}

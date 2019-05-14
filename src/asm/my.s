@@ -13,5 +13,5 @@ SpongeBug SegfaultPants!
 SpongeBug SegfaultPants!
 SpongeBuuuuuuug SegfaultPaaaaaaaants!"
 
-		or r1, %:l, r1
+		and 1 1, %1, r1
 		live %3
