@@ -36,9 +36,11 @@ void			ft_starter(t_label **labels, t_token **tokens, char *str)
 	filename = ft_get_filename(str);
 	fd2 = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	namecom = ft_get_name_comment(fd);
+	free(filename);
 	ft_get_tokens(fd, tokens, labels);
 	ft_get_size(tokens, labels);
 	ft_writer(fd2, namecom, labels, tokens);
+	ft_free_mass(namecom, -1);
 }
 
 int				main(int ac, char **av)
@@ -51,18 +53,18 @@ int				main(int ac, char **av)
 	tokens = (t_token*)ft_memalloc(sizeof(t_token));
 	labels = (t_label*)ft_memalloc(sizeof(t_label));
 	ft_starter(&labels, &tokens, av[ac - 1]);
-	printf("\nLABELS\n");
-	while (labels->next)
-	{
-		printf("NAME: %s POS: %d\n", labels->name, labels->position);
-		labels = labels->next;
-	}
-	printf("\nTOKENS\n");
-	while (tokens->next)
-	{
-		printf("VALUE: %s TYPE: %d\n", tokens->value, tokens->type);
-		tokens = tokens->next;
-	}
+	// printf("\nLABELS\n");
+	// while (labels->next)
+	// {
+	// 	// printf("NAME: %s POS: %d\n", labels->name, labels->position);
+	// 	labels = labels->next;
+	// }
+	// printf("\nTOKENS\n");
+	// while (tokens->next)
+	// {
+	// 	// printf("VALUE: %s TYPE: %d\n", tokens->value, tokens->type);
+	// 	tokens = tokens->next;
+	// }
 	system("leaks -q asmMY");
 	return (0);
 }

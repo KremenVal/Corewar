@@ -60,7 +60,6 @@ static void		ft_get_name_2(char *line, int *i, int flag)
 
 char			*ft_get_name(int fd, char *line, int flag)
 {
-	// int			y;
 	int			i;
 	int			*mass;
 	char		*name;

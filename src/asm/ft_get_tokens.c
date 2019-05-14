@@ -88,10 +88,12 @@ void			ft_get_rest(char *str, t_token **tokens, int i,
 		while (cur->next)
 			cur = cur->next;
 		if (!cur->next)
-			cur->next = (t_token*)ft_memalloc(sizeof(t_token));
+			cur->next = (t_token *)ft_memalloc(sizeof(t_token));
 		cur->value = mass[i];
 		ft_get_rest_2(&cur, labels, &mass, i);
 	}
+	free(mass);
+	free(str);
 }
 
 void			ft_define_tokens(char *str, t_token **tokens, t_label **labels)
