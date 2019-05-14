@@ -1,5 +1,3 @@
-
-
 .name		"SpongeBug"
 .comment    "Who lives in the compiler down in the code? 
 SpongeBug SegfaultPants! 
@@ -15,5 +13,5 @@ SpongeBug SegfaultPants!
 SpongeBug SegfaultPants!
 SpongeBuuuuuuug SegfaultPaaaaaaaants!"
 
-live:
-	or %1, %2%2, r1
+		or r1, %:l, r1
+		live %3
