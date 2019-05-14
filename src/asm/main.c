@@ -17,6 +17,8 @@ void			ft_writer(int fd2, char **namecom, t_label **labels,
 {
 	ft_put_magic(fd2, 0);
 	ft_write_name(fd2, namecom[0], 1);
+	// if (namecom[0])
+		// free(namecom);
 	ft_put_null(fd2);
 	ft_put_magic(fd2, 1);
 	ft_write_name(fd2, namecom[1], 2);
@@ -40,7 +42,7 @@ void			ft_starter(t_label **labels, t_token **tokens, char *str)
 	ft_get_tokens(fd, tokens, labels);
 	ft_get_size(tokens, labels);
 	ft_writer(fd2, namecom, labels, tokens);
-	ft_free_mass(namecom, -1);
+	free(namecom);
 }
 
 int				main(int ac, char **av)
