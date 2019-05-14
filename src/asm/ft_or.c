@@ -18,9 +18,9 @@ static void		ft_or_4(t_token **token, t_label **labels, int fd2, int *tmp)
 	int			n;
 
 	n = 0;
-	res = ft_hex_conv(n, tmp);
-	ft_write(fd2, &res, tmp);
-	g_byte_pos += tmp;
+	res = ft_hex_conv(n, (*tmp));
+	ft_write(fd2, &res, (*tmp));
+	g_byte_pos += (*tmp);
 	if ((*token)->next)
 		(*token) = (*token)->next;
 	if ((*token)->type == 1)
@@ -36,9 +36,9 @@ static void		ft_or_4(t_token **token, t_label **labels, int fd2, int *tmp)
 	else
 		ft_death("Bad second argument for or!!!");
 	if ((*token)->type == 1)
-		tmp = 1;
+		(*tmp) = 1;
 	else
-		tmp = (*token)->type == 2 || (*token)->type == 5 ? 4 : 2;
+		(*tmp) = (*token)->type == 2 || (*token)->type == 5 ? 4 : 2;
 }
 
 static void		ft_or_3(t_token **token, t_label **labels, int fd2, int *tmp)

@@ -22,7 +22,7 @@ static void		ft_get_name_3(char *line, int *i, char **name, int **mass)
 		{
 			if (!(*name))
 			{
-				(*name) = ft_strsub(line, y, (*i) - y);
+				(*name) = ft_strsub(line, (*mass)[1], (*i) - (*mass)[1]);
 				(*name) = ft_strjoin((*name), "\n");
 			}
 			else
@@ -60,7 +60,7 @@ static void		ft_get_name_2(char *line, int *i, int flag)
 
 char			*ft_get_name(int fd, char *line, int flag)
 {
-	int			y;
+	// int			y;
 	int			i;
 	int			*mass;
 	char		*name;

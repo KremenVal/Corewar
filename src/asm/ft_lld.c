@@ -12,7 +12,7 @@
 
 #include "../../includes/asm.h"
 
-static void		ft_lld_3(t_token **token, t_label **labels, int **mass, int fd2)
+static void		ft_lld_3(t_token **token, int **mass, int fd2)
 {
 	char		*res;
 
@@ -72,6 +72,6 @@ void			ft_lld(t_token **token, t_label **labels, int fd2)
 	else
 		mass[0] += 192;
 	ft_lld_2(token, labels, &mass, fd2);
-	ft_lld_3(token, labels, &mass, fd2);
+	ft_lld_3(token, &mass, fd2);
 	free(mass);
 }

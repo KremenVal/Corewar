@@ -12,7 +12,7 @@
 
 #include "../../includes/asm.h"
 
-static void		ft_check_label(char *str)
+void			ft_check_label(char *str)
 {
 	int			i;
 	int			y;
@@ -50,7 +50,7 @@ static void		ft_add_label_2(t_token **this, t_label **cur, char **str,
 	y = (*i);
 	while ((*str)[++(*i)] != LABEL_CHAR)
 		;
-	cur->name = ft_strsub((*str), y, (*i) - y);
+	(*cur)->name = ft_strsub((*str), y, (*i) - y);
 }
 
 void			ft_add_label(char *str, t_label **labels, t_token **tokens,

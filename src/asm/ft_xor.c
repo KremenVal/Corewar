@@ -12,8 +12,12 @@
 
 #include "../../includes/asm.h"
 
-static void		ft_xor_4(t_token **token, t_label **labels, int n, int *tmp)
+static void		ft_xor_4(t_token **token, t_label **labels, int fd2, int *tmp)
 {
+	char		*res;
+	int			n;
+
+	n = 0;
 	if ((*token)->next)
 		(*token) = (*token)->next;
 	if ((*token)->type == 1)
@@ -30,17 +34,19 @@ static void		ft_xor_4(t_token **token, t_label **labels, int n, int *tmp)
 		ft_death("Bad second argument for xor!!!");
 	if ((*token)->type == 1)
 		(*tmp) = 1;
-	else if ((*token)->type == 2 || (*token)->type == 5)
-		(*tmp) = 4;
 	else
-		(*tmp) = 2;
+		(*tmp) = (*token)->type == 2 || (*token)->type == 5 ? 4 : 2;
 	res = ft_hex_conv(n, (*tmp));
 	ft_write(fd2, &res, (*tmp));
 	g_byte_pos += (*tmp);
 }
 
-static void		ft_xor_3(t_token **token, t_label **labels, int n, int *tmp)
+static void		ft_xor_3(t_token **token, t_label **labels, int fd2, int *tmp)
 {
+	char		*res;
+	int			n;
+
+	n = 0;
 	if ((*token)->type == 1)
 		n = ft_atoi((*token)->value + 1);
 	else if ((*token)->type == 3)
@@ -99,8 +105,8 @@ void			ft_xor(t_token **token, t_label **labels, int fd2)
 	n = 0;
 	tmp = 0;
 	ft_xor_2(token, fd2, &tmp);
-	ft_xor_3(token, labels, 0, &tmp);
-	ft_xor_4(token, labels, 0, &tmp);
+	ft_xor_3(token, labels, fd2, &tmp);
+	ft_xor_4(token, labels, fd2, &tmp);
 	if ((*token)->next)
 		(*token) = (*token)->next;
 	if ((*token)->type != 1)
