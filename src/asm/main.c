@@ -17,8 +17,6 @@ void			ft_writer(int fd2, char **namecom, t_label **labels,
 {
 	ft_put_magic(fd2, 0);
 	ft_write_name(fd2, namecom[0], 1);
-	// if (namecom[0])
-		// free(namecom);
 	ft_put_null(fd2);
 	ft_put_magic(fd2, 1);
 	ft_write_name(fd2, namecom[1], 2);
@@ -38,7 +36,6 @@ void			ft_check_tokens(t_token **tokens)
 			ft_death("Error in token!");
 		if (cur->type == 2 || cur->type == 5)
 		{
-			printf("%s\n", cur->value);
 			if (ft_strchr(cur->value + 1, DIRECT_CHAR))
 				ft_death("Error in token!");
 			if (ft_strchr(cur->value + 2, LABEL_CHAR))
@@ -47,7 +44,6 @@ void			ft_check_tokens(t_token **tokens)
 		if (cur->type == 1)
 			if (ft_strchr(cur->value + 1, 'r'))
 				ft_death("Error in token!");
-		printf("%s\n", cur->value);
 		cur = cur->next;
 	}
 }
@@ -68,7 +64,7 @@ void			ft_starter(t_label **labels, t_token **tokens, char *str)
 	ft_check_tokens(tokens);
 	ft_get_size(tokens, labels);
 	ft_writer(fd2, namecom, labels, tokens);
-	free(namecom);
+	ft_free_mass(namecom, -1);
 }
 
 int				main(int ac, char **av)

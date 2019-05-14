@@ -95,7 +95,6 @@ char			**ft_get_name_comment(int fd)
 	while (i < 2)
 	{
 		get_next_line(fd, &line);
-		ft_printf("|%s|\n", line);
 		while (!ft_check_empty(line))
 		{
 			ft_strdel(&line);
@@ -108,6 +107,7 @@ char			**ft_get_name_comment(int fd)
 		else
 			ft_death("No, or dublicate name/comment!");
 		i++;
+		ft_strdel(&line);
 	}
 	res[2] = "\0";
 	return (res);
