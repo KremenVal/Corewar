@@ -31,25 +31,27 @@ static int	ft_get_name2(char *line, int i, int flag)
 	return (i);
 }
 
-static void	ft_get_name3(char **name, char *line, int **i, int fd)
+static void	ft_get_name3(char **name, char **line, int **i, int fd)
 {
 	char	*tmp;
 
-	if (!(*name))
+	if ((*name) == NULL && (*i)[0] != (*i)[1])
 	{
-		(*name) = ft_strsub(line, (*i)[0], (*i)[0] - (*i)[1]);
+		(*name) = ft_strsub((*line), (*i)[1], (*i)[0] - (*i)[1]);
 		(*name) = ft_strjoin((*name), "\n");
 	}
-	else
+	else if ((*i)[0] != (*i)[1])
 	{
-		tmp = ft_strsub(line, (*i)[1], (*i)[0] - (*i)[1]);
+		tmp = ft_strsub((*line), (*i)[1], (*i)[0] - (*i)[1]);
 		(*name) = ft_strjoin((*name), tmp);
 		ft_strdel(&tmp);
 		(*name) = ft_strjoin((*name), "\n");
 	}
 	(*i)[1] = 0;
 	(*i)[0] = -1;
-	get_next_line(fd, &line);
+	ft_strdel(line);
+	if (get_next_line(fd, line) <= 0)
+		ft_death("Bad name/comment!!!");
 }
 
 char		*ft_get_name(int fd, char *line, int flag)
@@ -64,13 +66,10 @@ char		*ft_get_name(int fd, char *line, int flag)
 	name = NULL;
 	while (line[++mass[0]] != '"')
 		if (!line[mass[0]])
-		{
-			ft_get_name3(&name, line, &mass, fd);
-			ft_strdel(&line);
-		}
-	if (!name)
+			ft_get_name3(&name, &line, &mass, fd);
+	if (!name && mass[1] != mass[0])
 		name = ft_strsub(line, mass[1], mass[0] - mass[1]);
-	else
+	else if (mass[1] != mass[0])
 	{
 		tmp = ft_strsub(line, mass[1], mass[0] - mass[1]);
 		name = ft_strjoin(name, tmp);
@@ -89,13 +88,24 @@ static void	ft_get_name_comment2(char *line, char ***res, int *flag, int fd)
 			ft_death("Dublicate name");
 		(*flag)++;
 		(*res)[0] = ft_get_name(fd, line, 1);
+		if (!(*res)[0])
+		{
+			ft_strdel(&(*res)[0]);
+			g_kostil = 1;
+			(*res)[0] = ft_strdup("Hello!");
+		}
 	}
 	else if (ft_strstr(line, ".comment") && !(*res)[1])
 	{
-		if ((*res)[1])
-			ft_death("Dublicate comment");
+		(*res)[1] ? ft_death("Dublicate comment") : 0;
 		(*flag)++;
 		(*res)[1] = ft_get_name(fd, line, 2);
+		if (!(*res)[1])
+		{
+			ft_strdel(&(*res)[1]);
+			g_kostil = 2;
+			(*res)[1] = ft_strdup("Hello!");
+		}
 	}
 }
 

@@ -111,7 +111,7 @@ void			ft_define_tokens(char *str, t_token **tokens, t_label **labels)
 	while (str[++i] == ' ' || str[i] == '\t')
 		;
 	y = i;
-	while (str[++i] != ' ' && str[i] != '\t')
+	while (str[i] && str[++i] != ' ' && str[i] != '\t')
 		;
 	cur->value = ft_strsub(str, y, i - y);
 	cur->type = OP;

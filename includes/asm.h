@@ -53,6 +53,7 @@ typedef struct				s_label
 
 int							g_code_size;
 int							g_byte_pos;
+int							g_kostil;
 
 /*
 **	ft_utility.c

@@ -69,6 +69,8 @@ void			ft_starter(t_label **labels, t_token **tokens, char *str)
 	namecom = ft_get_name_comment(fd);
 	free(filename);
 	ft_get_tokens(fd, tokens, labels);
+	if ((*tokens)->value == NULL)
+		ft_death("No tokens!");
 	ft_check_tokens(tokens);
 	ft_get_size(tokens, labels);
 	ft_writer(fd2, namecom, labels, tokens);
@@ -82,9 +84,9 @@ int				main(int ac, char **av)
 
 	if (ac != 2)
 		ft_death("USAGE: ./asm (filename)");
+	g_kostil = 0;
 	tokens = (t_token*)ft_memalloc(sizeof(t_token));
 	labels = (t_label*)ft_memalloc(sizeof(t_label));
 	ft_starter(&labels, &tokens, av[ac - 1]);
-	system("leaks -q asmMY");
 	return (0);
 }
