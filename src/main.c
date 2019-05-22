@@ -14,11 +14,11 @@
 
 static void		usage(void)
 {
-	ft_printf("\tUsage: [-dump nbr_cycles] [[-n number] champion1.cor] [-v]\n");
-	ft_printf("\t\t-dump -- At the end of nbr_cycles of executions, dump \n");
-	ft_printf("\t\t the memory on the standard output and quit the game!\n");
-	ft_printf("\t\t-n number -- Sets the number of the next player!\n");
-	ft_printf("\t\t-v -- Run visualizer!\n");
+	ft_printf("Usage: [-dump nbr_cycles] [[-n number] champion1.cor] [-v]\n");
+	ft_printf("\t-dump \t\t-- At the end of nbr_cycles of executions, dump \n");
+	ft_printf("\t \t\tthe memory on the standard output and quit the game!\n");
+	ft_printf("\t-n number \t-- Sets the number of the next player!\n");
+	ft_printf("\t-v \t\t-- Run visualizer!\n");
 	exit(0);
 }
 
@@ -62,8 +62,7 @@ int				main(int argc, char **argv)
 
 	if (!music())
 		return (0);
-	if (argc < 2 || !ft_strcmp(argv[1], "--help") ||
-		!ft_strstr(argv[1], ".cor"))
+	if (argc < 2 || !ft_strcmp(argv[1], "--help"))
 		usage();
 	g_id_players = (int *)ft_memalloc(sizeof(int) * 4);
 	g_count_bot = -1;

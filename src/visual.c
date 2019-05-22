@@ -36,7 +36,7 @@ void	fill_field(t_vmka *all, WINDOW **field, int i)
 {
 	int		id;
 	int		id_carr;
-	char	carr_field[MEM_SIZE];
+	char	carr_field[MEM_SIZE + 1];
 
 	is_carr(all, carr_field);
 	while (++i < MEM_SIZE)
