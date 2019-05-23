@@ -1,4 +1,4 @@
-.name			"SpongeBug"
+.name			"SpongeBug!"
 .comment		"Who lives in the compiler down in the code? 
 SpongeBug SegfaultPants! 
 Lagging and quitting segfaulting is he? 
@@ -11,14 +11,14 @@ Ready?
 SpongeBug SegfaultPants! 
 SpongeBug SegfaultPants! 
 SpongeBug SegfaultPants! 
-SpongeBuuuuuuug SegfaultPaaaaaaaants!" 
+SpongeBuuuuuuug SegfaultPaaaaaaaants!"
 
 live:
-	live %0
+	live %1
 
 while:
 	fork %-10
-	lfork %10
+	lfork %110
 	ld 0, r1
 	st r1, 50
 	ld 0, r1

@@ -18,6 +18,8 @@ char		*ft_get_filename(char *name)
 	int		endlen;
 	int		namelen;
 
+	if (!ft_strstr(ft_strrchr(name, '.'), ".s"))
+		ft_death("Bad file!");
 	endlen = (int)ft_strlen(ft_strrchr(name, '.'));
 	namelen = (int)ft_strlen(name) - endlen;
 	if (ft_strcmp(ft_strrchr(name, '.'), ".s"))

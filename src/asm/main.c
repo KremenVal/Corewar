@@ -12,9 +12,14 @@
 
 #include "../../includes/asm.h"
 
-void			ft_writer(int fd2, char **namecom, t_label **labels,
+void			ft_writer(char *filename, char **namecom, t_label **labels,
 							t_token **tokens)
 {
+	int			fd2;
+
+	fd2 = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
+	if (fd2 < 0)
+		ft_death("Bad file!");
 	if (g_gnl == 0)
 		ft_death("No newline!!!");
 	ft_put_magic(fd2, 0);
@@ -56,24 +61,20 @@ void			ft_starter(t_label **labels, t_token **tokens, char *str)
 {
 	char		*filename;
 	int			fd;
-	int			fd2;
 	char		**namecom;
 
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 		ft_death("Bad file!");
 	filename = ft_get_filename(str);
-	fd2 = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
-	if (fd2 < 0)
-		ft_death("Bad file!");
 	namecom = ft_get_name_comment(fd);
-	free(filename);
 	ft_get_tokens(fd, tokens, labels);
 	if ((*tokens)->value == NULL)
 		ft_death("No tokens!");
 	ft_check_tokens(tokens);
 	ft_get_size(tokens, labels);
-	ft_writer(fd2, namecom, labels, tokens);
+	ft_writer(filename, namecom, labels, tokens);
+	free(filename);
 	ft_free_mass(namecom, -1);
 }
 
