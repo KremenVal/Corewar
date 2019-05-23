@@ -204,6 +204,7 @@ void					config(t_vmka **all, int key);
 void					fill_winner(t_vmka *all);
 int						last_live(t_carr *all, int id);
 int						count_live(t_carr *all, int id);
+void					fill_header(int x);
 
 /*
 ** operations_1.c
