@@ -22,6 +22,7 @@ void			ft_writer(char *filename, char **namecom, t_label **labels,
 		ft_death("Bad file!");
 	if (g_gnl == 0)
 		ft_death("No newline!!!");
+	ft_validate_tokens(tokens);
 	ft_put_magic(fd2, 0);
 	ft_write_name(fd2, namecom[0], 1);
 	ft_put_null(fd2);
@@ -30,31 +31,6 @@ void			ft_writer(char *filename, char **namecom, t_label **labels,
 	ft_put_null(fd2);
 	g_byte_pos = 0;
 	ft_write_code(fd2, labels, tokens);
-}
-
-void			ft_check_tokens(t_token **tokens)
-{
-	t_token		*cur;
-
-	cur = (*tokens);
-	while (cur->next)
-	{
-		if (ft_strchr(cur->value, SEPARATOR_CHAR))
-			ft_death("Too many separators!");
-		if (ft_strchr(cur->value, '+'))
-			ft_death("No plusses here boi!");
-		if (cur->type == 2 || cur->type == 5)
-		{
-			if (ft_strchr(cur->value + 1, DIRECT_CHAR))
-				ft_death("Error in token!");
-			if (ft_strchr(cur->value + 2, LABEL_CHAR))
-				ft_death("Error in token!");
-		}
-		if (cur->type == 1)
-			if (ft_strchr(cur->value + 1, 'r'))
-				ft_death("Error in token!");
-		cur = cur->next;
-	}
 }
 
 void			ft_starter(t_label **labels, t_token **tokens, char *str)

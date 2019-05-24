@@ -1,25 +1,14 @@
-.name			"SpongeBug!"
-.comment		"Who lives in the compiler down in the code? 
-SpongeBug SegfaultPants! 
-Lagging and quitting segfaulting is he? 
-SpongeBug SegfaultPants! 
-Who works 1 of 10 times you run him in sh? 
-SpongeBug SegfaultPants! 
-So put in printf and try to break free! 
-SpongeBug SegfaultPants! 
-Ready? 
-SpongeBug SegfaultPants! 
-SpongeBug SegfaultPants! 
-SpongeBug SegfaultPants! 
-SpongeBuuuuuuug SegfaultPaaaaaaaants!"
-
-live:
-	live %1
-
-while:
-	fork %-10
-	lfork %110
-	ld 0, r1
-	st r1, 50
-	ld 0, r1
-	zjmp %:live
+.name			""		#comment
+.comment		""		#comment
+						#comment
+live:					#comment
+	live %1				#comment
+						#comment
+while:					#comment
+	fork %1 			#comment
+	lfork %110			#comment
+	ld 11, r1			#comment
+	st r1, 50			#comment
+	ld 0, r1			#comment
+	zjmp %:live			#comment
+						#comment
