@@ -117,6 +117,7 @@ typedef struct			s_vmka
 	int					cycles;
 	int					lives;
 	int					last_alive;
+	int					octet_dump;
 }						t_vmka;
 
 /*
