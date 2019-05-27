@@ -67,6 +67,8 @@ char		*ft_get_name(int fd, char *line, int flag)
 	while (line[++mass[0]] != '"')
 		if (!line[mass[0]])
 			ft_get_name3(&name, &line, &mass, fd);
+	if (ft_check_empty(line + mass[0] + 1))
+		ft_death("Bad symbols after name/comment!");
 	if (!name && mass[1] != mass[0])
 		name = ft_strsub(line, mass[1], mass[0] - mass[1]);
 	else if (mass[1] != mass[0])
@@ -125,7 +127,8 @@ char		**ft_get_name_comment(int fd)
 		while (!ft_check_empty(line))
 		{
 			ft_strdel(&line);
-			get_next_line(fd, &line);
+			if (get_next_line(fd, &line) <= 0)
+				ft_death("Bad file!");
 		}
 		ft_get_name_comment2(line, &res, &flag, fd);
 		i++;

@@ -133,6 +133,13 @@ void						ft_check_separators(char *str);
 void						ft_check_digit(char *str);
 
 /*
+**	ft_check_tokens.c
+*/
+
+void						ft_validate_tokens(t_token **tokens);
+void						ft_check_tokens(t_token **tokens);
+
+/*
 **	ft_operations.c
 */
 

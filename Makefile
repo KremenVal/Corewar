@@ -66,7 +66,8 @@ SRC_ASM = 	./src/asm/main.c\
 			./src/asm/ft_lld.c\
 			./src/asm/ft_lldi.c\
 			./src/asm/ft_lfork.c\
-			./src/asm/ft_aff.c
+			./src/asm/ft_aff.c\
+			./src/asm/ft_check_tokens.c
 
 OB_COREWAR = $(SRC_COREWAR:%.c=%.o) 
 
