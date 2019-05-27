@@ -43,6 +43,10 @@ void		ft_check_spaces(t_token *cur)
 	if (tmp[i] == '-' && (tmp[i + 1] == ' ' || tmp[i + 1] == '\t' ||
 		tmp[i + 1] == '\n' || tmp[i + 1] == '\0'))
 		ft_death("Bad argument!");
+	if (tmp[i] == '-')
+		while (tmp[++i + 1])
+			if (!ft_isdigit(tmp[i + 1]))
+				ft_death("Bad argument!");
 }
 
 void		ft_validate_tokens(t_token **tokens)
@@ -83,13 +87,16 @@ void		ft_check_tokens(t_token **tokens)
 			ft_death("No plusses here boi!");
 		if (cur->type == 2 || cur->type == 5)
 		{
-			if (ft_strchr(cur->value + 1, DIRECT_CHAR))
+			if (ft_strchr(cur->value + 1, DIRECT_CHAR) ||
+				!ft_check_empty(cur->value + 1))
 				ft_death("Error in token!");
-			if (ft_strchr(cur->value + 2, LABEL_CHAR))
+			if (ft_strchr(cur->value + 2, LABEL_CHAR) ||
+				!ft_check_empty(cur->value + 1))
 				ft_death("Error in token!");
 		}
 		if (cur->type == 1)
-			if (ft_strchr(cur->value + 1, 'r'))
+			if (ft_strchr(cur->value + 1, 'r') ||
+				!ft_check_empty(cur->value + 1))
 				ft_death("Error in token!");
 		cur = cur->next;
 	}

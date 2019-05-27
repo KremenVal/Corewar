@@ -93,7 +93,7 @@ static void	ft_get_name_comment2(char *line, char ***res, int *flag, int fd)
 		if (!(*res)[0])
 		{
 			ft_strdel(&(*res)[0]);
-			g_kostil = 1;
+			g_kostil = g_kostil == 2 ? 3 : 1;
 			(*res)[0] = ft_strdup("Hello!");
 		}
 	}
@@ -105,7 +105,7 @@ static void	ft_get_name_comment2(char *line, char ***res, int *flag, int fd)
 		if (!(*res)[1])
 		{
 			ft_strdel(&(*res)[1]);
-			g_kostil = 2;
+			g_kostil = g_kostil == 1 ? 3 : 2;
 			(*res)[1] = ft_strdup("Hello!");
 		}
 	}

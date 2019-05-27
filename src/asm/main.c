@@ -17,12 +17,13 @@ void			ft_writer(char *filename, char **namecom, t_label **labels,
 {
 	int			fd2;
 
-	fd2 = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
-	if (fd2 < 0)
-		ft_death("Bad file!");
 	if (g_gnl == 0)
 		ft_death("No newline!!!");
 	ft_validate_tokens(tokens);
+	ft_validate_args(tokens);
+	fd2 = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
+	if (fd2 < 0)
+		ft_death("Bad file!");
 	ft_put_magic(fd2, 0);
 	ft_write_name(fd2, namecom[0], 1);
 	ft_put_null(fd2);

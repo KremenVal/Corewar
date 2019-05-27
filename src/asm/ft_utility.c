@@ -39,6 +39,8 @@ int			ft_is_label(char *line)
 	{
 		if (line[i] == LABEL_CHAR)
 		{
+			if (i == 0)
+				ft_death("Label char? There?");
 			if (line[i - 1] && line[i - 1] != '%' && line[i - 1] != ',' &&
 				line[i - 1] != ' ')
 				return (1);

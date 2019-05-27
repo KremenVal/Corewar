@@ -44,3 +44,37 @@ void		ft_check_digit(char *str)
 			ft_death("Bad argument!");
 	}
 }
+
+int				ft_empty(char *line)
+{
+	int		i;
+
+	i = 0;
+	if (!line[1])
+		return (1);
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void			ft_add_separators(char *line)
+{
+	int			i;
+	char		*tmp;
+
+	i = -1;
+	if (line[0] == SEPARATOR_CHAR)
+		ft_death("Bad separator!");
+	tmp = ft_strrchr(line, ',');
+	if (tmp)
+		if (ft_empty(tmp))
+			ft_death("Bad separator!");
+}
+
+
+
+

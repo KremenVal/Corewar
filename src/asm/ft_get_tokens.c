@@ -76,6 +76,7 @@ void			ft_get_rest(char *str, t_token **tokens, int i,
 	cur = *tokens;
 	str = ft_destroy_comments(str);
 	mass = ft_strsplit(str, SEPARATOR_CHAR);
+	ft_add_separators(str);
 	while (mass[++i])
 	{
 		tmp = mass[i];
