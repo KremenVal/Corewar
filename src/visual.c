@@ -74,20 +74,26 @@ void	set_colors(void)
 void	fill_winner(t_vmka *all)
 {
 	WINDOW	*win;
+	int		x;
+	int		y;
 
-	win = newwin(7, 100, 72, 75);
-	wattron(win, COLOR_PAIR(all->bot[all->last_alive - 1]->id_bot));
-	wattron(win, A_BOLD);
-	wprintw(win, "¶¶```¶¶`¶¶¶¶¶¶``¶¶``¶¶``¶¶``¶¶``¶¶¶¶¶```¶¶¶¶¶\n");
-	wprintw(win, "¶¶```¶¶```¶¶````¶¶¶`¶¶``¶¶¶`¶¶``¶¶``````¶¶``¶¶\n");
-	wprintw(win, "¶¶`¶`¶¶```¶¶````¶¶`¶¶¶``¶¶`¶¶¶``¶¶¶¶````¶¶¶¶¶\n");
-	wprintw(win, "¶¶¶¶¶¶¶```¶¶````¶¶``¶¶``¶¶``¶¶``¶¶``````¶¶``¶¶\n");
-	wprintw(win, "`¶¶`¶¶``¶¶¶¶¶¶``¶¶``¶¶``¶¶``¶¶``¶¶¶¶¶```¶¶``¶¶\n");
-	wprintw(win, "\n\t\t%s", all->bot[all->last_alive - 1]->name);
-	wattroff(win, A_BOLD);
-	wattroff(win, COLOR_PAIR(all->bot[all->last_alive - 1]->id_bot));
-	refresh();
-	wrefresh(win);
+	getmaxyx(stdscr, y, x);
+	if (y > 72)
+	{
+		win = newwin(7, 100, 72, 60);
+		wattron(win, COLOR_PAIR(all->bot[all->last_alive - 1]->id_bot));
+		wattron(win, A_BOLD);
+		wprintw(win, "\t¶¶```¶¶`¶¶¶¶¶¶``¶¶``¶¶``¶¶``¶¶``¶¶¶¶¶```¶¶¶¶¶\n");
+		wprintw(win, "\t¶¶```¶¶```¶¶````¶¶¶`¶¶``¶¶¶`¶¶``¶¶``````¶¶``¶¶\n");
+		wprintw(win, "\t¶¶`¶`¶¶```¶¶````¶¶`¶¶¶``¶¶`¶¶¶``¶¶¶¶````¶¶¶¶¶\n");
+		wprintw(win, "\t¶¶¶¶¶¶¶```¶¶````¶¶``¶¶``¶¶``¶¶``¶¶``````¶¶``¶¶\n");
+		wprintw(win, "\t`¶¶`¶¶``¶¶¶¶¶¶``¶¶``¶¶``¶¶``¶¶``¶¶¶¶¶```¶¶``¶¶\n");
+		wprintw(win, "\n\t\t%s", all->bot[all->last_alive - 1]->name);
+		wattroff(win, A_BOLD);
+		wattroff(win, COLOR_PAIR(all->bot[all->last_alive - 1]->id_bot));
+		refresh();
+		wrefresh(win);
+	}
 	while (getch() != 27)
 		;
 }
@@ -96,9 +102,10 @@ void	visual(t_vmka **all)
 {
 	WINDOW	*field;
 	WINDOW	*info;
+	int		x;
+	int		y;
 
 	initscr();
-	(void)all;
 	curs_set(0);
 	field = newwin(64, 192, 7, 1);
 	info = newwin(60, 30, 7, 196);
@@ -106,11 +113,13 @@ void	visual(t_vmka **all)
 	nodelay(stdscr, TRUE);
 	noecho();
 	set_colors();
+	getmaxyx(stdscr, y, x);
+	fill_header(x);
 	fill_field(*all, &field, -1);
-	fill_info(*all, &info, -1);
+	if (x > 196 && y > 7)
+		fill_info(*all, &info, -1);
 	refresh();
 	wrefresh(field);
-	wrefresh(info);
 	timeout((*all)->speed);
 	config(all, 0);
 }
