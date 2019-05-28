@@ -14,11 +14,20 @@
 
 static void		usage(void)
 {
-	ft_printf("Usage: [-dump nbr_cycles] [[-n number] champion1.cor] [-v]\n");
-	ft_printf("\t-dump \t\t-- At the end of nbr_cycles of executions, dump \n");
-	ft_printf("\t \t\tthe memory on the standard output and quit the game!\n");
-	ft_printf("\t-n number \t-- Sets the number of the next player!\n");
-	ft_printf("\t-v \t\t-- Run visualizer!\n");
+	ft_printf(" Usage: \033[0;31m[-dump nbr_cycles]\033[0m \033[0;32m");
+	ft_printf("[[-n number] champion1.cor]\033[0m \033[0;33m[-v]\033[0m ");
+	ft_printf("\033[0;34m[-dump64 nbr_cycles]\033[0m\n");
+	ft_printf("\t\033[0;31m-dump \t\t-- At the end of nbr_cycles of\n");
+	ft_printf("\t \t\texecutions, dump the memory on the standard output\n");
+	ft_printf("\t \t\tin the hexadecimal format with 32 octets per line\n");
+	ft_printf("\t \t\tand quit the game!\033[0m\n");
+	ft_printf("\t\033[0;32m-n number \t-- Sets the number of the ");
+	ft_printf("next player!\033[0m\n");
+	ft_printf("\t\033[0;33m-v \t\t-- Run visualizer!\033[0m\n");
+	ft_printf("\t\033[0;34m-dump64 \t-- At the end of nbr_cycles of\n");
+	ft_printf("\t \t\texecutions, dump the memory on the standard output\n");
+	ft_printf("\t \t\tin the hexadecimal format with 64 octets per line\n");
+	ft_printf("\t \t\tand quit the game!\033[0m\n");
 	exit(0);
 }
 
