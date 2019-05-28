@@ -67,6 +67,5 @@ int				main(int ac, char **av)
 	tokens = (t_token*)ft_memalloc(sizeof(t_token));
 	labels = (t_label*)ft_memalloc(sizeof(t_label));
 	ft_starter(&labels, &tokens, av[ac - 1]);
-	system("leaks -q asm");
 	return (0);
 }
