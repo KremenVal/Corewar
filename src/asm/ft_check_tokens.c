@@ -44,9 +44,10 @@ void		ft_check_spaces(t_token *cur)
 		tmp[i + 1] == '\n' || tmp[i + 1] == '\0'))
 		ft_death("Bad argument!");
 	if (tmp[i] == '-')
-		while (tmp[++i + 1])
-			if (!ft_isdigit(tmp[i + 1]))
-				ft_death("Bad argument!");
+		i++;
+	while (cur->type != 5 && cur->type != 6 && tmp[++i])
+		if (!ft_isdigit(tmp[i]) || tmp[i] == '-')
+			ft_death("Bad argument!");
 }
 
 void		ft_validate_tokens(t_token **tokens)

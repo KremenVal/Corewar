@@ -33,14 +33,17 @@ char		*ft_get_filename(char *name)
 int			ft_is_label(char *line)
 {
 	int		i;
+	char	*tmp;
 
 	i = -1;
 	while (line[++i])
 	{
 		if (line[i] == LABEL_CHAR)
 		{
-			if (i == 0)
+			tmp = ft_strsub(line, 0, i);
+			if (i == 0 || !ft_check_empty(tmp))
 				ft_death("Label char? There?");
+			ft_strdel(&tmp);
 			if (line[i - 1] && line[i - 1] != '%' && line[i - 1] != ',' &&
 				line[i - 1] != ' ')
 				return (1);

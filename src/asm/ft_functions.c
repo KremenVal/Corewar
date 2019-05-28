@@ -24,7 +24,7 @@ static int	ft_get_name2(char *line, int i, int flag)
 		line[i + 3] != 'm' || line[i + 4] != 'm' || line[i + 5] != 'e' ||
 		line[i + 6] != 'n' || line[i + 7] != 't'))
 		ft_death("Error in comment");
-	i += flag == 1 ? 5 : 8;
+	i += flag == 1 ? 4 : 7;
 	while (line[++i] != '"')
 		if (line[i] != ' ' && line[i] != '\t')
 			ft_death("Error in name/comment");
