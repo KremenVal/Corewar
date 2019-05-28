@@ -115,10 +115,7 @@ void	ft_validate_args(t_token **tokens)
 			ft_validate_args5(&cur);
 		}
 		else if (cur->type != 4)
-		{
-			printf("%d!, %s\n", cur->type, cur->value);
 			ft_death("Wrong arguments!");
-		}
 		cur = cur->next;
 	}
 }

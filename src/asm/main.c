@@ -20,6 +20,7 @@ void			ft_writer(char *filename, char **namecom, t_label **labels,
 	if (g_gnl == 0)
 		ft_death("No newline!!!");
 	ft_validate_tokens(tokens);
+	ft_validate_register(tokens);
 	ft_validate_args(tokens);
 	fd2 = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	if (fd2 < 0)
@@ -66,5 +67,6 @@ int				main(int ac, char **av)
 	tokens = (t_token*)ft_memalloc(sizeof(t_token));
 	labels = (t_label*)ft_memalloc(sizeof(t_label));
 	ft_starter(&labels, &tokens, av[ac - 1]);
+	system("leaks -q asm");
 	return (0);
 }

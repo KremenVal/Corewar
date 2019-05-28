@@ -12,6 +12,30 @@
 
 #include "../../includes/asm.h"
 
+void		ft_validate_register(t_token **token)
+{
+	t_token	*cur;
+	int		i;
+	int		num;
+
+	cur = (*token);
+	num = 0;
+	while (cur->next)
+	{
+		i = 0;
+		if (cur->type == 1)
+		{
+			num = ft_atoi(&cur->value[1]);
+			if (num > 99 || num < 0)
+				ft_death("Bad register!");
+			while (cur->value[++i])
+				if (!ft_isdigit(cur->value[i]))
+					ft_death("Bad register!");
+		}
+		cur = cur->next;
+	}
+}
+
 void		ft_check_separators(char *str)
 {
 	int		i;
@@ -45,7 +69,7 @@ void		ft_check_digit(char *str)
 	}
 }
 
-int				ft_empty(char *line)
+int			ft_empty(char *line)
 {
 	int		i;
 
@@ -61,10 +85,10 @@ int				ft_empty(char *line)
 	return (1);
 }
 
-void			ft_add_separators(char *line)
+void		ft_add_separators(char *line)
 {
-	int			i;
-	char		*tmp;
+	int		i;
+	char	*tmp;
 
 	i = -1;
 	if (line[0] == SEPARATOR_CHAR)
@@ -74,7 +98,3 @@ void			ft_add_separators(char *line)
 		if (ft_empty(tmp))
 			ft_death("Bad separator!");
 }
-
-
-
-

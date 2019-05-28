@@ -39,6 +39,7 @@ void			ft_check_ind(char *str, t_label **labels)
 static void		ft_get_rest_2(t_token **cur, t_label **labels, char ***mass,
 								int i)
 {
+	(*cur)->value = (*mass)[i];
 	if ((*mass)[i][0] == 'r')
 	{
 		g_code_size++;
@@ -89,7 +90,6 @@ void			ft_get_rest(char *str, t_token **tokens, int i,
 		while (cur->next)
 			cur = cur->next;
 		cur->next = !cur->next ? (t_token *)ft_memalloc(sizeof(t_token)) : 0;
-		cur->value = mass[i];
 		ft_get_rest_2(&cur, labels, &mass, i);
 	}
 	free(mass);

@@ -132,6 +132,7 @@ void						ft_write_code(int fd2, t_label **labels,
 void						ft_check_separators(char *str);
 void						ft_check_digit(char *str);
 void						ft_add_separators(char *line);
+void						ft_validate_register(t_token **token);
 
 /*
 **	ft_check_tokens.c
