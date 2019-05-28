@@ -30,6 +30,8 @@ void				get_and_check_bot_code(char *bot_code, t_bot **bot,
 	code = (char *)ft_memalloc(sizeof(char) * (*bot)->code_size + 1);
 	if ((n = read((*fd), code, (*bot)->code_size)) < 0)
 		error_management("ERROR: unable to read file!\n");
+	if (n < (*bot)->code_size)
+		error_management("ERROR: unable to read file!\n");
 	if (n > MAX_BOT_SIZE - MIN_BOT_SIZE)
 		error_management("ERROR: wrong champion size!\n");
 	step = -1;
